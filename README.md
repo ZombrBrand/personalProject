@@ -1,12 +1,13 @@
 * JS特效部分
 	* [关闭状态](https://github.com/lzj222312/personalProject/blob/master/SimulationBox.html)
 		* 比较有意思部分是通过冒泡控制父盒子的其中两个按钮去关闭弹出层，而不会作用在父盒子上
-		`closeBox.addEventListener('click',function(e){`
-	        `e.stopPropagation();`
-	        `if(hasClass(e.target,'close') || hasClass(e.target,'btn-cancel')) {`
-	          `$('.gray').classList.remove('active');`
-	        `}`            
-	      `});`
+	
+	`closeBox.addEventListener('click',function(e){`
+        `e.stopPropagation();`
+        `if(hasClass(e.target,'close') || hasClass(e.target,'btn-cancel')) {`
+          `$('.gray').classList.remove('active');`
+        `}`            
+      `});`
 
 		`function hasClass(ele,cls) { `
 		  `//找到当前target的className，然后通过!去转成布尔`

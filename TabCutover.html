@@ -72,14 +72,19 @@
               });
               e.target.classList.add('hover');
             }
-            var index = [].indexOf.call(barLis,e.target)
-            // var arr = [];
-            // 当在同一事件函数内使用[].forEach.call()会造成报错，但还没知道原因
-            // 暂时解决：
-            // 1.办法重新var arr = []一个新的空数组
-            // 2.使用for循环
-            // 3.使用原型链Array.prototype.forEach.call()
-            Array.prototype.forEach.call(conLis,function(node){
+            var index = [].indexOf.call(barLis,e.target);
+            // 浏览器解析html会有个问题：
+            // 如果下一行开头是用的是{}、[]的话就会自动上移到上一段代码结尾，所以一定要加上';'
+            // 如：
+            //    var a = function(){}
+            //    [].forEach.call()
+            //    结果解析为：
+            //    a = function(){}[].forEach.call(),这样就会报错 
+            
+            // 两种遍历的方法：
+            // 1.使用for循环
+            // 2.使用原型链Array.prototype.forEach.call()或者是[].forEach.call()
+            [].forEach.call(conLis,function(node){
               node.classList.remove('active');
             });
             // for(var i = 0; i < conLis.length; i++) {

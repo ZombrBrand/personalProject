@@ -12,7 +12,7 @@
 	* [Ajax封装](https://github.com/lzj222312/personalProject/blob/master/JS%E5%B0%81%E8%A3%85%E9%83%A8%E5%88%86/ajax.js)
 
 * Ajax跨域处理
-	* [jsonp&Cors]()
-	* [postMessage]()
-	* [降域]()
+	* [jsonp&Cors](https://github.com/lzj222312/personalProject/tree/master/Ajax%E8%B7%A8%E5%9F%9F%E5%A4%84%E7%90%86/jsonp%26Cors)
+	* [postMessage](https://github.com/lzj222312/personalProject/tree/master/Ajax%E8%B7%A8%E5%9F%9F%E5%A4%84%E7%90%86/postMessage)
+	* [降域](https://github.com/lzj222312/personalProject/tree/master/Ajax%E8%B7%A8%E5%9F%9F%E5%A4%84%E7%90%86/%E9%99%8D%E5%9F%9F)
 

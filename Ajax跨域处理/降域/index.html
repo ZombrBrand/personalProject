@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <style type="text/css">
+			* {
+				margin: 0;
+				padding: 0;
+			}
+			.ct {
+				width: 910px;
+				margin: 200px auto;
+			}
+			.ct .main {
+				float: left;
+				width: 450px;
+				height: 300px;
+				border: 1px solid #ccc;
+			}
+			.ct input {
+				width: 200px;
+				margin:20px;
+				line-height: 18px;
+			}
+			.ct .color {
+				width: 400px;
+				height: 200px;
+				border: 1px solid #ccc;
+				margin: 0 20px;
+			}
+			iframe {
+				width: 450px;
+				height: 300px;
+				border:1px dashed #ccc;
+			}
+			h3 {
+				margin: 50px 0;
+				text-align: center;
+			}
+        </style>
+    </head>
+    <body>
+    	<div class="ct">
+    		<h3>实现psotMessage和降域</h3>
+    		<div class="main">
+    			<input type="text" placeholder="http://a.home.org:8080/index.html" class="input_1">
+    			<div class="color"></div>
+    		</div>
+    		<iframe src="http://b.home.org:8080/b.html" frameborder="0"></iframe>
+    	</div>
+    	<script type="text/javascript">
+    		var inp_1 = $('.input_1');
+
+    		inp_1.addEventListener('change', function(){
+    			window.frames[0].document.querySelector('input').value = this.value;
+
+    		})
+
+            document.domain = "home.org"
+
+    		function $(id) {
+    			return document.querySelector(id);
+    		}
+    	</script>
+    </body>
+</html>

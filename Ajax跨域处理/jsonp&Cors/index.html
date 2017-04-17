@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+    </head>
+    <body>
+    	<button class="btn">点我</button>
+
+    	<script type="text/javascript">
+    		var btn = $('.btn');
+
+    		btn.addEventListener('click',function(){
+
+                //  Cors跨域请求
+    			ajax({
+    				type:'get',
+    				url:'http://b.home.org:8080/getCors',
+    				dataType:'text',
+    				data:{
+    					username:'Cors',
+    					content:'Welcome to 127.0.0.1:8080'
+    				},
+    				succ:function(content){
+    					var h2 = document.createElement('h2');
+                        h2.innerText = content;
+                        document.body.appendChild(h2);
+    				},
+    				error:function(){
+    					console.log('error');
+    				}
+    			});
+
+                //  Jsonp跨域请求
+                jsonp({
+                url:'http://a.home.org:8080/getJsonp',
+                data:{
+                    callback:'getMessage',
+                    username:'Jsonp',
+                    content:'Welcome to 127.0.0.1:8080'
+                }
+            })
+    			
+    		})
+
+
+
+    		function jsonp(opt){
+    			var script = document.createElement('script');
+    			var html = '';
+    			for(var key in opt.data){
+    				html += key + '=' + opt.data[key] + '&';
+    			}
+    			html = opt.url + '?' + html.substr(0,html.length-1);
+    			script.setAttribute('src',html);
+    			document.head.appendChild(script);
+    			document.head.removeChild(script);
+    		}
+
+    		function getMessage(content){
+    					var h2 = document.createElement('h2');
+                        h2.innerText = content;
+                        document.body.appendChild(h2);
+    				}
+
+    		function $(id){
+    			return document.querySelector(id);
+    		}
+
+    		function ajax(opt) {
+    			opt.type = opt.type || 'get';
+    			opt.succ = opt.succ || function(){};
+    			opt.dataType = opt.dataType || 'json';
+    			opt.data = opt.data || {};
+    			opt.error = opt.error || function(){};
+
+    			var html = '';
+    			for(var key in opt.data) {
+    				html += key + '=' + opt.data[key] + '&'
+    			}
+
+    			var xhr = new XMLHttpRequest();
+    			xhr.onreadystatechange = function(){
+    				if(xhr.readyState === 4) {
+    					if(xhr.status === 200 || xhr.status === 304) {
+    						if(opt.dataType.toLowerCase() === 'text') {
+    							opt.succ(xhr.responseText);
+    						}else if(opt.dataType.toLowerCase() === 'json'){
+    							var json = JSON.parse(xhr.responseText);
+    							opt.succ(json);
+    						}
+    					}else{
+    						opt.error();
+    					}
+    				}
+    			}
+
+    			html = html.substr(0,html.length-1);
+
+    			if(opt.type.toLowerCase() === 'get') {
+    				html = opt.url + '?' + html;
+    				xhr.open(opt.type,html,true);
+    				xhr.send();
+    			}
+    			if(opt.type.toLowerCase() === 'post') {
+    				xhr.open(opt.type,opt.url,true);
+    				xhr.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+    				xhr.send(html);
+    			}
+    			
+    		}
+    	</script>
+    </body>
+</html>

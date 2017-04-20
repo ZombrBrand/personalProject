@@ -7,6 +7,12 @@
 	
     * [模拟加载更多-Ajax源码](https://github.com/lzj222312/personalProject/blob/master/JS%E7%89%B9%E6%95%88%E9%83%A8%E5%88%86/Ajax_demo/index.html)
 
+    * [JQ Tab栏切换]()
+
+    * [JQ 导航栏]()
+
+    * [JQ 加载更多]()
+
 * JS封装部分
 	* [事件封装（兼容）](https://github.com/lzj222312/personalProject/blob/master/JS%E5%B0%81%E8%A3%85%E9%83%A8%E5%88%86/eventCompatibility.js)
 	* [Ajax封装](https://github.com/lzj222312/personalProject/blob/master/JS%E5%B0%81%E8%A3%85%E9%83%A8%E5%88%86/ajax.js)

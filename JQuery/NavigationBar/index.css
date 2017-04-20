@@ -1,0 +1,54 @@
+html, body, ul, li, ol, dl, dd, dt, form, fieldset, legend, img {
+    margin: 0;
+    padding: 0;
+}
+s, i, em {				
+    font-style: normal;
+    text-decoration: none;
+}
+ul,li {
+	list-style: none;
+}
+a {
+	text-decoration: none;
+}
+.box {
+	width: 200px;
+	border: 1px solid #ccc;
+	margin: 30px;
+}
+.level-1 {
+	background-color: #c7171e;
+}
+.level-1>.directory-1 {
+	position: relative;
+	padding: 10px;
+	border-bottom: 1px dotted #de272e;
+}
+.level-1 a {
+	display: block;
+	width: 100%;
+	color: #fff;
+}
+.level-1 i {
+	position: absolute;
+	top: 9px;
+	right: 10px;
+	color: #fff;
+}
+.level-1 .level-2 {
+	position: absolute;
+	top: 0;
+	right: -202px;
+	width: 200px;
+	border: 1px solid #ccc;
+	border-left: none;
+	display: none;
+}
+.level-2 li {
+	float: left;
+	width: 60px;
+	padding: 10px 20px;
+	font-size: 12px;
+	cursor: pointer;
+}

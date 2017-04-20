@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+    </head>
+    <body>
+    	<ul class="ct">
+    		<li>a-1</li>
+    		<li>a-2</li>
+    		<li>a-3</li>
+    		<li>b-1</li>
+    		<li>b-2</li>
+    	</ul>
+    	<script type="text/javascript" src="jquery-3.2.1.min.js"></script>
+
+    	<!-- .filter()的使用，遍历筛选为true的结果集 -->
+    	<script type="text/javascript">
+	    	var $li =  $('li').filter(function(index) {
+	    		var str = $(this).html();
+	    		return str.indexOf('a-') > -1
+	    	});
+    	</script>
+    	
+    	<!-- on代理事件写法 -->
+    	<script type="text/javascript">
+    		$('.ct').on('click','li',function(){alert('1')})
+    	</script>
+    </body>
+</html>

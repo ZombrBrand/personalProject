@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="index.css">
+    </head>
+    <body>
+		<div class="jewelry">
+			<h3>珠宝首饰</h3>
+			<ul class="prod-ct  clearfix">
+				<li class="prod">
+					<div class="cover">
+						<a href="">立即抢购</a>
+					</div>
+					<a href="javascript:;">
+						<img src="http://img10.360buyimg.com/N3/jfs/t1360/330/897475737/123557/23624706/55b05e25N13d4ec5e.jpg" alt="">
+						<div class="prod-name">藏美千足金和田玉金镶玉路路通吊坠</div>
+						<div class="prod-price">￥1699.00</div>
+					</a>	
+				</li>
+				<li class="prod">
+					<div class="cover">
+						<a href="">立即抢购</a>
+					</div>
+					<a href="javascript:;">
+						<img src="http://img10.360buyimg.com/N3/jfs/t1360/330/897475737/123557/23624706/55b05e25N13d4ec5e.jpg" alt="">
+						<div class="prod-name">藏美千足金和田玉金镶玉路路通吊坠</div>
+						<div class="prod-price">￥1699.00</div>
+					</a>	
+				</li>
+				<li class="prod">
+					<div class="cover">
+						<a href="javascript:;">立即抢购</a>
+					</div>
+					<a href="javascript:;">
+						<img src="http://img10.360buyimg.com/N3/jfs/t1360/330/897475737/123557/23624706/55b05e25N13d4ec5e.jpg" alt="">
+						<div class="prod-name">藏美千足金和田玉金镶玉路路通吊坠</div>
+						<div class="prod-price">￥1699.00</div>
+					</a>	
+				</li>
+			</ul>
+			<a class="load" href="javascript:;">加载更多</a>
+		</div>
+    	<script type="text/javascript" src="../jquery-3.2.1.min.js"></script>
+    	<script type="text/javascript">
+    		$btn = $('.jewelry .load');
+
+    		$btn.on('click',function(){
+    			$.ajax({
+    				url: '/getJewelry',
+    				type: 'get',
+    				dataType: 'json'
+    			}).done(function(ret){
+    				if(ret.status === 0){
+    					createHtml(ret.data);
+    				}else{
+    					alert('获取信息失败');
+    				}
+    			}).fail(function(){
+    				alert('服务器异常');
+    			})
+    		})
+
+    		function createHtml(data){
+    			var $prod_ct = $('.prod-ct');
+    			var htmls = '';
+    			$.each(data,function(index,cont){ //使用$.each()如果回调函数里不设置参数，则用this代替，如：this.img\this.name\this.price
+    				htmls += '<li class="prod"><div class="cover"><a href="javascript:;">立即抢购</a></div>'
+    				htmls += '<a href="javascript:;">'
+    				htmls += '<img src="' + cont.img + '" alt="">'
+    				htmls += '<div class="prod-name">' + cont.name + '</div>'
+    				htmls += '<div class="prod-price">' + cont.price + '</div>'
+    				htmls += '</a></li>'
+    			})
+    			
+    			// for(var i = 0; i < data.length; i++){
+    			// 	htmls += '<li class="prod"><div class="cover"><a href="javascript:;">立即抢购</a></div>'
+    			// 	htmls += '<a href="javascript:;">'
+    			// 	htmls += '<img src="' + data[i].img + '" alt="">'
+    			// 	htmls += '<div class="prod-name">' + data[i].name + '</div>'
+    			// 	htmls += '<div class="prod-price">' + data[i].price + '</div>'
+    			// 	htmls += '</a></li>'
+    			// }
+    			$prod_ct.append(htmls);
+    		}
+
+    		// function ajax(){
+
+    		// }
+    	</script>
+    </body>
+</html>

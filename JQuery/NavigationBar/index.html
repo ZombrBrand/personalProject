@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" type="text/css" href="index.css">
+    </head>
+    <body>
+    	<div class="box">
+    		<ul class="level-1">
+    			<li class="directory-1">
+	    			<a href="#">珠宝玉器</a>
+	    			<i>></i>
+                    <ul class="level-2">
+                    </ul>
+    			</li>
+    			<li class="directory-1">
+	    			<a href="#">珠宝玉器</a>
+	    			<i>></i>
+    			</li>
+    			<li class="directory-1">
+	    			<a href="#">珠宝玉器</a>
+	    			<i>></i>
+    			</li>
+    			<li class="directory-1">
+	    			<a href="#">珠宝玉器</a>
+	    			<i>></i>
+    			</li>
+    			<li class="directory-1">
+	    			<a href="#">珠宝玉器</a>
+	    			<i>></i>
+    			</li>
+    		</ul>
+    	</div>
+    	<script type="text/javascript" src="../jquery-3.2.1.min.js"></script>
+
+        <script type="text/javascript">
+            var $directoryOne = $('.directory-1');
+            var $levelTwo = $('.level-2');
+            var data = ['翡翠','翡翠','宝石','宝石','琥珀','琥珀','水晶','水晶','珍珠','珍珠'];
+
+            $directoryOne.on('mouseenter',function(){
+                var $index = $(this).index();
+                var randomNum = parseInt(Math.random() * data.length + 1);
+                if(randomNum != 1){
+                    for(var i = 0; i < randomNum; i++){
+                        var $li = '<li>' + data[i] + '</li>';
+                        $levelTwo.append($li);
+                    }
+                    $levelTwo.css('display','block'); 
+                } 
+            })
+
+            $directoryOne.on('mouseleave',function(){
+                $levelTwo.css('display','none');
+                $levelTwo.empty();
+            })
+
+        </script>
+    </body>
+</html>

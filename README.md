@@ -7,11 +7,14 @@
 	
     * [模拟加载更多-Ajax源码](https://github.com/lzj222312/personalProject/blob/master/JS%E7%89%B9%E6%95%88%E9%83%A8%E5%88%86/Ajax_demo/index.html)
 
-    * [JQ Tab栏切换]()
+    * [JQ Tab栏切换](https://github.com/lzj222312/personalProject/blob/master/JQuery/NavigationBar/index.html)
+    	* [效果](http://i4.buimg.com/567571/95c7e5c79d071348.gif)
 
-    * [JQ 导航栏]()
+    * [JQ 导航栏](https://github.com/lzj222312/personalProject/blob/master/JQuery/TabBar/index.html)
+    	* [效果](http://i4.buimg.com/567571/8e1a07d0268c6217.gif)
 
-    * [JQ 加载更多]()
+    * [JQ 加载更多](https://github.com/lzj222312/personalProject/blob/master/JQuery/loadMore/index.html)
+    	* [效果](http://i1.piimg.com/567571/ac67d3aa41509916.gif)
 
 * JS封装部分
 	* [事件封装（兼容）](https://github.com/lzj222312/personalProject/blob/master/JS%E5%B0%81%E8%A3%85%E9%83%A8%E5%88%86/eventCompatibility.js)

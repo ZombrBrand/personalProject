@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <style>
+            ul,li{
+              margin: 0;
+              padding: 0
+            }
+            .ct li{
+              list-style:none;
+              border: 1px solid #ccc;
+              padding: 10px;
+              margin-top: 10px;
+              cursor:pointer;
+            }
+            #load-more{
+                display: block;
+                margin: 10px auto;
+                text-align: center;
+                cursor: pointer;
+            }
+            #load-more img{
+                width: 40px;
+                height: 40px;
+            }
+            .btn{
+                display: inline-block;
+                height: 40px;
+                line-height: 40px;
+                width: 80px;
+                border: 1px solid #E27272;
+                border-radius: 3px;
+                text-align: center;
+                text-decoration: none;
+                color: #E27272;
+            }
+            .hover{
+              background: pink;
+              color: #fff;
+            }
+        </style>
+        <script type="text/javascript" src="./jquery-3.2.1.min.js"></script>
+    </head>
+    <body>
+        <ul class="ct">
+          <li>内容1</li>
+          <li>内容2</li>
+        </ul>
+        <a id="load-more" class="btn" href="#">加载更多</a>
+        <script type="text/javascript">
+            var $btn = $('.btn');
+            var $ct = $('.ct')
+            var $lis = $ct.children();
+            var pageIdx = 3
+            var isDataArrive = true;
+
+            $btn.on('click',function(e){
+                e.preventDefault();
+                if(!isDataArrive) {
+                    return;
+                }
+
+                $.ajax({
+                	url:'/loadMore',
+                	type:'get',
+                	dataType:'json',
+                	data:{
+                		'text':'新闻',
+                		'index':pageIdx,
+                		'len':3
+                	}
+                }).done(function(ret){
+                	if(ret.status === 0){
+                		getHtml(ret.data);
+	                	pageIdx += 3;
+	                	isDataArrive = true;
+                	}else{
+                		alert('获取信息失败')
+                	}          	
+                }).fail(function(){
+                	alert('服务器异常')
+                });
+
+                isDataArrive = false;
+            });
+
+            $ct.on('mousemove','li',function(e){
+            	$(this).addClass('hover')
+            })
+
+            $ct.on('mouseout','li',function(e){
+            	$(this).removeClass('hover')
+            })
+
+            function getHtml(ret) {
+            	$.each(ret,function(idx,val){
+            		var $li = '<li>' + val + '</li>'
+            		$ct.append($li);
+            	})
+            }
+        </script>
+    </body>
+</html>

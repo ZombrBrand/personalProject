@@ -19,6 +19,12 @@
    	* [JQ 加载更多-2](https://github.com/lzj222312/personalProject/blob/master/JQuery/loadMore-2/index.html)
     	* [效果](http://i4.buimg.com/567571/c07e216603a50b3b.gif)
 
+    * [JQ 图片懒加载]()
+    	* [效果]()
+
+    * [JQ-Ajax 腾讯新闻懒加载]()
+    	* [效果](http://i2.muimg.com/567571/b0995e658d3fa399.gif)
+
 * JS封装部分
 	* [事件封装（兼容）](https://github.com/lzj222312/personalProject/blob/master/JS%E5%B0%81%E8%A3%85%E9%83%A8%E5%88%86/eventCompatibility.js)
 	* [Ajax封装](https://github.com/lzj222312/personalProject/blob/master/JS%E5%B0%81%E8%A3%85%E9%83%A8%E5%88%86/ajax.js)

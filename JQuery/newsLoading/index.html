@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="index.css">
+        <script type="text/javascript" src="jquery-3.2.1.min.js"></script>
+    </head>
+    <body>
+    	<div class="container">
+	    	<ul class="news">
+	    		<!-- <li class="item clearfix">
+					<a href="http://view.inews.qq.com/a/20160830A02SEB00">
+						<div class="news-top-img">
+							<img src="http://inews.gtimg.com/newsapp_ls/0/531730377_150120/0" alt="">
+						</div>
+						<div class="news-bottom-introduction">
+							<h3>中国轰6K研发险些被俄罗斯发动机厂商卡脖子</h3>
+							<p>近日，轰6K＂战神＂轰炸机首次公开亮相。在中国...</p>
+						</div>
+					</a>
+	    		</li>
+	    		<li class="item clearfix">
+					<a href="http://view.inews.qq.com/a/20160830A02SEB00">
+						<div class="news-top-img">
+							<img src="http://inews.gtimg.com/newsapp_ls/0/531730377_150120/0" alt="">
+						</div>
+						<div class="news-bottom-introduction">
+							<h3>中国轰6K研发险些被俄罗斯发动机厂商卡脖子</h3>
+							<p>近日，轰6K＂战神＂轰炸机首次公开亮相。在中国...</p>
+						</div>
+					</a>
+	    		</li> -->
+	    	</ul>
+	    	<p class="loadMore"></p>
+    	</div>
+    </body>
+	<script type="text/javascript">
+		var $container = $('.container');
+		var $news = $('.news')
+		var pageIndex = 0;
+		var isLoad = true;
+		var isOver = false;
+		
+		getNews();
+		$(window).on('scroll',function(){
+			if(isVisible($('.loadMore')) && isLoad && !isOver){
+				getNews();
+			}
+		})
+
+		function getNews(){
+			$.ajax({
+				url:'/getNews',
+				type:'get',
+				dataType:'json',
+				data:{
+					'index':pageIndex
+				}
+			}).done(function(ret){
+				console.log(ret.data)
+				if(ret.status === 0){
+					pageIndex += 1;
+					isHtml(ret.data);
+					if(isVisible($('.loadMore')) && !isOver){
+						getNews()
+					}
+				}else{
+					console.log('请求失败！')
+				}
+				isLoad = true;
+			}).fail(function(){
+				console.log('服务器出错！')
+			})
+
+			isLoad = false;
+		}
+
+		function isHtml(ret){
+			if(ret.length === 0){
+				isOver = true;	
+				$container.append('<p>没有更多数据</p>')
+				return;
+			}
+
+			var html = '';
+			$.each(ret,function(){
+				html += '<li class="item clearfix">';
+				html += '<a href="' + this.link + '">'
+				html += '<div class="news-top-img">'
+				html += '<img src="' + this.img + '" alt="">'
+				html += '</div><div class="news-bottom-introduction">';
+				html += '<h3>' + this.title + '</h3>';
+				html += '<p>' + this.brif + '</p>';
+				html += '</div></a></li></ul>'
+			})
+			
+			$news.append(html);
+			
+		}
+
+		function isVisible($node){
+			var windowH = $(window).height();
+			var scrollTop = $(window).scrollTop();
+			var offset = $node.offset().top;
+			var nodeH = $node.outerHeight(true);
+
+			if(windowH + scrollTop > offset && offset + nodeH > scrollTop){
+				return true;
+			}else{
+				return false;
+			}
+		}
+	</script>
+</html>
+
+
+

@@ -1,0 +1,46 @@
+html, body, ul, li, ol, dl, dd, dt, form, fieldset, legend, img {
+    margin: 0;
+    padding: 0;
+}
+s, i, em {				
+    font-style: normal;
+    text-decoration: none;
+}
+ul,li {
+	list-style: none;
+}
+a {
+	text-decoration: none;
+	color: #000;
+}
+.clearfix:after {
+	content: '';
+	display: block;
+	clear: both;
+}
+.container{
+ max-width: 600px;
+ margin: 0 auto;
+}
+.item .news-top-img {
+	float: left;
+	margin-right: 10px;
+}
+.item .news-top-img img {
+	width: 100px;
+}
+.item .news-bottom-introduction {
+	float: left;
+}
+.item .news-bottom-introduction h3 {
+	margin: 10px 0;
+}
+.news-bottom-introduction p {
+	/* margin-top: 20px; */
+	font-size: 14px;
+	color: #666;
+}
+.container .loadMore {
+	height: 5px;
+	visibility: hidden;
+}

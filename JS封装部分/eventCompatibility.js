@@ -3,6 +3,9 @@ window.onload = function() {
         if(node.addEventListener) {
             node.addEventListener(type,handler);
         }else if(node.attachEvent){
+            // 代码作者利用了闭包和引用类型的特性
+            // 1.引用类型：赋予变量的只是指针，当需要使用时，只要找到指针即可
+            // 2.闭包：内部函数调用外部函数变量，致使外部函数变量不释放，使得可以找到外部函数变量
             node['e' + type + handler] = handler;
             node[type + handler] = function(){
               node['e' + type + handler](window.event)

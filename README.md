@@ -20,7 +20,7 @@
     	* [效果](http://i4.buimg.com/567571/c07e216603a50b3b.gif)
 
     * [JQ 图片懒加载](https://github.com/lzj222312/personalProject/blob/master/JQuery/lazyLoading/index.html)
-    	* [效果](https://lzj222312.github.io/personalProject/blob/master/JQuery/lazyLoading/index.html)
+    	* [效果](https://lzj222312.github.io/personalProject/JQuery/lazyLoading/index.html)
 
     * [JQ-Ajax 腾讯新闻懒加载](https://github.com/lzj222312/personalProject/blob/master/JQuery/newsLoading/index.html)
     	* [效果](http://i2.muimg.com/567571/b0995e658d3fa399.gif)

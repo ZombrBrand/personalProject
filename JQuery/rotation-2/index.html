@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" type="text/css" href="index.css">
+        <script type="text/javascript" src="jquery-3.2.1.min.js"></script>
+    </head>
+    <body>
+    	<div class="rotation">
+    		<ul class="img-ct clearfix">
+    			<li>
+	    			<a href="#"><img src="http://cdn.jirengu.com/book.jirengu.com/img/1.jpg" alt=""></a>
+    			</li>
+    			<li>
+	    			<a href="#"><img src="http://cdn.jirengu.com/book.jirengu.com/img/2.jpg" alt=""></a>
+    			</li>
+    			<li>
+	    			<a href="#"><img src="http://cdn.jirengu.com/book.jirengu.com/img/3.jpg" alt=""></a>
+    			</li>
+    			<li>
+	    			<a href="#"><img src="http://cdn.jirengu.com/book.jirengu.com/img/4.jpg" alt=""></a>
+    			</li>
+    		</ul>
+    		<div class="auxiliary">
+    			<a href="#" class="btn pre-btn">&lt;</a>
+    			<a href="#" class="btn next-btn">&gt;</a>
+    		</div>
+    		<ul class="dots">
+	    		<li class="hover"></li>
+	    		<li></li>
+	    		<li></li>
+	    		<li></li>
+    		</ul>
+    	</div>
+    	<script type="text/javascript">
+    		var $btn = $('.auxiliary'),
+    			$preBtn = $('.pre-btn'),
+    			$nextBtn = $('.next-btn'),
+    			$imgCt = $('.img-ct'),
+    			$lis = $imgCt.children(),
+    			$liCount = $lis.length,
+    			$dotLis = $('.dots').children(),
+    			$rotation = $('.rotation');
+    			
+    		var	pageIdx = 0,
+    			isFade = true,
+    			time;
+
+			$rotation.on('mouseover',function(){
+				clearInterval(time);
+				$btn.stop().animate({
+					'opacity':1
+				})
+			});
+
+			$rotation.on('mouseout',function(){
+				automatic();
+				$btn.stop().animate({
+					'opacity':0
+				})
+			});
+
+    		$nextBtn.on('click',function(e){
+    			e.preventDefault(); 
+    			playNext()				
+    		});
+
+    		$preBtn.on('click',function(e){
+    			e.preventDefault(); 
+    			playPer()				
+    		});
+
+    		$dotLis.on('click',function(){
+    			var $Idx = $(this).index();
+    			play($Idx);
+    		})
+			
+			play(0);
+			automatic();
+
+			function playNext(){
+				play((pageIdx + 1) % $liCount)
+			};
+
+			function playPer(){
+				play(($liCount + pageIdx -1) % $liCount)
+			};
+
+    		function play(Idx){
+    			if(!isFade){return}
+    			isFade = false;
+    			$lis.eq(pageIdx).fadeOut(500);
+    			$lis.eq(Idx).fadeIn(500,function(){
+    				isFade = true;
+    			});
+    			pageIdx = Idx;
+    			setDots()
+    		};
+
+    		function setDots(){
+    			$dotLis.removeClass('hover')
+    				   .eq(pageIdx)
+    				   .addClass('hover');
+    		};
+
+    		function automatic(){
+    			clearInterval(time);
+    			time = setInterval(function(){
+    				playNext();
+    			},1500)
+    		}
+    	</script>
+    </body>
+</html>

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" type="text/css" href="index.css">
+        <script type="text/javascript" src="jquery-3.2.1.min.js"></script>
+    </head>
+    <body>
+    	<div class="rotation">
+    		<ul class="img-ct">
+    			<li>
+	    			<a href="#"><img src="http://cdn.jirengu.com/book.jirengu.com/img/1.jpg" alt=""></a>
+    			</li>
+    			<li>
+	    			<a href="#"><img src="http://cdn.jirengu.com/book.jirengu.com/img/2.jpg" alt=""></a>
+    			</li>
+    			<li>
+	    			<a href="#"><img src="http://cdn.jirengu.com/book.jirengu.com/img/3.jpg" alt=""></a>
+    			</li>
+    			<li>
+	    			<a href="#"><img src="http://cdn.jirengu.com/book.jirengu.com/img/4.jpg" alt=""></a>
+    			</li>
+    		</ul>
+    		<div class="auxiliary">
+    			<a href="#" class="btn pre-btn active">&lt;</a>
+    			<a href="#" class="btn next-btn">&gt;</a>
+    		</div>
+    		<ul class="dots">
+	    		<li class="hover"></li>
+	    		<li></li>
+	    		<li></li>
+	    		<li></li>
+    		</ul>
+    	</div>
+    	<script type="text/javascript">
+    		var $btn = $('.auxiliary'),
+    			$preBtn = $('.pre-btn'),
+    			$nextBtn = $('.next-btn'),
+    			$imgCt = $('.img-ct'),
+    			$lis = $imgCt.children(),
+    			$dotLis = $('.dots').children(),
+    			$img = $('.img-ct img'),
+    			$rotation = $('.rotation');
+    			
+    		var	pageIdx = 0,
+    			isOver = true,
+    			isFade = true,
+    			time;
+
+    		var lastLi = $lis.last(),
+    			firstLi = $lis.first();
+
+    		$imgCt.prepend(lastLi.clone());
+    		$imgCt.append(firstLi.clone());
+
+    		$imgCt.width($imgCt.children().length * 300);
+    		$imgCt.css('left','-300px');
+
+    		automatic();
+
+			$rotation.on('mouseover',function(){
+				clearInterval(time);
+				$btn.stop().animate({
+					'opacity':1
+				})
+			});
+
+			$rotation.on('mouseout',function(){
+				automatic();
+				$btn.stop().animate({
+					'opacity':0
+				})
+			});
+
+    		$preBtn.on('click',function(e){
+    			e.preventDefault();
+    			if(isOver){
+    				playPre(1);			
+    			};
+    		});
+
+    		$nextBtn.on('click',function(e){
+    			e.preventDefault();
+    			if(isOver){
+    				playNext(1)   				
+    			};
+    		});
+
+    		$dotLis.on('click',function(){
+    			var $targetIdx = $(this).index();
+    			if($targetIdx > pageIdx){
+    				playNext($targetIdx - pageIdx)
+    			}
+    			if($targetIdx < pageIdx){
+    				playPre(pageIdx - $targetIdx)
+    			}
+    		})
+
+    		function automatic(){
+    			clearInterval(time);
+    			time = setInterval(function(){
+    				playNext(1)
+    			}, 1500)
+    		}
+
+    		function playPre(len){
+    			isOver = false;
+    			$imgCt.animate({
+    				'left': '+=' + len * $img.width()
+    			},500,function(){
+    				pageIdx -= len;
+    				if(pageIdx < 0){
+    					$imgCt.css('left',-$lis.length * $img.width());
+    					pageIdx = $lis.length - 1;
+    				}
+    				isOver = true;
+    				setDots()
+    			})
+    		}
+
+    		function playNext(len){
+    			isOver = false;
+    			$imgCt.animate({
+    				'left': '-=' + len * $img.width()
+    			},500,function(){
+    				pageIdx += len;
+    				if(pageIdx > $lis.length -1){
+    					$imgCt.css('left',-$img.width());
+    					pageIdx = 0;
+    				}
+    				isOver = true;
+    				setDots()
+    			});
+    		}
+
+    		function setDots(){
+    			$dotLis.removeClass()
+    					.eq(pageIdx)
+    				    .addClass('hover');
+    		}
+    	</script>
+    </body>
+</html>

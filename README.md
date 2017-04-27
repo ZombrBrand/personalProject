@@ -24,7 +24,12 @@
 
     * [JQ-Ajax 腾讯新闻懒加载](https://github.com/lzj222312/personalProject/blob/master/JQuery/newsLoading/index.html)
     	* [效果](http://i2.muimg.com/567571/b0995e658d3fa399.gif)
+    
+    * [JQ 轮播(左右平移)]()
+        * [效果]()
 
+    * [JQ 轮播(img重叠渐变)]()
+        * [效果]()
 * JS封装部分
 	* [事件封装（兼容）](https://github.com/lzj222312/personalProject/blob/master/JS%E5%B0%81%E8%A3%85%E9%83%A8%E5%88%86/eventCompatibility.js)
 	* [Ajax封装](https://github.com/lzj222312/personalProject/blob/master/JS%E5%B0%81%E8%A3%85%E9%83%A8%E5%88%86/ajax.js)

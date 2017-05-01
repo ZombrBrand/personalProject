@@ -1,0 +1,55 @@
+html, body, ul, li, ol, dl, dd, dt, form, fieldset, legend, img {
+    margin: 0;
+    padding: 0;
+}
+s, i, em {				
+    font-style: normal;
+    text-decoration: none;
+}
+ul,li {
+	list-style: none;
+}
+a {
+	text-decoration: none;
+	color: #000;
+}
+.clearfix:after {
+	content: '';
+	display: block;
+	clear: both;
+}
+.content {
+	position: relative;
+	width: 900px;
+	margin: 5px auto;
+}
+.content .item{	
+	position: absolute;
+	top: 0;
+	left: 0;
+	padding: 10px 10px;
+	margin: 10px 0 10px 10px;
+	/* border: 1px solid #ccc; */
+	box-shadow: 0 4px 8px rgba(0,0,0,0.2),4px 6px 12px rgba(0,0,0,0.19)
+}
+.item img {
+	width: 260px;
+}
+.item h4{
+	width: 260px;
+	margin: 10px 0;
+	padding-bottom: 10px;
+	border-bottom: 1px solid #ccc;
+}
+.item p{
+	width: 260px;
+	margin: 5px 0;
+	font-size: 14px;
+	/* overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap; */
+}
+.load {
+	height: 10px;
+	visibility: hidden;
+}

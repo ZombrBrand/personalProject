@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <script src="http://apps.bdimg.com/libs/jquery/1.9.1/jquery.min.js"></script>
+        <style type="text/css">
+			html, body, ul, li, ol, dl, dd, dt, form, fieldset, legend, img {
+			    margin: 0;
+			    padding: 0;
+			}
+			s, i, em {				
+			    font-style: normal;
+			    text-decoration: none;
+			}
+			ul,li {
+				list-style: none;
+			}
+			a {
+				text-decoration: none;
+				color: #000;
+			}
+			.clearfix:after {
+				content: '';
+				display: block;
+				clear: both;
+			}
+			.content {
+				position: relative;
+			}
+			.item {
+				position: absolute;
+				width: 200px;
+				margin: 10px 0 0 10px;
+				transition: all 2s;
+				opacity: 0;
+			}
+			.load {
+				height: 20px;
+				visibility: hidden;
+			}
+        </style>
+    </head>
+    <body>
+    	<div class="content">
+    		<ul class="ct clearfix">
+    		</ul>
+    	</div>
+    	<div class="load">加载插件</div>
+
+    	<script type="text/javascript">
+    		var $ct = $('.ct'),
+    			$content = $('.content'),
+    			$load = $('.load');
+    		
+    		var itemArr = [],
+
+    			// 开关，用于判断时候已经请求，当请求失败时将不再请求
+    			isReq = true;
+
+    		start(5)
+
+    		$(window).on('scroll',function(){
+    			if(!isReq){ return; }
+
+    			if(checkLoad($('.load')) && isReq){
+    				start(5)
+    			}
+    		})
+
+
+    		function start(num){
+    			var $urlList = getImgUrls(num);
+    			// console.log($urlList)
+
+    			$.each($urlList,function(idx,url){ 	//	将创建dom节点和瀑布流一起遍历是由于
+    												//	1.如果一次性创建完N个dom节点后再进行瀑布流的话，因为'$node.find('img').on('load',function(){}'
+    												//	加载函数会在每检测到img都会加载一次(类似递归)，这样会导致多次请求，使得定位数出现不停的累加，导致
+    												//	定位出现问题
+    												//	2.必须等待图片加载完成后再进行瀑布流排位，否则因为获取不完整高度导致BUG
+    				var $node = doHtml(url);
+    				// console.log($node instanceof jQuery)
+    				// console.log($node[0])
+    				
+    				// 只要发现有img时就等待加载完成再进行下一步
+    				$node.find('img').on('load',function(){
+    					$ct.append($node);
+    					$('img').width(200);
+    					// console.log($node)
+    					warterFall($node);
+    					if(checkLoad($('.load')) && isReq && idx == ($urlList.length -1)){
+    						start(num)
+    					}
+    				})
+    			})
+    		}
+    		
+    		// 创建dom
+    		function doHtml(url){
+    			var html = '';
+    				html += '<li class="item">';
+    				html += '<img src="' + url + '" alt="" />';
+    				html += '</li>';
+
+    			return $(html);
+    		}
+
+    		// 获取数据
+    		function getImgUrls(num) {
+				isReq = false;
+		        var color, width, height, urls = [];
+		        for (var i = 0; i < num; i++) {
+		          color = Math.random().toString(16).substring(2, 8);
+		          width = Math.floor(Math.random() * 100 + 50);
+		          height = Math.floor(Math.random() * 100 + 50);
+		          urls.push("http://placehold.it/" + width + "x" + height + "/" + color + "/fff");
+		        }
+		        isReq = true;
+
+		        return $(urls);
+		      }
+
+		    //	检查加载元素load，是否获取数据
+		    function checkLoad($ele){
+		    	let $winHeight = $(window).height(),
+		    		$scrollTop = $(window).scrollTop(),
+		    		$offset = $ele.offset().top,
+		    		$nodeHeight = $ele.outerHeight(true);
+
+		    	if($winHeight + $scrollTop > $offset && $offset + $nodeHeight > $scrollTop){
+		    		return true;
+		    	}else{
+		    		return false;
+		    	}
+
+		    }
+
+		    function warterFall($node){
+		    	var colNum = parseInt($content.width() / $node.outerWidth(true));
+
+
+		    	// 只有在第一次的时候需要init数组，否则start()的时候都要init数组，导致数据不准确
+		    	if(itemArr == 0){
+		    		for(var i = 0; i < colNum; i++){
+		    			itemArr.push(0);
+		    		}
+		    	}
+
+		    	// 由于$node是jQ对象，属于伪数组，可以进行遍历
+		    	$node.each(function(){
+		    		var maxHeight = Math.max.apply(null,itemArr);
+		    		var minHeight = Math.min.apply(null,itemArr);
+		    		var minIdx = itemArr.indexOf(minHeight);
+
+		    		$(this).css({
+		    			'top': itemArr[minIdx],
+		    			'left': $(this).outerWidth(true) * minIdx,
+		    			'opacity': 1
+		    		})
+
+		    		itemArr[minIdx] += $(this).outerHeight(true);
+		    		$content.height(maxHeight);
+		    	})
+		    }
+    	</script>
+    </body>
+</html>

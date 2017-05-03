@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <style type="text/css">
+			* {
+				padding: 0;
+				margin: 0;
+			}
+			.img-preview {
+				width: 1000px;
+				margin: 0 auto;
+			}
+			.img-row {
+				margin-bottom: 8px;
+			}
+			.img-row:after {
+				content: '';
+				display: block;
+				clear: both;
+			}
+			.img-box {
+				float: left;
+			}
+        </style>
+        <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    </head>
+    <body>
+    	<div class="img-preview">
+    		<div class="img-row">
+    			<div class="img-box"></div>
+    		</div>
+    	</div>
+    </body>
+    <script type="text/javascript">
+    	function Barrels($parentEle,num){
+    		this.$parentEle = $parentEle;
+    		this.baseHeight = 150;
+    		// 存放遍历后的请求数据
+    		this.rowList = [];
+    		this.loadImg(num);
+    	}
+
+    	Barrels.prototype = {
+
+    		loadImg: function(num){
+    			var _this = this;
+    			var urlList = this.getData(num);
+    			$.each(urlList,function(idx,url){
+    				var img = new Image;
+    				img.src = url;
+    				img.onload = function(){
+    					var originWidth = this.width,
+    						originHeight = this.height,
+    						ratio = this.width / this.height;
+
+    					var imageInfo = {
+    						target: $(img),
+    						width: _this.baseHeight * ratio,
+    						height: _this.baseHeight,
+    						ratio: ratio
+    					}
+    					// console.log(imageInfo)
+    					_this.render(imageInfo);
+    				}
+    			})
+    		},
+
+    		render: function(imageInfo){
+    			var _this = this;
+    			// 将每次获取的img++宽度,判断是否超过容器
+    			// 获取img++宽度后小于容器时，高度按比例放大到Y值正好填充容器
+    			var rowWidth = 0,
+    				rowHeight = 0,
+    				rowList = this.rowList,
+    				clientWidth = this.$parentEle.width(),
+
+    				// 获取最后一张图片信息
+    				lastImageInfo = imageInfo;
+
+    			rowList.push(imageInfo);
+    			$.each(rowList,function(Idx,imageInfo){
+    				// console.log(img)
+    				rowWidth += imageInfo.width;
+    				if(rowWidth > clientWidth){
+    					rowList.pop();
+    					rowWidth = rowWidth - lastImageInfo.width;
+    					// 获取新的图片高度，使得图片按比例缩放后宽能填充容器
+    					rowHeight = clientWidth * _this.baseHeight / rowWidth;
+
+    					_this.createEle(rowHeight);   					
+    					// 重置数组
+    					_this.rowList = [];
+    					// 将最后一张多出来的img放入数组，等待下一行继续摆放
+    					_this.rowList.push(lastImageInfo);
+    				}
+
+    			})
+
+    		},
+
+    		createEle: function(rowHeight){
+    			console.log(2)
+    			var $rowct = $('<div class="img-row"></div>');
+    			$.each(this.rowList,function(Idx,imageInfo){
+    				var $imgct = $('<div class="img-box"></div>'),
+    					$img = imageInfo.target;
+    					$img.height(rowHeight);
+    					$imgct.append($img);
+    					$rowct.append($imgct);
+    			})
+    			this.$parentEle.append($rowct);
+
+    		},
+
+    		getData: function(num){
+    			var color,width,height,urls = [];
+    			for(var i = 0; i < num; i++){
+    				color = Math.random().toString(16).substring(2, 8);
+    				width = Math.floor(Math.random() * 100 + 50);
+    				height = Math.floor(Math.random() * 100 + 50);
+    				urls.push('http://placehold.it/' + width + 'x' + height + '/' + color + '/fff');
+    			}
+    			return urls;
+    		}
+    	}
+
+
+    	var barrels = new Barrels($('.img-preview'),30) 
+    </script>
+</html>

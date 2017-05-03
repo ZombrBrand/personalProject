@@ -30,6 +30,16 @@
 
     * [JQ 轮播(img重叠渐变)](https://github.com/lzj222312/personalProject/blob/master/JQuery/rotation-2/index.html)
         * [效果](https://lzj222312.github.io/personalProject/JQuery/rotation-2/index.html)
+    
+    * [JQ 瀑布流-1](https://github.com/lzj222312/personalProject/blob/master/JQuery/WaterfallsFlow/index.html)
+        * [效果](https://lzj222312.github.io/personalProject/JQuery/WaterfallsFlow/index.html)
+
+    * [JQ-Ajax 瀑布流-2](https://github.com/lzj222312/personalProject/blob/master/JQuery/WaterfallsFlow_2/index.html)
+        * [效果](https://lzj222312.github.io/personalProject/JQuery/WaterfallsFlow_2/index.html)
+
+    * [JQ 木桶布局](https://github.com/lzj222312/personalProject/blob/master/JQuery/Barrels/index.html)
+        * [效果](https://lzj222312.github.io/personalProject/JQuery/Barrels/index.html)
+
 * JS封装部分
 	* [事件封装（兼容）](https://github.com/lzj222312/personalProject/blob/master/JS%E5%B0%81%E8%A3%85%E9%83%A8%E5%88%86/eventCompatibility.js)
 	* [Ajax封装](https://github.com/lzj222312/personalProject/blob/master/JS%E5%B0%81%E8%A3%85%E9%83%A8%E5%88%86/ajax.js)

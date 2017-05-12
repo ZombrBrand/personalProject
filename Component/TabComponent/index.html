@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset='utf-8'>
+	<style type="text/css">
+		html, body, ul, li, ol, dl, dd, dt, form, fieldset, legend, img {
+		    margin: 0;
+		    padding: 0;
+		}
+		s, i, em {				
+		    font-style: normal;
+		    text-decoration: none;
+		}
+		ul,li {
+			list-style: none;
+		}
+		a {
+			text-decoration: none;
+			color: #000;
+		}
+		.clearfix:after {
+			content: '';
+			display: block;
+			clear: both;
+		}
+		.ct {
+			width: 700px;
+			margin: 100px auto;
+		}
+		.ct-box{
+			padding: 30px;
+			margin-bottom: 20px;
+			border: 1px solid #ccc;
+			border-radius: 5px;
+		}
+		.option-car li {
+			float: left;
+			padding: 10px;
+			margin-right: 20px;
+			border: 1px solid transparent;
+			font-size: 20px;
+			cursor: pointer;
+			color: red;
+		}
+		.option-car li.active {
+			background-color: #fff;
+			border: 1px solid #ccc;
+			border-radius: 5px 5px 0 0;
+			border-bottom: transparent;
+			color: #000;
+		}
+		.option-content {
+			padding: 20px 0 20px 0;
+			border-top: 1px solid #ccc;
+			margin-top: -2px;
+		}
+		.option-content li{
+			display: none;
+			height: 50px;
+			padding: 10px;
+			font-size: 20px;
+			line-height: 50px;
+		}
+		.option-content li.show {
+			display: block;
+		}
+	</style>
+	<script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+	<script type="text/javascript" src="index.js"></script>
+</head>
+<body>
+	<div class="ct">
+		<div class="ct-box">
+			<ul class="option-car clearfix">
+				<li class="active">选项1</li>
+				<li>选项2</li>
+				<li>选项3</li>
+			</ul>
+			<ul class="option-content">
+				<li class="show">内容1</li>
+				<li>内容2</li>
+				<li>内容3</li>
+			</ul>
+		</div>
+		<div class="ct-box">
+			<ul class="option-car clearfix">
+				<li class="active">选项1</li>
+				<li>选项2</li>
+				<li>选项3</li>
+			</ul>
+			<ul class="option-content">
+				<li class="show">内容1</li>
+				<li>内容2</li>
+				<li>内容3</li>
+			</ul>
+		</div>
+	</div>
+    <script type="text/javascript">
+    	tabSwitch_1 = new Tabswitch($$('.ct-box')[0])
+    	tabSwitch_2 = new Tabswitch($$('.ct-box')[1])
+
+    	function $$(eles){
+    		return document.querySelectorAll(eles)
+    	}
+    </script>
+</body>
+
+</html>

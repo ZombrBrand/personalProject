@@ -40,6 +40,14 @@
     * [JQ 木桶布局](https://github.com/lzj222312/personalProject/blob/master/JQuery/Barrels/index.html)
         * [效果](https://lzj222312.github.io/personalProject/JQuery/Barrels/index.html)
 
+* 组件化
+    * [Tab栏切换组件]()
+        * [效果]()
+    * [曝光组件]()
+        * [效果]()
+    * [轮播组件]()
+        * [效果]()
+
 * JS封装部分
 	* [事件封装（兼容）](https://github.com/lzj222312/personalProject/blob/master/JS%E5%B0%81%E8%A3%85%E9%83%A8%E5%88%86/eventCompatibility.js)
 	* [Ajax封装](https://github.com/lzj222312/personalProject/blob/master/JS%E5%B0%81%E8%A3%85%E9%83%A8%E5%88%86/ajax.js)
@@ -48,4 +56,7 @@
 	* [jsonp&Cors](https://github.com/lzj222312/personalProject/tree/master/Ajax%E8%B7%A8%E5%9F%9F%E5%A4%84%E7%90%86/jsonp%26Cors)
 	* [postMessage](https://github.com/lzj222312/personalProject/tree/master/Ajax%E8%B7%A8%E5%9F%9F%E5%A4%84%E7%90%86/postMessage)
 	* [降域](https://github.com/lzj222312/personalProject/tree/master/Ajax%E8%B7%A8%E5%9F%9F%E5%A4%84%E7%90%86/%E9%99%8D%E5%9F%9F)
+
+* 模块化
+    * [基本思路]()
 

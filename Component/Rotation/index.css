@@ -1,0 +1,74 @@
+html, body, ul, li, ol, dl, dd, dt, form, fieldset, legend, img {
+    margin: 0;
+    padding: 0;
+}
+s, i, em {				
+    font-style: normal;
+    text-decoration: none;
+}
+ul,li {
+	list-style: none;
+}
+a {
+	text-decoration: none;
+	color: #000;
+}
+.clearfix:after {
+	content: '';
+	display: block;
+	clear: both;
+}
+.rotation {
+	position: relative;
+	width: 300px;
+	margin: 50px auto;
+	overflow: hidden;
+}
+.img-ct {
+	position: relative;
+	left: 0;
+	width: 1200px;
+}
+.img-ct li {
+	float: left;
+}
+.img-ct li img {
+	width: 300px;
+}
+.auxiliary .btn {
+	position: absolute;
+	top: 50%;
+	transform: translate(0,-50%);
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+	background-color: rgba(127,127,127,0.5);
+	text-align: center;
+	line-height: 40px;
+	font-size:20px;
+}
+.auxiliary .pre-btn {
+	left: 15px
+}
+.auxiliary .next-btn {
+	right: 15px
+}
+.dots {
+	position: absolute;
+	bottom: 20px;
+	left: 50%;
+	transform: translate(-50%,0);
+}
+.dots li {
+	float: left;
+	width: 20px;
+	height: 5px;
+	/* border: 1px solid #000; */
+	border-radius: 5px;
+	margin-right: 10px;
+	background-color: #fff;
+	cursor: pointer;
+}
+.dots li.hover {
+	background-color: #666;
+}

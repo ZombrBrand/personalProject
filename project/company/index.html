@@ -3,7 +3,11 @@
     <head>
         <meta charset="utf-8">
         <link rel="stylesheet" type="text/css" href="css/golabel.css">
-        <link rel="stylesheet" type="text/css" href="font/section-3/iconfont.css">
+        <link rel="stylesheet" type="text/css" href="./font/section-3/iconfont.css">
+        <script src="src/js/lib/jquery-1.11.3.min.js"></script>
+        <script type="text/javascript" src="src/js/lib/jquery.gototop.min.js"></script>
+        <script type="text/javascript" src="src/js/com/rotation.js"></script>
+        <script type="text/javascript" src="src/js/com/gotop.js"></script>
         <title>企业网站</title>
     </head>
     <body>
@@ -20,6 +24,12 @@
     		</div>
     	</div>
     	<div class="header">
+    		<ul class="rotation-header">
+    			<li><img src="images/bg1.jpg" alt=""></li>
+    			<li><img src="images/bg2.jpg" alt=""></li>
+    			<li><img src="images/bg3.jpg" alt=""></li>
+    			<li><img src="images/bg1.jpg" alt=""></li>
+    		</ul>
     		<div class="con">
     			<h3>Welcome To Youcai College!</h3>
     			<p>IT'S NICE TO MEET YOU</p>
@@ -182,5 +192,10 @@
 	    		</div>
     		</div>
     	</footer>
+    	<script type="text/javascript">
+    		rotation.init($('.header'))
+    		goTop.init($(document))
+
+    	</script>
     </body>
 </html>

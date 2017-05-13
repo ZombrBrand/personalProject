@@ -57,6 +57,7 @@ body {
 	right: 0;
 	/* background-color: transparent; */
 	z-index: 1;
+
 }
 .wrap {
 	max-width: 1140px;
@@ -106,7 +107,18 @@ body {
 .header {
 	position: relative;
 	height: 683px;
-	background: url('../images/bg2.jpg') no-repeat;
+	overflow: hidden;
+	/* background: url('../images/bg2.jpg') no-repeat; */
+}
+.rotation-header {
+	position: absolute;
+	width: 7604px;
+}
+.rotation-header>li {
+	float:left;
+}
+.rotation-header img {
+	width: 1901px;
 }
 .con {
 	position: absolute;
@@ -344,3 +356,16 @@ footer {
 	font-weight: bold;
 	color: #fff;
 }
+.go-top {
+	position: fixed;
+	bottom: 30px;
+	right: -110px;
+	width: 80px;
+	height: 20px;
+	padding: 10px;
+	border: 5px solid #ccc;
+	border-radius: 5px;
+	font-size: 18px;
+	cursor: pointer;
+}
+

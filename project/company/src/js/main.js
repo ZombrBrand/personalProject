@@ -1,4 +1,4 @@
-// 配置加载模块地址
+// require.js配置加载模块地址
 requirejs.config({
 	baseUrl: "./src/js",
 	paths: {

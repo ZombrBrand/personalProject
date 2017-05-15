@@ -1,10 +1,12 @@
-var exposure = (function(){
-	function Exposure($target,callblack){
-		this.$target = $target;
-		this.callblack = callblack;
+define(function()){
 
-		this.bind();
-		this.check();
+	var exposure = (function(){
+		function Exposure($target,callblack){
+			this.$target = $target;
+			this.callblack = callblack;
+
+			this.bind();
+			this.check();
 	}
 
 	Exposure.prototype = {
@@ -45,6 +47,11 @@ var exposure = (function(){
 		}
 	}
 })()
+
+	return exposure
+}
+
+
 
 function html($node){
 	var url = $node.attr('data-src');

@@ -4,10 +4,6 @@
         <meta charset="utf-8">
         <link rel="stylesheet" type="text/css" href="css/golabel.css">
         <link rel="stylesheet" type="text/css" href="./font/section-3/iconfont.css">
-        <script src="src/js/lib/jquery-1.11.3.min.js"></script>
-        <script type="text/javascript" src="src/js/lib/jquery.gototop.min.js"></script>
-        <script type="text/javascript" src="src/js/com/rotation.js"></script>
-        <script type="text/javascript" src="src/js/com/gotop.js"></script>
         <title>企业网站</title>
     </head>
     <body>
@@ -65,12 +61,24 @@
     	</section>
     	<section class="section-two clearfix">
     		<div class="wrap">
-    			<h2>实习案例</h2>
-    			<h4>讲课内容，结合实战案例，学后实战实习，直接参与一线实战案例！</h4>
-    			<ul class="clearfix">
+    			<h2>新闻加载</h2>
+    			<h4>实时新闻，点击加载推送</h4>
+    			<ul class="relative">
+    				<!-- <li class="item">
+	    				<a href="#" class="link">
+	    					<img src="http://s.img.mix.sina.com.cn/auto/resize?img=http%3A%2F%2Fwww.sinaimg.cn%2Fdy%2Fslidenews%2F5_img%2F2016_09%2F453_75615_657883.jpg&size=250_0" alt="">
+	    				</a>
+	    				<h4>标题</h4>
+	    				<p class="desp">
+	    					当地时间2016年3月1日，在东部与亲俄武装作战中受伤的乌克兰士兵接受海豚治疗。
+	    				</p>
+    				</li> -->
+    			</ul>
+    			<div class="load"><a href="javascript:;">加载更多</a></div>
+    			<!-- <ul class="clearfix">
     				<li>
 	    				<a href="#">
-	    					<img src="images/pic1.jpg" alt="">
+	    					<img src="http://n.sinaimg.cn/tech/transform/20170514/4dSt-fyfeutp9018690.jpg" alt="">
 	    				</a>
 	    				<h5>圈点生活项目</h5>
 	    				<p>实战基础实习作品</p>
@@ -110,7 +118,7 @@
 	    				<h5>圈点生活项目</h5>
 	    				<p>实战基础实习作品</p>
     				</li>
-    			</ul>
+    			</ul> -->
     		</div>
     	</section>
     	<section class="section-three">
@@ -192,10 +200,22 @@
 	    		</div>
     		</div>
     	</footer>
-    	<script type="text/javascript">
-    		rotation.init($('.header'))
-    		goTop.init($(document))
+    	<script data-main="dist/merge.min.js" src="src/js/lib/require/require.js"></script>
+    	<!-- <script>
+    		// 配置加载模块地址
+			requirejs.config({
+				baseUrl: "src/js",
+				paths: {
+					'jquery': 'lib/jquery/jquery-1.11.3.min'
+				}
+			});
 
-    	</script>
+			// 加载入口模块
+			requirejs(['app/index'])
+			
+
+
+    	</script> -->
+
     </body>
 </html>

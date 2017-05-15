@@ -1,11 +1,13 @@
-rotation = (function(){
-	function Rotation($ct){
-		this.$ct = $ct;
-		this.pageIndex = 0;
-		this.isOpen = true;
-		this.time;
-		this.init();
-		this.bind();
+define(function(){
+
+	var rotation = (function(){
+		function Rotation($ct){
+			this.$ct = $ct;
+			this.pageIndex = 0;
+			this.isOpen = true;
+			this.time;
+			this.init();
+			this.bind();
 	}
 
 	Rotation.prototype = {
@@ -123,13 +125,20 @@ rotation = (function(){
 
 	}
 	
-	return {
-		init: function($ct){
-			$ct.each(function(idx,node){
-				new Rotation($(node));
-			})
+		return {
+			init: function($ct){
+				$ct.each(function(idx,node){
+					new Rotation($(node));
+				})
+			}
 		}
-	}
-})()
+
+	})()
+
+
+	return rotation
+})
+
+
 
 

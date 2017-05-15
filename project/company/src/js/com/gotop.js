@@ -1,9 +1,11 @@
-var goTop = (function(){
-	function GoTop($ct){
-		this.$ct = $ct;
-		this.isScroll = true;
-		this.init();
-		this.bind();
+define(function(){
+
+	var goTop = (function(){
+		function GoTop($ct){
+			this.$ct = $ct;
+			this.isScroll = true;
+			this.init();
+			this.bind();
 	}
 
 	GoTop.prototype = {
@@ -24,7 +26,21 @@ var goTop = (function(){
 			})
 
 			this.$ct.on('scroll',function(){
-				_this.scroll()				
+				if(_this.isScroll){
+					_this.isScroll = false;
+
+					setTimeout(function(){
+							_this.scroll()
+					},500)
+				}
+
+				//	可利用延时+条件判断达成scroll只要滚动就触发方法的问题
+				//	只要是利用了setTimerout和setInterval,会在代码执行完成后
+				//	才执行的特性
+				//		setTimeout(function(){
+				//			_this.scroll()
+				//		},300) 
+	
 			})
 		},
 
@@ -39,12 +55,12 @@ var goTop = (function(){
 			var $scroll = this.$ct.scrollTop();
 			var _this = this;
 
-			if($scroll > 500 && $scroll < 600){
+			_this.isScroll = true;
+
+			if($scroll > 500){
 				this.$goTop.stop().animate({
 					right: 0
-				},500,function(){
-					_this.isScroll = true;
-				});
+				},500);
 				this.$nav.stop().fadeOut(300);
 			}else if($scroll < 500){
 				this.$goTop.stop().animate({
@@ -55,12 +71,14 @@ var goTop = (function(){
 		}
 	}
 
-	return {
-		init: function($ct){
-			new GoTop($ct);
+		return {
+			init: function($ct){
+				new GoTop($ct);
+			}
 		}
-	}
 
-})()
+	})()
 
 
+	return goTop
+})

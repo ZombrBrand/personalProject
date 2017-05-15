@@ -44,9 +44,9 @@
     * [Tab栏切换组件]()
         * [效果]()
 
-    * [曝光组件]()
-        * [效果]()
-        
+    * [曝光组件](https://github.com/lzj222312/personalProject/blob/master/Component/Exposure/index.js)
+        * [效果](https://lzj222312.github.io/personalProject/Component/Exposure/index.html)
+
     * [轮播组件]()
         * [效果]()
 
@@ -60,8 +60,10 @@
 	* [降域](https://github.com/lzj222312/personalProject/tree/master/Ajax%E8%B7%A8%E5%9F%9F%E5%A4%84%E7%90%86/%E9%99%8D%E5%9F%9F)
 
 * 模块化
-    * [基本思路]()
+    * [基本思路](https://github.com/lzj222312/personalProject/blob/master/Modular/Modular%E5%9F%BA%E6%9C%AC%E6%80%9D%E8%B7%AF/ModularBasis.js)
 
-    * [requirejs模块化实例]()
-        * [效果]()
+    * [进阶思路](https://github.com/lzj222312/personalProject/blob/master/Modular/Modular%E5%9F%BA%E6%9C%AC%E6%80%9D%E8%B7%AF/ModularAdvanced.js)
+
+    * [requirejs模块化实例](https://github.com/lzj222312/personalProject/blob/master/project/company/index.html)
+        * [效果](https://lzj222312.github.io/personalProject/project/company/index.html)
 

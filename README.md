@@ -41,14 +41,14 @@
         * [效果](https://lzj222312.github.io/personalProject/JQuery/Barrels/index.html)
 
 * 组件化
-    * [Tab栏切换组件]()
-        * [效果]()
+    * [Tab栏切换组件](https://github.com/lzj222312/personalProject/blob/master/Component/TabComponent/index.js)
+        * [效果](https://lzj222312.github.io/personalProject/Component/TabComponent/index.html)
 
     * [曝光组件](https://github.com/lzj222312/personalProject/blob/master/Component/Exposure/index.js)
         * [效果](https://lzj222312.github.io/personalProject/Component/Exposure/index.html)
 
-    * [轮播组件]()
-        * [效果]()
+    * [轮播组件](https://github.com/lzj222312/personalProject/blob/master/Component/Rotation/index.js)
+        * [效果](https://lzj222312.github.io/personalProject/Component/Rotation/index.html)
 
 * JS封装部分
 	* [事件封装（兼容）](https://github.com/lzj222312/personalProject/blob/master/JS%E5%B0%81%E8%A3%85%E9%83%A8%E5%88%86/eventCompatibility.js)

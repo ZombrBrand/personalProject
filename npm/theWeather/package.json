@@ -1,0 +1,28 @@
+{
+  "name": "weather-liangzj",
+  "version": "0.0.3",
+  "description": "天气预报demo",
+  "main": "./index.js",
+  "bin": {
+  	"weather": "./index.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lzj222312/personalProject.git"
+  },
+  "keywords": [
+    "theWeather"
+  ],
+  "author": "liangzj",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lzj222312/personalProject/issues"
+  },
+  "homepage": "https://github.com/lzj222312/personalProject#readme",
+  "dependencies": {
+    "axios": "^0.16.1"
+  }
+}

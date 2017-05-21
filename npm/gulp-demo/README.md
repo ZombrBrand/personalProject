@@ -1,1 +1,0 @@
-[谷内：gulp案例(vip_recruit)](http://book.jirengu.com/jrg-team/jrg-operation-pages/)

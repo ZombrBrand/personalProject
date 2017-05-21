@@ -1,0 +1,24 @@
+{
+  "name": "gulp-demo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "liangzj",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lzj222312/personalProject/issues"
+  },
+  "homepage": "https://github.com/lzj222312/personalProject#readme",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-concat": "^2.6.1",
+    "gulp-cssnano": "^2.1.2",
+    "gulp-jshint": "^2.0.4",
+    "gulp-plumber": "^1.1.0",
+    "gulp-rimraf": "^0.2.1",
+    "gulp-uglify": "^2.1.2"
+  }
+}

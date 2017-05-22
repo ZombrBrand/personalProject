@@ -38,7 +38,7 @@
 	browsers-sync start --server	//开启服务器
 	browsers-sync start --server -f bulid/*  开启服务器并监控文件变动
 
-#### browserify 打包工具
+#### browserify js打包工具
 	npm install browserify -g
 	npm install browserify --save-dev 
 
@@ -50,8 +50,8 @@
 	uglifyjs index.js -m -o index.min.js
 
 	所谓 JavaScript 混淆:
-		基本就是重命名局部变量（YUI Compressor 也可以配置参数，拒绝变量重命名）
-		移除代码空白（Space、Tab、Line-Feed）在相同语义的情况下压缩代码，比如去掉末尾分号（Remove Terminator Semicolons），常量替换（Constant Propagation）
+	基本就是重命名局部变量（YUI Compressor 也可以配置参数，拒绝变量重命名）
+	移除代码空白（Space、Tab、Line-Feed）在相同语义的情况下压缩代码，比如去掉末尾分号（Remove Terminator Semicolons），常量替换（Constant Propagation）
 
 
 #### less CSS转换器
@@ -65,5 +65,18 @@
 
 	lessc css/index.less > index.css --clean-css="advanced"
 
+#### img压缩(后端使用)
+	npm install node-smushit -g
 
+	smushit img
 
+#### img压缩(前端使用，免费每月500张)
+	npm install tinify
+
+	tinify img
+
+#### base64-css 图片base64转换
+	npm install base64-css
+
+	不使用全局化命令：
+	node node_modules.base64-css/bin/cli.js -f index.css

@@ -1,4 +1,4 @@
-// 随时随地将你的当前目录变成一个静态文件服务器的根目录。
+### 随时随地将你的当前目录变成一个静态文件服务器的根目录
     cnpm i -g anywhere	
 
 ### 淘宝npm镜像
@@ -44,6 +44,16 @@
 
 	browserify commonjs/b.js > index.js 
 
+#### js压缩
+	npm install uglifyjs -g
+
+	uglifyjs index.js -m -o index.min.js
+
+	所谓 JavaScript 混淆:
+		基本就是重命名局部变量（YUI Compressor 也可以配置参数，拒绝变量重命名）
+		移除代码空白（Space、Tab、Line-Feed）在相同语义的情况下压缩代码，比如去掉末尾分号（Remove Terminator Semicolons），常量替换（Constant Propagation）
+
+
 #### less CSS转换器
 	npm install less -g
 	npm install less --save-dev
@@ -54,3 +64,6 @@
 	npm install less-plugin-clean-css -g
 
 	lessc css/index.less > index.css --clean-css="advanced"
+
+
+

@@ -9,8 +9,11 @@
 #### 只通过本地安装，在这个文件夹下可以找到对应的执行文件
 	./node_modules/.bin/
 
-#### 下载所有依赖包
+#### 下载所有开发依赖包(devDependencies)
 	cnpm install
+
+#### 下载所有生产依赖包(dependencies)
+	cnpm i --production
 
 #### babel 转化JS代码
 	npm install -g babel-cli

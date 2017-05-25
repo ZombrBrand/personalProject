@@ -3,7 +3,7 @@
 // add(1,2)
 
 // var $ = require("jquery");
-import $ from "jquery"
+// import $ from "jquery"
 
 // var stuJson = require("./stu.json");
 import stuJson from "./stu.json"

@@ -8,7 +8,11 @@ var extractCSS = new ExtractTextPlugin('css/index.css')
 // var HtmlWebpackPlugin = require('html-webpack-plugin') 
 
 module.exports = {
-	entry: __dirname + "/src/js/index.js", //唯一入口文件
+	entry: {
+		app: __dirname + "/src/js/index.js", //唯一入口文件
+		// more: [__dirname + "/src/js/a.js",__dirname + "/src/js/b.js"],	//引入组件等等
+		v: ['jquery'] //引入公共库
+	},
 	output: {
 		path: __dirname + "/assets/",
 		filename:"js/index.js",
@@ -51,6 +55,14 @@ module.exports = {
 			{
 				test:/\.json$/,
 				loader:"json-loader"
+			},
+			{
+				test:/\.png|\.jpg$/,
+				loader:"url-loader?limit=5000&name=../assets/img/[hash:8].[name].[ext]"
+			},
+			{
+				test:/\.html$/,
+				loader:"html-loader"
 			}
 		]
 	},
@@ -66,8 +78,37 @@ module.exports = {
 				compress: {
 					warnings: false
 				}
+		}),
+
+		// 声明全局
+		new webpack.ProvidePlugin({
+			$: 'jquery'
+		}),
+		// 插件块，可以将一些插件块独立得导出来成js
+		new webpack.optimize.CommonsChunkPlugin({
+			name:'v',
+			filename:'lib/jquery.min.js'
 		})
-	]
+
+		// 如果额外引入组件之类的js
+		// new webpack.optimize.CommonsChunkPlugin({
+		// 	names:['a','b']
+		// })
+	],
+	// 加载自己的jquery
+	// externals:{
+	// 	jquery:"http://libs.baidu.com/jquery/1.9.1/jquery.min.js"
+	// },
+	
+	// resolve:{	//需要从外部引入自己的公共库函数或者方法
+	// 	root:'d:/js/',	//指定引入地址
+	// 	extensions:['','.js'],	//引入的文件
+	// 	alias:{
+	// 		addAdd:'add.js'	//别名
+	// 	}
+	// }
+	// 引入方式，到入口文件src/index.js
+	// var add = require('appAdd').add
 }
 
 

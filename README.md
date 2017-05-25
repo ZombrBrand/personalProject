@@ -67,5 +67,6 @@
     * [requirejs模块化实例](https://github.com/lzj222312/personalProject/blob/master/project/company/index.html)
         * [效果](https://lzj222312.github.io/personalProject/project/company/index.html)
 
-    * [webpack实例]()
+    * [webpack-demo]()
 
+    * [webpack实例](https://lzj222312.github.io/personalProject/project/company-webpack/index.html)

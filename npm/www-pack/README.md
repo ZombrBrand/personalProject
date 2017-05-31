@@ -32,5 +32,8 @@
 #### uglify js压缩工具
 	npm install uglify-js --save-dev
 
-#### file-loader和url-loader
+#### file-loader和url-loader图片64转码和压缩
 	npm install file-loader url-loader --save-dev
+
+#### html文件图片转换地址
+	npm install html-loader --saver-dev

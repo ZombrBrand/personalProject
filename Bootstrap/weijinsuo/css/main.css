@@ -42,6 +42,15 @@ body {
     url('../font/MiFie-Web-Font.woff') format('woff');
 }
 
+@font-face {
+  font-family: "iconfont";
+  /*src: url('iconfont.eot?t=1496747178492');  IE9*/
+  src: url('../font/iconfont.eot') format('embedded-opentype'), /* IE6-IE8 */
+  url('../font/iconfont.svg') format('svg'), /* chrome, firefox */
+  url('../font/iconfont.ttf') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
+  url('../font/iconfont.woff') format('woff'); /* iOS 4.1- */
+}
+
 /* 
     第一个知识点：
         利用条件选择器获取整个document class为icon-或者是' icon-'的类，那样就可以少写一个类进行icon引入
@@ -49,6 +58,12 @@ body {
 [class^='icon-'],[class*=' icon-'] {
     font-family: 'itcast';
     font-style: normal;
+}
+
+[class^='iconcast-'],[class*=' iconcast-'] {
+    font-family:"iconfont" !important;
+    font-size:16px;
+    font-style:normal;
 }
 
 .icon-mobilephone::before {
@@ -69,6 +84,62 @@ body {
   content: "\e920";
 }
 
+.icon-uniE907:before {
+    content: "\e907";
+}
+
+.iconcast-uniE907:before {
+    content: "\e609";
+}
+
+.iconcast-uniE908:before {
+    content: "\e610";
+}
+
+.iconcast-uniE909:before {
+    content: "\e607";
+}
+
+.iconcast-uniE910:before {
+    content: "\e620";
+}
+
+.iconcast-uniE911:before {
+    content: "\e621";
+}
+
+.icon-uniE906:before {
+    content: "\e906";
+}
+
+.icon-uniE905:before {
+    content: "\e905";
+}
+
+.icon-news01:before {
+    content: "\e90e";
+    font-size: 28px;
+    color: #EAEAEA;
+}
+
+.icon-news02:before {
+    content: "\e90f";
+    font-size: 28px;
+    color: #EAEAEA;
+}
+
+.icon-news03:before {
+    content: "\e910";
+    font-size: 28px;
+    color: #EAEAEA;
+}
+
+.icon-news04:before {
+    content: "\e911";
+    font-size: 28px;
+    color: #EAEAEA;
+}
+
 #header .icon-icon {
   font-size: 50px;
   color: #E92322;
@@ -82,6 +153,453 @@ body {
   line-height: 50px;
   vertical-align: middle;
 }
+
+/*头部区域*/
+#header > .topbar {
+    height: 40px;
+    border-bottom: 1px solid #c0c0c0;
+    line-height: 40px;
+}
+
+#header > .topbar > .container > .row > div {
+    height: 40px;
+    font-size: 12px;
+    color: #888;
+}
+
+/* +号选择器可使element的兄弟元素获取css样式 */
+#header > .topbar > .container > .row > div + div {
+    border-left: 1px solid #c0c0c0;
+}
+
+#header .mobile-link {
+    display: block;
+    width: 91px;
+    height: 40px;
+    margin: 0 auto;
+}
+
+#header .mobile-link > img {
+    display: none;
+    position: absolute;
+    top: 30px;
+    left: 50%;
+    margin-left: -60px;
+    z-index: 1001;
+}
+
+#header .mobile-link:hover > img {
+    display: block;
+}
+
+#header .btn-link:link,
+#header .btn-link:visited,
+#header .btn-link:hover,
+#header .btn-link:active {
+  text-decoration: none;
+  outline: none;
+}
+
+
+/* 广告轮播 */
+#main-ad > .carousel-inner > .item {
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+@media (min-width:768px) {
+  #main-ad > .carousel-inner > .item {
+    height: 410px;
+  }   
+}
+
+#main-ad > .carousel-inner > .item > img {
+    width: 100%;
+}
+
+/* 特色介绍 */
+#tese {
+    padding: 50px 0;
+    border-bottom: 1px solid #c0c0c0;
+}
+
+#tese > .container > .row > div {
+    margin: 20px 0;
+}
+
+#tese > .container > .row > div i {
+    font-size: 35px;
+}
+
+/* 立即预约 */
+#ljyy {
+  padding: 20px 0;
+  border-bottom: 1px solid #c0c0c0;
+}
+
+#ljyy > .container > p {
+  margin-bottom: 0;
+  font-size: 14px;
+}
+
+#ljyy > .container > p > i {
+  margin-right: 5px;
+  vertical-align: middle;
+}
+
+#ljyy > .container > p > span {
+  color: #E92322;
+}
+
+#ljyy > .container > .pull-left > a {
+  border-bottom: 1px dashed #E92322;
+  color: #E92322
+}
+
+#ljyy > .container > .pull-right > a {
+  color: #23527c
+}
+
+/* 产品推荐 */
+#products {
+  padding: 40px 0;
+  background-color: #f0f0f0;
+}
+
+#products > .container > .move-wapper > .nav-tabs {
+  padding: 0 20px;
+}
+
+#products > .container > .move-wapper > .nav-tabs > li > a {
+  font-size: 16px;
+  color: #444;
+  background-color: transparent;
+  border-color: transparent;
+  border-bottom: 3px solid transparent;
+}
+
+#products > .container > .move-wapper > .nav-tabs > li.active > a {
+  border-bottom: 3px solid #E92322;
+}
+
+#products > .container > .move-wapper > .nav-tabs > li > a:hover {
+  color: #222;
+}
+
+#products > .container > .tab-content {
+  padding: 20px 0;
+}
+
+#products > .container > .tab-content .project-end-one::before {
+  content: '已满标';
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  border: 4px solid #E92322;
+  border-radius: 50%;
+  line-height: 80px;
+  text-align: center;
+  left: 196px;
+  top: 35px;
+  font-size: 20px;
+  font-weight: 700;
+  color: #E92322;
+  transform: rotate(320deg);
+  z-index: 3;
+}
+
+#products > .container > .tab-content .project-end-two::before {
+  content: '还款中';
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  border: 4px solid #E92322;
+  border-radius: 50%;
+  line-height: 80px;
+  text-align: center;
+  left: 196px;
+  top: 35px;
+  font-size: 20px;
+  font-weight: 700;
+  color: #E92322;
+  transform: rotate(320deg);
+  z-index: 3;
+}
+
+.panel-itcase > .panel-heading {
+  height: 150px;
+  margin-right: 120px;
+  border-radius: 0;
+}
+
+.panel-itcase > .panel-heading > .row >  p {
+  margin-left: 15px;
+  font-size: 16px;
+}
+
+.panel-itcase > .panel-heading > .row > .col-xs-6 > p {
+  margin-bottom: 0;
+}
+
+.panel-itcase > .panel-body {
+  position: relative;
+  float: right;
+  width: 120px;
+  height: 150px;
+  text-align: center;
+  border-radius: 0;
+  border-left: 1px dashed #c0c0c0;
+  padding: 25px 20px;
+}
+
+.panel-itcase > .panel-body > p {
+  margin-bottom: 0;
+}
+
+.panel-itcase > .panel-body > .tooltips > .badge {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background-color: transparent;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 0;
+  text-align: center;
+  padding: 4px 3px;
+}
+
+.panel-itcase > .panel-body > .tooltips > .badge-one {
+  border-color: #E92322;
+  margin-right: 1px;
+  color: #E92322;
+}
+
+.panel-itcase > .panel-body > .tooltips > .badge-two {
+  border-color: #399;
+  color: #399;
+}
+
+.panel-itcase > .panel-body > p > strong {
+  font-size: 45px;
+}
+
+.panel-itcase > .panel-body::before,
+.panel-itcase > .panel-body::after {
+  position: absolute;
+  content: '';
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: #f0f0f0;
+}
+
+.panel-itcase > .panel-body::before {
+  top: -10px;
+  left: -10px;
+  box-shadow: 0px -1px 1px #ccc inset;
+}
+
+.panel-itcase > .panel-body::after {
+  bottom: -10px;
+  left: -10px;
+  box-shadow: 0px 2px 1px #ccc inset;
+}
+
+.panel-itcase.active {
+  background-color: #E92322;
+  color: #fff
+}
+
+.panel-itcase.active::before {
+    content: "\e915";
+    font-family: itcast;
+    font-size: 35px;
+    position: absolute;
+    top: -8px;
+    left: 16px;
+}
+
+.panel-itcase.disable {
+  background-color: rgba(0,0,0,0.2);
+  color: #777;
+}
+
+/* 新闻列表 */
+#news {
+  padding: 10px;
+  border-bottom: 1px solid #c0c0c0;
+}
+
+#news .news-title {
+  position: relative;
+  font-size: 20px;
+  font-weight: 600;
+  text-align: center;
+  padding: 20px 0 10px 0;
+  border-bottom: 1px dashed #c0c0c0;
+  margin-right: 10px;
+}
+
+#news .news-title::before {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  right: -10px;
+  width: 10px;
+  height: 10px;
+  border: 1px solid #c0c0c0;
+  border-radius: 50%;
+}
+
+#news .nav-pills li {
+  margin: 0 0 15px 0;
+}
+
+#news .base-tab {
+  display: block;
+  width: 67px;
+  height: 67px;
+  border-radius: 50%;
+  background-color: #c0c0c0;
+  text-align: center;
+  padding: 15px 0;
+}
+
+#news .nav-pills li.active > .base-tab {
+  background-color: #E92322;
+}
+
+#news .base-tab:hover {
+  background-color: #E92322;
+}
+
+@media screen and (max-width:970px) {
+  #news .nav-pills li {
+    float: left;
+    margin: 15px 5px;
+  }
+
+}
+
+#news .tab-content .tab-pane {
+  padding: 25px 0;
+}
+
+#news .tab-content .tab-pane li{
+  margin-bottom: 20px;
+}
+
+/* 合作伙伴 */
+#hzhb {
+  padding: 30px 0;
+}
+
+#hzhb .partner-list {
+  width: 1000px;
+  margin: 15px auto;
+}
+
+#hzhb .partner-list::after{
+  content: '';
+  display: block;
+  clear: both;
+}
+
+#hzhb li {
+  float: left;
+  line-height: 1;
+}
+
+#hzhb li + li {
+  border-left: 1px dashed #c0c0c0;
+}
+
+#hzhb li a {
+  padding: 0 30px;
+  font-size: 50px;
+}
+
+
+.icon-uniE930:hover {
+  color: #df3232;
+}
+
+.icon-uniE930:before {
+  content: "\e946";
+}
+
+.icon-uniE92F:hover {
+  color: #e8380d;
+}
+
+.icon-uniE92F:before {
+  content: "\e92f";
+}
+
+.icon-uniE92E:hover {
+  color: #ed6f00;
+}
+
+.icon-uniE92E:before {
+  content: "\e92e";
+}
+
+.icon-uniE92A:hover {
+  color: #159f69;
+}
+
+.icon-uniE92A:before {
+  content: "\e92a";
+}
+
+.icon-uniE929:hover {
+  color: #07569e;
+}
+
+.icon-uniE929:before {
+  content: "\e929";
+}
+
+.icon-uniE931:hover {
+  color: #004098;
+}
+
+.icon-uniE931:before {
+  content: "\e931";
+}
+
+.icon-uniE92C:hover {
+  color: #d32019;
+}
+
+.icon-uniE92C:before {
+  content: "\e92c";
+}
+
+.icon-uniE92B:hover {
+  color: #3eac4a;
+}
+
+.icon-uniE92B:before {
+  content: "\e92b";
+}
+
+.icon-uniE92D:hover {
+  color: #2bb289;
+}
+
+.icon-uniE92D:before {
+  content: "\e92d";
+}
+
+
+/* 脚注区域 */
+/*#footer {
+    height: 40px;
+    background-color: pink;
+}*/
+
+
 
 /*
 *   第二个知识点：
@@ -140,6 +658,9 @@ fieldset[disabled] .btn-register.active {
 .navbar-itcast {
   background-color: #fff;
   border-color: #e7e7e7;
+  margin-bottom: 0;
+  top: 0;
+  width: 100%;
 }
 .navbar-itcast .navbar-brand {
   color: #777;
@@ -240,67 +761,21 @@ fieldset[disabled] .navbar-itcast .btn-link:focus {
   color: #ccc;
 }
 
-/*
-    头部区域
-*/
-#header {
-    height: 200px;
+.panel-itcase {
+  border-color: #ddd;
 }
-
-#header > .topbar {
-    height: 40px;
-    border-bottom: 1px solid #c0c0c0;
-    line-height: 40px;
+.panel-itcase > .panel-heading {
+  /* color: #fff; */
+  /* background-color: #E92322; */
+  /* border-color: #ddd; */
 }
-
-#header > .topbar > .container > .row > div {
-    height: 40px;
-    font-size: 12px;
-    color: #888;
+.panel-itcase > .panel-heading + .panel-collapse > .panel-body {
+  border-top-color: #ddd;
 }
-
-/* +号选择器可使element的兄弟元素获取css样式 */
-#header > .topbar > .container > .row > div + div {
-    border-left: 1px solid #c0c0c0;
+.panel-itcase > .panel-heading .badge {
+  color: #f5f5f5;
+  background-color: #333;
 }
-
-#header .mobile-link {
-    display: block;
-    width: 91px;
-    height: 40px;
-    margin: 0 auto;
-}
-
-#header .mobile-link > img {
-    display: none;
-    position: absolute;
-    top: 30px;
-    left: 50%;
-    margin-left: -60px;
-    z-index: 1001;
-}
-
-#header .mobile-link:hover > img {
-    display: block;
-}
-
-
-/*
-    section区域
-*/
-section {
-    height: 200px;
-    background-color: #f0f0f0
-
-}
-section:nth-of-type(2n) {
-    background-color: skyblue;
-}
-
-/*
-    脚注区域
-*/
-#footer {
-    height: 40px;
-    background-color: pink
+.panel-itcase > .panel-footer + .panel-collapse > .panel-body {
+  border-bottom-color: #ddd;
 }

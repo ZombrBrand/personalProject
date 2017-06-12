@@ -3,7 +3,6 @@ define(function(){
 	var goTop = (function(){
 		function GoTop($ct){
 			this.$ct = $ct;
-			console.log('$===jQuery:',$===jQuery)
 			this.isScroll = true;
 			this.init();
 			this.bind();

@@ -106,6 +106,7 @@ define(function(){
 			new LoadMore($ct)
 		}
 	}
+	
 })()
 	
 	return loadMore

@@ -116,8 +116,7 @@
     				}
     			}
 
-    			$node.each(function(){
-    				var mixHeight = Math.max.apply(null,itemArr);
+    			$node.each(function(){	
     				var minHeight = Math.min.apply(null,itemArr);
     				var minIdx = itemArr.indexOf(minHeight);
 
@@ -127,6 +126,9 @@
     				})
 
     				itemArr[minIdx] += $(this).outerHeight(true);
+					
+					// 要将数组中的最大高度放置在更新数组之后，否则会出现$content盒子高度不对的bug
+					var mixHeight = Math.max.apply(null,itemArr);
     				$content.height(mixHeight);
     			})
     		}

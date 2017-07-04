@@ -58,7 +58,7 @@ html {
     overflow: hidden;
 }
 body {
-    width:100%; height:100%; font: 14px/1.5 Tahoma,Arial,Roboto,"Droid Sans","Helvetica Neue","Droid Sans Fallback","Heiti SC",sans-self;
+    width:100%; height:100%; font: 14px/1.5 SimSun,Tahoma,Arial,Roboto,"Droid Sans","Helvetica Neue","Droid Sans Fallback","Heiti SC",sans-self;
 }
 
 .title {
@@ -210,9 +210,13 @@ body {
     text-align: center;
     color: #fff;
 }
+#musicdetails .details-name {
+    font-family: SimSun;
+}
 #musicdetails .details-name > span {
-    font-size: 12px;
     margin-left: 10px;
+    font-size: 12px;
+    font-family: SimSun;   
 }
 #musicdetails .detaols-tip {
     position: absolute;

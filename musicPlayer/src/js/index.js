@@ -2,9 +2,11 @@ $(function(){
     var viewWidth = $(window).width(),
         viewHeight = $(window).height()
         desWidth = 640,
+        musicId = 0,
         $main = $('#main'),
         $contentUl = $('.music-content .content-ul'),
         $musicTitle = $('#music-list .music-title'),
+        $contentUlList = $('.content-ul-list'),
         $musicdetails = $('#musicdetails'),
         $detaols_tip = $('.detaols-tip'),
         $audio = $('.audio'),
@@ -77,12 +79,18 @@ $(function(){
             $contentUl.on(touchend,'li',function(){
                 if(onoff3){
                     $(this).attr('class','content-ul-list active').siblings().attr('class','content-ul-list');
+                    
+                    // 获取元素中保存的歌曲ID，通过ajax获取点击后该歌曲的所有信息
+                    musicId = $(this).attr('musicid');
+                    musicAudio.id(musicId);
                 }
             });
-
+    
             $audio.on('click',function(){
-                musicDetails.sildeUp();
-            })
+                if(musicId){
+                    musicDetails.sildeUp();
+                }
+            });
         };
 
         function start(){
@@ -119,7 +127,7 @@ $(function(){
 
         function createDom(data){
             // var li = '<li class="content-ul-list"><h3 class="title">' + data[0].title + '</h3><p class="name">' + data[0].artist + '</p></li>'
-            var li = '<li class="content-ul-list"><h3 class="title">'+(data.musicName)+'</h3><p class="name">'+(data.name)+'</p></li>';            
+            var li = '<li musicid="'+ data.id +'" class="content-ul-list"><h3 class="title">'+(data.musicName)+'</h3><p class="name">'+(data.name)+'</p></li>';            
             return $(li)
         };
 
@@ -221,8 +229,17 @@ $(function(){
 			});
         };
 
+
+        function show(sName,sMusicName,sImg){
+            $audio.find('img').attr('src','./img/' + sImg);
+            $audio.find('h3').html(sMusicName);
+            $audio.find('p').html(sName);
+            $audio.find('.audio-btn').show();        
+        }
+
         return {
-            init:init
+            init: init,
+            show: show
         }
 
     })();
@@ -249,10 +266,53 @@ $(function(){
             })
         }
 
+        function show(sName,sMusicName,sImg){
+            $musicdetails.find('.details-name').html(sMusicName + '<span>' + sName + '</span>')
+        }
+
         return {
             init: init,
-            sildeUp: sildeUp
+            sildeUp: sildeUp,
+            show: show
         };
+    })();
+
+    var musicAudio = (function(){
+        function init(){
+
+        };
+
+        function id(id){
+            $.ajax({
+                url: '../../musicAudio.php',
+                type: 'GET',
+                dataType: 'json',
+                data: {
+                    id: id
+                }
+            }).done(function(data){
+                show(data)
+            }).fail(function(){
+                console.log('请求失败，请重新请求！')
+            })
+        };
+
+        // 保存通过id获取当前歌曲的所有信息，并触发对应列表页的dom修改
+        function show(obj){
+            var sName = obj.name,
+                sMusicName = obj.musicName,
+                sLyric = obj.lyric,
+                sImg = obj.img,
+                sAudio = obj.audio;
+            
+            musicList.show(sName,sMusicName,sImg);
+            musicDetails.show(sName,sMusicName,sImg);
+        };
+
+        return {
+            init: init,
+            id: id
+        }
     })();
 
     init();

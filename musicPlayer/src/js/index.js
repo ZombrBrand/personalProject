@@ -8,12 +8,20 @@ $(function(){
         $musicTitle = $('#music-list .music-title'),
         $contentUlList = $('.content-ul-list'),
         $musicdetails = $('#musicdetails'),
+        $detailsAllTime = $('#detailsAllTime'),
+        $detailsNowTime = $('#detailsNowTime'),
         $detaols_tip = $('.detaols-tip'),
+        $detailsAudioProUp = $('#detailsAudioProUp'),
+        $detailsAudioProBar = $('#detailsAudioProBar'),
+        $detailsAudioPro = $musicdetails.find('.details-audioPro');
         $audio = $('.audio'),
+        $audioBtn = $audio.find('.audio-btn'),
+        $detailsPlay = $musicdetails.find('.details-play'),
+        oAudio = $('#loadAudio').get(0),
         touchstart = 'touchstart',
         touchmove = 'touchmove',
         touchend = 'touchend';
-
+    
     /**
      * 初始化播放器
      */
@@ -21,6 +29,7 @@ $(function(){
         device();
         musicList.init();
         musicDetails.init();
+        musicAudio.init();
     }
 
     /**
@@ -277,9 +286,15 @@ $(function(){
         };
     })();
 
-    var musicAudio = (function(){
-        function init(){
+    var musicAudio = (function(){   //音乐播放操作
+        var onoff = true,
+            timer = null,
+            scale = 0,
+            disX = 0,
+            parenW = $detailsAudioPro.width();
 
+        function init(){
+            bin();
         };
 
         function id(id){
@@ -297,17 +312,103 @@ $(function(){
             })
         };
 
+        function bin(){
+            $audioBtn.add($detailsPlay).on(touchstart,function(){
+                if(onoff){
+                    play();
+                }else{
+                    pause();
+                }
+
+                return false;
+            });
+
+            $detailsAudioProBar.on(touchstart,function(eve){
+                var touch = eve.originalEvent.changedTouches ? eve.originalEvent.changedTouches[0]:eve;
+                var This = this;
+
+                disX = touch.pageX - $(this).position().left;
+                timer && clearInterval(timer);
+
+                $(document).on(touchmove + '.move',function(eve){
+                    var touch = eve.originalEvent.changedTouches ? eve.originalEvent.changedTouches[0]:eve;
+                    var L = touch.pageX - disX;
+
+                    if(L <= 0){
+                        L = 0;
+                    }else if(L >= parenW){
+                        L = parenW;
+                    }
+
+                    $(This).css('left',L);
+
+                });
+                $(document).on(touchend + '.move',function(){
+                    $(this).off('.move');
+
+                })
+            });
+        }
+
         // 保存通过id获取当前歌曲的所有信息，并触发对应列表页的dom修改
         function show(obj){
             var sName = obj.name,
                 sMusicName = obj.musicName,
                 sLyric = obj.lyric,
                 sImg = obj.img,
-                sAudio = obj.audio;
+                sAudio = obj.audio;             
             
             musicList.show(sName,sMusicName,sImg);
             musicDetails.show(sName,sMusicName,sImg);
+            oAudio.src = '../../img/' + sAudio;
+            $(oAudio).one('canplaythrough',function(){
+                play();
+                $detailsAllTime.html(formatTime(oAudio.duration));
+            });
         };
+
+        function play(){    //播放
+            onoff = false;
+
+            $audio.find('img').addClass('Imgrotate');
+            $audioBtn.css('backgroundImage',"url('../img/list_audioPause.png')");
+            $detailsPlay.css('backgroundImage',"url('../img/details_pause.png')");
+            oAudio.play();
+            playing();
+            timer && clearInterval(timer);
+            setInterval(playing,1000);
+        };
+
+        function pause(){   //暂停
+            onoff = true;
+
+            $audio.find('img').removeClass('Imgrotate');
+            $audioBtn.css('backgroundImage',"url('../img/list_audioPlay.png')");
+            $detailsPlay.css('backgroundImage',"url('../img/details_play.png')");
+            oAudio.pause();
+        };
+
+        function formatTime(num){   //转换获取的音频时长
+            var iM = Math.floor(num % 3600 / 60),
+                iS = Math.floor(num % 60)
+
+            return toZero(iM) + ':' + toZero(iS);
+        }
+
+        function toZero(num){
+            if(num < 10){
+                return '0' + num;
+            }else{
+                return '' + num;
+            }
+        }
+
+        function playing(){ //播放进行中
+            $detailsNowTime.html(formatTime(oAudio.currentTime));
+            scale = oAudio.currentTime / oAudio.duration;
+            $detailsAudioProUp.css('width',scale * 100 + '%');
+            $detailsAudioProBar.css('left',scale * 100 + '%');
+        }
 
         return {
             init: init,

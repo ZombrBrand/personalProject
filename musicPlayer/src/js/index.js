@@ -3,17 +3,19 @@ $(function(){
         viewHeight = $(window).height()
         desWidth = 640,
         musicId = 0,
+        index = 0,
         $main = $('#main'),
         $contentUl = $('.music-content .content-ul'),
         $musicTitle = $('#music-list .music-title'),
-        $contentUlList = $('.content-ul-list'),
         $musicdetails = $('#musicdetails'),
         $detailsAllTime = $('#detailsAllTime'),
         $detailsNowTime = $('#detailsNowTime'),
         $detaols_tip = $('.detaols-tip'),
         $detailsAudioProUp = $('#detailsAudioProUp'),
         $detailsAudioProBar = $('#detailsAudioProBar'),
-        $detailsAudioPro = $musicdetails.find('.details-audioPro');
+        $detailsAudioPro = $musicdetails.find('.details-audioPro'),
+        $detailsNext = $('#detailsNext'),
+        $detailsPrev = $('#detailsPrev'),
         $audio = $('.audio'),
         $audioBtn = $audio.find('.audio-btn'),
         $detailsPlay = $musicdetails.find('.details-play'),
@@ -92,6 +94,7 @@ $(function(){
                     // 获取元素中保存的歌曲ID，通过ajax获取点击后该歌曲的所有信息
                     musicId = $(this).attr('musicid');
                     musicAudio.id(musicId);
+                    index = $(this).index();
                 }
             });
     
@@ -342,11 +345,26 @@ $(function(){
 
                     $(This).css('left',L);
 
+                    scale = L / parenW
+
                 });
                 $(document).on(touchend + '.move',function(){
                     $(this).off('.move');
 
+                    oAudio.currentTime = scale * oAudio.duration;
+                    playing();
+                    timer && clearInterval(timer);
+                    timer = setInterval(playing,1000);                
                 })
+                return false;
+            });
+
+            $detailsPrev.on(touchstart,function(){
+                prev();
+            })
+
+            $detailsNext.on(touchstart,function(){
+                next();
             });
         }
 
@@ -365,6 +383,9 @@ $(function(){
                 play();
                 $detailsAllTime.html(formatTime(oAudio.duration));
             });
+            $(oAudio).one('ended',function(){
+                next();
+            })
         };
 
         function play(){    //播放
@@ -376,7 +397,7 @@ $(function(){
             oAudio.play();
             playing();
             timer && clearInterval(timer);
-            setInterval(playing,1000);
+            timer = setInterval(playing,1000);
         };
 
         function pause(){   //暂停
@@ -386,6 +407,7 @@ $(function(){
             $audioBtn.css('backgroundImage',"url('../img/list_audioPlay.png')");
             $detailsPlay.css('backgroundImage',"url('../img/details_play.png')");
             oAudio.pause();
+            timer && clearInterval(timer);
         };
 
         function formatTime(num){   //转换获取的音频时长
@@ -393,7 +415,7 @@ $(function(){
                 iS = Math.floor(num % 60)
 
             return toZero(iM) + ':' + toZero(iS);
-        }
+        };
 
         function toZero(num){
             if(num < 10){
@@ -401,19 +423,35 @@ $(function(){
             }else{
                 return '' + num;
             }
-        }
+        };
 
         function playing(){ //播放进行中
             $detailsNowTime.html(formatTime(oAudio.currentTime));
             scale = oAudio.currentTime / oAudio.duration;
             $detailsAudioProUp.css('width',scale * 100 + '%');
             $detailsAudioProBar.css('left',scale * 100 + '%');
-        }
+        };
+
+        function next(){    //下一首
+            var $li = $contentUl.find('li');
+            index = index == $li.length - 1 ? 0:index + 1;
+            musicId = $li.eq(index).attr('musicid');
+            $li.eq(index).addClass('active').siblings().removeClass('active');
+            id(musicId);
+        };
+
+        function prev(){    //上一首
+            var $li = $contentUl.find('li');
+            index = index == 0 ? $li.length - 1:index - 1;
+            musicId = $li.eq(index).attr('musicid');
+            $li.eq(index).addClass('active').siblings().removeClass('active');
+            id(musicId);
+        };
 
         return {
             init: init,
             id: id
-        }
+        };
     })();
 
     init();

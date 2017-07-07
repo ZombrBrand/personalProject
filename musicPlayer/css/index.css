@@ -242,6 +242,33 @@ body {
 }
 
 /**
+*   歌词列表
+*/
+#musicdetails .details-lyric {
+    width: 100%;
+    position: absolute;
+    top: 40px;
+    bottom: 150px;
+    overflow: hidden;
+}
+.details-lyric > .details-lyric-ul {
+    width: 100%;
+    position: absolute;
+    top: 0;    
+    left: 0;
+    text-align: center;
+    font-size: 14px;
+    color: #fff;
+    transition: 5s;
+}
+.details-lyric li {
+    margin-top: 10px;   
+}
+.details-lyric li.hover {
+    color: #00ffff; 
+}
+
+/**
 *   播放控制
 */
 #musicdetails .details-audio {

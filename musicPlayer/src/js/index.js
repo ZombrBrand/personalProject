@@ -7,6 +7,7 @@ $(function(){
         $main = $('#main'),
         $contentUl = $('.music-content .content-ul'),
         $musicTitle = $('#music-list .music-title'),
+        $detailsLyricUl = $('#detailsLyricUl'),
         $musicdetails = $('#musicdetails'),
         $detailsAllTime = $('#detailsAllTime'),
         $detailsNowTime = $('#detailsNowTime'),
@@ -257,6 +258,10 @@ $(function(){
     })();
 
     var musicDetails = (function(){ //音乐详情页操作
+        var re = /\[[^[]+/g
+            arr = [],
+            $li = null;
+
         function init(){
             $musicdetails.css('transform','translate3d(0,' + viewHeight + 'px,0)');
 
@@ -278,14 +283,53 @@ $(function(){
             })
         }
 
-        function show(sName,sMusicName,sImg){
-            $musicdetails.find('.details-name').html(sMusicName + '<span>' + sName + '</span>')
+        function show(sName,sMusicName,sLyric){
+            $musicdetails.find('.details-name').html(sMusicName + '<span>' + sName + '</span>');
+            $detailsLyricUl.empty().css('transition','.5s').css('transform','translate3d(0,0,0)');
+
+            arr = sLyric.match(re); //  通过正则将每段歌词分离
+
+            for(var i = 0; i < arr.length; i++){ //将歌词和时间分离
+                arr[i] = [formatTime(arr[i].substring(0,10)),arr[i].substring(10)]; 
+            }
+
+            for(var i = 0; i < arr.length; i++){
+                $detailsLyricUl.append('<li>' + arr[i][1] + '</li>');
+            }
+            
+            $li = $detailsLyricUl.find('li');
+            $li.first().attr('class','hover');
+            $iLiH = $li.first().outerHeight(true);
+
+        }
+
+        function formatTime(num){   //时间格式化
+            num = num.substring(1,num.length-1);
+            var arr = num.split(':');
+            return (parseFloat(arr[0] * 60) + parseFloat(arr[1])).toFixed(2);
+            // toFixed(),该方法表示保留多少位小数
+        }
+
+        function scrollLyric(time){
+            for(var i = 0; i < arr.length; i++){
+                if(i != arr.length -1 && time > arr[i][0] && time < arr[i+1][0]){
+                    $li.eq(i).attr('class','hover').siblings().removeClass('hover');
+                    if(i > 5){
+                        $detailsLyricUl.css('transform','translate3d(0,'+ (-$iLiH * (i - 5)) +'px,0)');
+                    }else{
+                        $detailsLyricUl.css('transform','translate3d(0,0,0)');
+                    }
+                }else if(i == arr.length -1 && time > arr[i][0]){
+                    $li.eq(i).attr('class','hover').siblings().removeClass('hover');
+                }
+            }
         }
 
         return {
             init: init,
             sildeUp: sildeUp,
-            show: show
+            show: show,
+            scrollLyric: scrollLyric
         };
     })();
 
@@ -375,9 +419,9 @@ $(function(){
                 sLyric = obj.lyric,
                 sImg = obj.img,
                 sAudio = obj.audio;             
-            
+
             musicList.show(sName,sMusicName,sImg);
-            musicDetails.show(sName,sMusicName,sImg);
+            musicDetails.show(sName,sMusicName,sLyric);
             oAudio.src = '../../img/' + sAudio;
             $(oAudio).one('canplaythrough',function(){
                 play();
@@ -430,6 +474,7 @@ $(function(){
             scale = oAudio.currentTime / oAudio.duration;
             $detailsAudioProUp.css('width',scale * 100 + '%');
             $detailsAudioProBar.css('left',scale * 100 + '%');
+            musicDetails.scrollLyric(oAudio.currentTime);
         };
 
         function next(){    //下一首

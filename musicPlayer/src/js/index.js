@@ -1,22 +1,29 @@
 $(function(){
     var viewWidth = $(window).width(),
-        viewHeight = $(window).height()
+        viewHeight = $(window).height(),
         desWidth = 640,
         musicId = 0,
         index = 0,
         $main = $('#main'),
         $contentUl = $('.music-content .content-ul'),
         $musicTitle = $('#music-list .music-title'),
+        $detailsLyric = $('.details-lyric')
         $detailsLyricUl = $('#detailsLyricUl'),
         $musicdetails = $('#musicdetails'),
+        $detailsAudioAll = $('.details-audioAll')
         $detailsAllTime = $('#detailsAllTime'),
         $detailsNowTime = $('#detailsNowTime'),
         $detaols_tip = $('.detaols-tip'),
+        $detailsBtnLis = $('.details-btn').children(),
         $detailsAudioProUp = $('#detailsAudioProUp'),
         $detailsAudioProBar = $('#detailsAudioProBar'),
         $detailsAudioPro = $musicdetails.find('.details-audioPro'),
         $detailsNext = $('#detailsNext'),
         $detailsPrev = $('#detailsPrev'),
+        $detailsMessage = $('#detailsMessage'),
+        $detailsMessageTextarea = $('#detailsMessageTextarea'),
+        $detailsMessageBtn = $('#detailsMessageBtn'),
+        $detailsMessageUl = $('#detailsMessageUl'),
         $audio = $('.audio'),
         $audioBtn = $audio.find('.audio-btn'),
         $detailsPlay = $musicdetails.find('.details-play'),
@@ -96,10 +103,11 @@ $(function(){
                     musicId = $(this).attr('musicid');
                     musicAudio.id(musicId);
                     index = $(this).index();
+                    musicDetails.loadMessage();
                 }
             });
     
-            $audio.on('click',function(){
+            $audio.on(touchstart,function(){
                 if(musicId){
                     musicDetails.sildeUp();
                 }
@@ -260,11 +268,13 @@ $(function(){
     var musicDetails = (function(){ //音乐详情页操作
         var re = /\[[^[]+/g
             arr = [],
-            $li = null;
+            $li = null,
+            downX = 0,
+            range = 20;
 
         function init(){
             $musicdetails.css('transform','translate3d(0,' + viewHeight + 'px,0)');
-
+            $detailsMessage.css('transform','translate3d('+ viewWidth +'px,0,0)');
             bin();
         };
 
@@ -280,6 +290,28 @@ $(function(){
         function bin(){
             $detaols_tip.on('click',function(){
                 sildeDown();
+            })
+
+            $musicdetails.on(touchstart,function(eve){
+                var touch = eve.originalEvent.changedTouches ? eve.originalEvent.changedTouches[0]:eve;
+
+                downX = touch.pageX;
+
+                $(document).on(touchend + '.move',function(eve){
+                    var touch = eve.originalEvent.changedTouches ? eve.originalEvent.changedTouches[0]:eve;
+                    $(this).off('.move');
+            
+                    if(touch.pageX - downX < -range){
+                        $detailsLyric.add($detailsAudioAll).css('transform','translate3d('+ (-viewWidth) +'px,0,0)');
+                        $detailsMessage.css('transform','translate3d(0,0,0)');
+                        $detailsBtnLis.eq(1).addClass('active').siblings().removeClass('active');
+                        loadMessage();
+                    }else if(touch.pageX - downX > range){
+                        $detailsLyric.add($detailsAudioAll).css('transform','translate3d(0,0,0)');
+                        $detailsMessage.css('transform','translate3d('+ (viewWidth) +'px,0,0)');
+                        $detailsBtnLis.eq(0).addClass('active').siblings().removeClass('active');
+                    }
+                })
             })
         }
 
@@ -325,11 +357,32 @@ $(function(){
             }
         }
 
+        function loadMessage(){
+            $detailsMessageUl.empty();
+
+            $.ajax({
+                url: 'loadMessage.php',
+                type: 'GET',
+                dataType: 'json',
+                data: {
+                    mid: musicId
+                }
+            }).done(function(data){
+                $.each(data,function(idx,obj){
+                    var $li = '<li>'+ obj.text +'</li>';
+                    $detailsMessageUl.prepend($li);
+                })
+            }).fail(function(){
+                console.log('请求失败，请重新请求！')
+            })
+        }
+
         return {
             init: init,
             sildeUp: sildeUp,
             show: show,
-            scrollLyric: scrollLyric
+            scrollLyric: scrollLyric,
+            loadMessage: loadMessage
         };
     })();
 
@@ -360,14 +413,14 @@ $(function(){
         };
 
         function bin(){
-            $audioBtn.add($detailsPlay).on(touchstart,function(){
+            $audioBtn.add($detailsPlay).on(touchstart,function(eve){
+                eve.stopPropagation();
+
                 if(onoff){
                     play();
                 }else{
                     pause();
                 }
-
-                return false;
             });
 
             $detailsAudioProBar.on(touchstart,function(eve){

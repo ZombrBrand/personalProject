@@ -284,7 +284,7 @@ body {
     position: relative;
     width: 200px;
     margin: 20px auto;
-    transition: 0.5s;
+    /*transition: 0.5s;*/
 }
 .details-audioAll .details-audioPro {
     /*position: relative;*/
@@ -382,7 +382,7 @@ body {
     width: 100%;
     padding: 0 30px;
     box-sizing: border-box;
-    transition: 0.5s;
+    /*transition: 0.5s;*/
 }
 #detailsMessage textarea {
     width: 100%;
@@ -419,4 +419,5 @@ body {
     clear: both;
     margin-top: 10px;
     color: #fff;
+    transition: 2s;
 }

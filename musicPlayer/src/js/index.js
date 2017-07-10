@@ -58,6 +58,13 @@ $(function(){
             touchmove = 'mousemove';
             touchend = 'mouseup';
         }
+
+        $(window).resize(function(){
+            viewWidth = $(window).width();
+			viewHeight = $(window).height();
+            musicDetails.init();
+            musicDetails.sildeDown();
+        })
     }
 
     /**
@@ -270,7 +277,8 @@ $(function(){
             arr = [],
             $li = null,
             downX = 0,
-            range = 20;
+            range = 20,
+            timer = null;
 
         function init(){
             $musicdetails.css('transform','translate3d(0,' + viewHeight + 'px,0)');
@@ -288,8 +296,12 @@ $(function(){
         };
 
         function bin(){
-            $detaols_tip.on('click',function(){
+            $detaols_tip.on(touchstart,function(){
                 sildeDown();
+                $detailsLyric.add($detailsAudioAll).css('transform','translate3d(0,0,0)');
+                $detailsMessage.css('transform','translate3d('+ (viewWidth) +'px,0,0)');
+                $detailsLyric.add($detailsAudioAll).add($detailsMessage).css('transition','0s');
+                timer && clearInterval(timer);
             })
 
             $musicdetails.on(touchstart,function(eve){
@@ -304,15 +316,23 @@ $(function(){
                     if(touch.pageX - downX < -range){
                         $detailsLyric.add($detailsAudioAll).css('transform','translate3d('+ (-viewWidth) +'px,0,0)');
                         $detailsMessage.css('transform','translate3d(0,0,0)');
+                        $detailsLyric.add($detailsAudioAll).add($detailsMessage).css('transition','.5s');
                         $detailsBtnLis.eq(1).addClass('active').siblings().removeClass('active');
                         loadMessage();
+                        timer && clearInterval(timer);
+                        timer = setInterval(scrollMessage,3500);
                     }else if(touch.pageX - downX > range){
                         $detailsLyric.add($detailsAudioAll).css('transform','translate3d(0,0,0)');
                         $detailsMessage.css('transform','translate3d('+ (viewWidth) +'px,0,0)');
                         $detailsBtnLis.eq(0).addClass('active').siblings().removeClass('active');
+                        timer && clearInterval(timer);
                     }
-                })
-            })
+                });
+            });
+
+            $detailsMessageBtn.on(touchstart,function(){
+                addMessage();
+            });
         }
 
         function show(sName,sMusicName,sLyric){
@@ -377,12 +397,46 @@ $(function(){
             })
         }
 
+        function addMessage(){  //添加留言
+            var text = $detailsMessageTextarea.val();
+            $detailsMessageTextarea.val('');
+
+            $.ajax({
+                url: 'addMessage.php',
+                type: 'POST',
+                dataType: 'json',
+                data: {
+                    mid: musicId,
+                    text: text
+                }
+            }).done(function(data){
+                if(data.code){
+                    var $li = '<li>'+ data.message +'</li>';
+                    $detailsMessageUl.prepend($li);
+                }
+            }).fail(function(){
+                console.log('请求失败，请重新发送请求！')
+            })
+        }
+
+        function scrollMessage(){
+            var $lis = $detailsMessageUl.children(),
+                lastLi = $lis.last();
+            
+            setTimeout(function(){
+                $detailsMessageUl.prepend(lastLi);
+                console.log(11111)
+            },1000);
+        }
+
         return {
             init: init,
             sildeUp: sildeUp,
             show: show,
             scrollLyric: scrollLyric,
-            loadMessage: loadMessage
+            loadMessage: loadMessage,
+            scrollMessage: scrollMessage,
+            sildeDown: sildeDown
         };
     })();
 

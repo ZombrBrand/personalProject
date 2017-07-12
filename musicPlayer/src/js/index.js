@@ -27,6 +27,7 @@ $(function(){
         $audio = $('.audio'),
         $audioBtn = $audio.find('.audio-btn'),
         $detailsPlay = $musicdetails.find('.details-play'),
+        $loading = $('#loading'),
         oAudio = $('#loadAudio').get(0),
         touchstart = 'touchstart',
         touchmove = 'touchmove',
@@ -36,10 +37,38 @@ $(function(){
      * 初始化播放器
      */
     function init(){
+        loading();
         device();
         musicList.init();
         musicDetails.init();
         musicAudio.init();
+    }
+
+    function loading(){ //加载动画
+        var arr = ['bg.jpg','detailsBg.jpg','details_pause.png','details_play.png','details_next.png','details_prev.png','list_audioBg.png','miaov.jpg'];
+        var count = 0;
+
+        $.each(arr,function(idx,img){
+            var objImg = new Image();
+            objImg.onload = function(){
+                count++;
+                if(count === arr.length){
+                    $loading.animate({
+                        opacity: 0
+                    },1000,function(){
+                        $(this).remove();
+                    })
+                }
+            };
+            objImg.onerror = function(){ //jQ出错事件
+                $loading.animate({
+                        opacity: 0
+                    },1000,function(){
+                        $(this).remove();
+                    })
+            }
+            objImg.src = '../../img/' + img;
+        })
     }
 
     /**
@@ -85,7 +114,9 @@ $(function(){
             onoff2 = true,
             onoff3 = true,
             isReq = true,
-            timer = null;
+            timer = null,
+            $loadingLi = null,
+            page = 0;
            
 
         function init(){ //初始化
@@ -205,7 +236,10 @@ $(function(){
                         if(onoff2){
                             onoff2 = false;
                             downY = touch.pageY;
-                            // console.log(downY)
+
+                            //懒加载歌曲数据
+                            // $loadingLi = '<li>loading....</li>';
+                            // $(This).append($loadingLi);
                         }   
                         $(This).css('transform','translate3d(0,'+ ((touch.pageY - downY) / 3 + (parentH - childH)) + 'px,0)')                        
                     }else{
@@ -214,10 +248,29 @@ $(function(){
                 });
 
                 $(document).on(touchend + '.move',function(){
-                    // var $loading = $('.loading');
-
                     //  当鼠标放开下按的时候，取消命名空间为.move的事件
                     $(this).off('.move');
+
+                    // if($loadingLi){  //懒加载歌曲数据
+                    //     $loadingLi.remove();
+                    //     $loadingLi = null;
+
+                    //     $.ajax({
+                    //         url : 'pageMusic.php',
+					// 		type : 'GET',
+					// 		dataType : 'json',
+					// 		data : { page : page }
+                    //     }).done(function(data){
+                    //         $.each(data,function(i,obj){
+					// 				var $li = '<li musicId="'+(obj.id)+'"><h3 class="title">'+(obj.musicName)+'</h3><p class="name">'+(obj.name)+'</p></li>';
+					// 				$listContentUl.append($li);
+					// 			});
+					// 			childH = $listContentUl.height();
+					// 			page++;
+                    //     }).fail(function(){
+                    //         console.log('请求失败！')
+                    //     })
+                    // }
 
                     timer && clearInterval(timer);
 
@@ -227,12 +280,8 @@ $(function(){
                             if(Math.abs(speed) <= 1 || iTop > 50 || iTop < parentH - childH){
                                 timer && clearInterval(timer);
                                 if(iTop >= 0){
-                                    // $loading.fadeOut(200);
                                     $(This).css({transition:'.2s'});
-                                    $(This).css('transform','translate3d(0,0,0)');
-                                    // $contentUl.empty();
-                                    // childH = 0;
-                                    // start();                               
+                                    $(This).css('transform','translate3d(0,0,0)');                        
                                 }else if(iTop <= parentH - childH){
                                     $(This).css({transition:'.2s'})
                                     $(This).css('transform','translate3d(0,'+ (parentH - childH) +'px,0)')
@@ -287,6 +336,7 @@ $(function(){
         };
 
         function sildeUp(){
+            // $musicdetails.css('z-index','10');
             $musicdetails.css('transition','0.5s');
             $musicdetails.css('transform','translate3d(0,0,0)');
         };

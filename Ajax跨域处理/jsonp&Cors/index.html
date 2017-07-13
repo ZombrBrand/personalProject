@@ -45,15 +45,15 @@
 
 
     		function jsonp(opt){
-    			var script = document.createElement('script');
+    			var oScript = document.createElement('script');
     			var html = '';
     			for(var key in opt.data){
     				html += key + '=' + opt.data[key] + '&';
     			}
     			html = opt.url + '?' + html.substr(0,html.length-1);
-    			script.setAttribute('src',html);
-    			document.head.appendChild(script);
-    			document.head.removeChild(script);
+    			oScript.setAttribute('src',html);
+    			document.head.appendChild(oScript);
+    			document.head.removeChild(oScript);
     		}
 
     		function getMessage(content){
@@ -108,6 +108,25 @@
     			}
     			
     		}
+
+			// 原生JS写模仿Jq的Jsonp写法
+			function getJsonp(url,fn){
+				var $script = document.createElement('script');
+				var re = /callback=\?/;
+				var randomNum = 'Jsonp' + Math.random().toString().replace(/\D/g,'');
+				url = url.replace(re,'callback=' + randomNum);
+				$script.src = url;
+				window[randomNum] = fn;
+				$script.onload = function(){
+					document.body.removeChild($script);
+					delete window[randomNum]
+				}
+
+			}
+
+			getJsonp('http://http://a.home.org:8080/callback=?&username="Jsonp"&content="Welcome to 127.0.0.1:8080"',function(data){
+				console.log(data);
+			})
     	</script>
     </body>
 </html>

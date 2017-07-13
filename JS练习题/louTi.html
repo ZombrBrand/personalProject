@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /**
+        *    15级楼梯，一步最多三级，爬上楼梯可以有多少种走法实现
+        *       思路：跳到15级有三种情况14、13、12
+        *       fn(15) = fn(14) + fn(13) + fn(12)
+        */
+        
+        function step(n){
+            if(n == 1){ return 1 };
+            if(n == 2){ return 2 };
+            if(n == 3){ return 4 };
+            
+            return step(n - 1) + step(n - 2) + step(n - 3);
+        }
+    </script>
+</body>
+</html>

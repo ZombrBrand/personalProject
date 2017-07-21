@@ -9,6 +9,9 @@
 <body>
     <script>
         function Elem(id){
+            //  1.创建this = {}
+            //  2.赋值this.ele = xxx
+            //  3.return this
             this.ele = document.querySelector(id);
         }
         Elem.prototype.html = function(val){

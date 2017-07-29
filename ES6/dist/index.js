@@ -1,6 +1,12 @@
 'use strict';
 
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 /**
  * 声明
@@ -186,20 +192,240 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 /**
 *   对象
 */
-var name = 'xxx';
-var id = _defineProperty({}, name, 'wos');
-console.log(id.xxx);
+// let name = 'xxx';
+// let id = {  //ES6新增将key转成变量的方法
+//     [name]:'wos'
+// }
+// console.log(id.xxx);
 
-// ===为同值相等
-// Object.is()为严格相等
-console.log(+0 === -0);
-console.log(NaN === NaN); //由于在同值相等当中，NaN是没有声明类型，所有判断为false;
-console.log(Object.is(+0, -0));
-console.log(Object.is(NaN, NaN));
+// // ===为同值相等
+// // Object.is()为严格相等
+// console.log(+0 === -0);
+// console.log(NaN === NaN);   //由于在同值相等当中，NaN是没有声明类型，所有判断为false;
+// console.log(Object.is(+0,-0));
+// console.log(Object.is(NaN,NaN));
 
-// 对象合并
-var a = { a: 1 };
-var b = { b: 1 };
-var c = Object.assign(a, b);
-console.log(c);
-console.log(Object.keys(c)); //将Object对象的key放在数组中输出
+// // 对象合并
+// let a = {a:1}
+// let b = {b:1}
+// let c = Object.assign(a,b);
+// console.log(c)
+// console.log(Object.keys(c)) //将Object对象的key放在数组中输出
+
+/**
+*   symbol
+*/
+// let s = Symbol('hello');    //原始数据类型
+// console.log(s);
+// console.log(typeof(s));
+
+// //Symbol类型的对象的key值，想要获取它的val值必须使用obj[]而不是使用obj.xx
+// let my = Symbol();
+// let json = {
+//     [my]:'peter'
+// }
+// console.log(json[my]);
+// json[my] = '韩梅梅';
+// console.log(json[my]);
+
+// //当使用Symbol作为数据类型时，使用遍历对象是无法将该数据类型的key输出出来
+// let obj = {
+//     x:0,
+//     y:1,
+//     z:2
+// }
+// let a = Symbol('a');
+// let b = Symbol('b');
+// obj[a] = 'ThisA';
+// obj[b] = 'ThisB';
+
+// for(let key in obj){
+//     console.log(obj[key]);
+// }
+
+// console.log(obj[a],obj[b])  //必须使用这种方法才能输出
+
+/**
+*   set、Weakset
+*/
+// //set不是数组，是以数组形式展现的数据结构，数组里不允许里面有重复数据
+// const arr = new Set([1,2,3,3])
+// console.log(arr);
+
+// // set的方法有add(追加)、delete(删除)、has(查找重复值)、clear(清除)
+// for(let key of arr.entries()){  //能使用entries()方法说明不是数组而是Object
+//     console.log(key)
+// }
+
+// //Weakset
+// const obj = new WeakSet();
+// let json1 = {a:1};
+// let json2 = {b:1};
+// obj.add(json1);
+// obj.add(json2);
+// console.log(obj)
+
+/**
+ * map 
+ *  map和object的区别是
+ *      1.object总有一个prototype,而map = Object.create(null),没有原型的对象
+ *      2.对象的key只能是字符串或者symbols,mpa可以是任意值类型
+ *      3.通过size属性可以查询map的键值对个数，对象只能通过手动确认
+ */
+// var myMap = new Map();
+
+// var keyObj = {},
+//     keyFunc = function () {},
+//     keyString = "a string";
+
+// // 添加键
+// myMap.set(keyString, "和键'a string'关联的值");
+// myMap.set(keyObj, "和键keyObj关联的值");
+// myMap.set(keyFunc, "和键keyFunc关联的值");
+
+// myMap.size; // 3
+
+// // 读取值
+// myMap.get(keyString);    // "和键'a string'关联的值"
+// myMap.get(keyObj);       // "和键keyObj关联的值"
+// myMap.get(keyFunc);      // "和键keyFunc关联的值"
+
+// myMap.get("a string");   // "和键'a string'关联的值"
+//                          // 因为keyString === 'a string'
+// myMap.get({});           // undefined, 因为keyObj !== {}
+// myMap.get(function() {}) // undefined, 因为keyFunc !== function () {}
+
+/**
+*   proxy
+*/
+// var exp = new Proxy({
+//     add:function(val){
+//         return val + 10;
+//     },
+//     name:'my name is exp'
+// },{
+//     // proxy
+//     get:function(target,key,property){
+//         console.log(`getter ${key} reading`);
+//         return target[key];
+//     },
+//     set:function(target,key,val,receiver){
+//         console.log(`setter ${key} = ${val}`)
+//         return target[key] = val;
+//     }
+// })
+// console.log(exp.name);
+
+// exp.name = '1234'
+// console.log(exp.name);
+
+// var twice = {  
+//     apply(target, ctx, args) {  
+//         return Reflect.apply(...arguments) * 2;  
+//     }  
+// };  
+
+// function sum(left, right) {  
+//     return left + right;  
+// };  
+// var proxy = new Proxy(sum, twice);  
+// proxy(1, 2) // 6  
+// proxy.call(null, 5, 6) // 22  
+// proxy.apply(null, [7, 8]) // 30  
+
+/**
+ * promise
+ */
+// var check = 200;
+
+// function step1(resolve,reject){
+//     console.log('第一步已完成');
+//     if(check === 200){
+//         resolve('step.1 success');
+//     }else{
+//         reject('step.1 error');
+//     }
+// }
+
+// function step2(resolve,reject){
+//     console.log('第二步已完成');
+//     if(check === 200){
+//         resolve('step.2 success');
+//     }else{
+//         reject('step.2 error');
+//     }
+// }
+
+// function step3(resolve,reject){
+//     check = 404;
+//     console.log('第三步已完成');
+//     if(check === 200){
+//         resolve('step.3 success');
+//     }else{
+//         reject('step.3 error');
+//     }
+// }
+
+// new Promise(step1).then(function(val){
+//     console.log(val);
+//     return new Promise(step2);
+// }).then(function(val){
+//     console.log(val);
+//     return new Promise(step3);
+// }).then(function(val){
+//     console.log(val);
+//     return val
+// })
+
+/**
+ * class语法糖
+ */
+var wo = function () {
+  function wo(x, y) {
+    _classCallCheck(this, wo);
+
+    //此方法为class默认方法，给wo这个类提供参数形式
+    this.x = x;
+    this.y = y;
+  }
+
+  _createClass(wo, [{
+    key: 'name',
+    value: function name(val) {
+      // console.log(val);
+      return val; //要return val才能被类里的函数获取到值
+    }
+  }, {
+    key: 'fullname',
+    value: function fullname(val) {
+      console.log('Ms.' + this.name(val));
+    }
+  }, {
+    key: 'add',
+    value: function add() {
+      return this.x + this.y;
+    }
+  }]);
+
+  return wo;
+}();
+
+var w = new wo(10, 11);
+console.log(w.add());
+console.log(w.fullname('111'));
+
+var SunZi = function (_wo) {
+  _inherits(SunZi, _wo);
+
+  function SunZi() {
+    _classCallCheck(this, SunZi);
+
+    return _possibleConstructorReturn(this, (SunZi.__proto__ || Object.getPrototypeOf(SunZi)).apply(this, arguments));
+  }
+
+  return SunZi;
+}(wo);
+
+var w1 = new SunZi(1, 2);
+console.log(w1.add());
+console.log(w1.fullname('222'));

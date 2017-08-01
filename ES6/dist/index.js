@@ -2,10 +2,6 @@
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 /**
@@ -377,55 +373,117 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 //     return val
 // })
 
+// let p = new Promise((resolve,reject) => {
+//     setTimeout(resolve,1000,2);
+// })
+
+// let p1 = p.then(val => {
+//     console.log(val)
+//     val += 2;
+//     console.log(val);
+//     return 2
+// }).then((val) => {
+//     console.log(val)
+// })
+
+//编写简易promise
+var Promise = function () {
+    function Promise() {
+        _classCallCheck(this, Promise);
+
+        this.callback = [];
+    }
+
+    _createClass(Promise, [{
+        key: 'then',
+        value: function then(onsuccess, onfail) {
+            this.callback.push({
+                resolve: onsuccess,
+                reject: onfail
+            });
+            return this;
+        }
+    }, {
+        key: 'resolve',
+        value: function resolve(result) {
+            this.complete('resolve', result);
+        }
+    }, {
+        key: 'reject',
+        value: function reject(result) {
+            this.complete('reject', result);
+        }
+    }, {
+        key: 'complete',
+        value: function complete(type, result) {
+            var callbackObj = this.callback.shift();
+            callbackObj[type](result);
+        }
+    }]);
+
+    return Promise;
+}();
+
+var p = new Promise();
+
+function fn() {
+    console.log('fn');
+    setTimeout(function () {
+        p.resolve('data1');
+    }, 1000);
+    return p;
+}
+
+function fn1(val) {
+    console.log('fn1', val);
+    setTimeout(function () {
+        p.resolve('data2');
+    }, 1000);
+}
+
+function fn2(val) {
+    console.log('fn2', val);
+}
+fn().then(fn1).then(fn2);
+
 /**
  * class语法糖
  */
-var wo = function () {
-  function wo(x, y) {
-    _classCallCheck(this, wo);
+// class wo {
+//     constructor(x,y){   //此方法为class默认方法，给wo这个类提供参数形式
+//         this.x = x
+//         this.y = y
+//     }
 
-    //此方法为class默认方法，给wo这个类提供参数形式
-    this.x = x;
-    this.y = y;
-  }
+//     name(val){
+//         // console.log(val);
+//         return val  //要return val才能被类里的函数获取到值
+//     }
 
-  _createClass(wo, [{
-    key: 'name',
-    value: function name(val) {
-      // console.log(val);
-      return val; //要return val才能被类里的函数获取到值
-    }
-  }, {
-    key: 'fullname',
-    value: function fullname(val) {
-      console.log('Ms.' + this.name(val));
-    }
-  }, {
-    key: 'add',
-    value: function add() {
-      return this.x + this.y;
-    }
-  }]);
+//     fullname(val){
+//         console.log('Ms.' + this.name(val))
+//     }
 
-  return wo;
-}();
+//     add(){
+//         return this.x + this.y
+//     }
+// }
 
-var w = new wo(10, 11);
-console.log(w.add());
-console.log(w.fullname('111'));
+// var w = new wo(10,11)
+// console.log(w.add());
+// console.log(w.fullname('111'))
 
-var SunZi = function (_wo) {
-  _inherits(SunZi, _wo);
+// class SunZi extends wo {    //将SunZi扩展到wo中，类似继承
+//     constructor(x,y){
+//         super();
+//         this.x = x;
+//         this.y = y;
+//     }
 
-  function SunZi() {
-    _classCallCheck(this, SunZi);
-
-    return _possibleConstructorReturn(this, (SunZi.__proto__ || Object.getPrototypeOf(SunZi)).apply(this, arguments));
-  }
-
-  return SunZi;
-}(wo);
-
-var w1 = new SunZi(1, 2);
-console.log(w1.add());
-console.log(w1.fullname('222'));
+//     add(){
+//         return this.x * this.y
+//     }
+// }
+// var w1 = new SunZi(1,2)
+// console.log(w1.add())
+// console.log(w1.fullname('222'))

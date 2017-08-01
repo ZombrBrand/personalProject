@@ -367,36 +367,108 @@
 //     return val
 // })
 
+// let p = new Promise((resolve,reject) => {
+//     setTimeout(resolve,1000,2);
+// })
+
+// let p1 = p.then(val => {
+//     console.log(val)
+//     val += 2;
+//     console.log(val);
+//     return 2
+// }).then((val) => {
+//     console.log(val)
+// })
+
+//编写简易promise
+class Promise {
+    constructor(){
+        this.callback = []
+    }
+
+    then(onsuccess,onfail){
+        this.callback.push({
+            resolve:onsuccess, 
+            reject:onfail
+        })
+        return this
+    }
+
+    resolve(result){
+        this.complete('resolve',result);
+    }
+
+    reject(result){
+        this.complete('reject',result);
+    }
+
+    complete(type,result){
+        var callbackObj = this.callback.shift();
+        callbackObj[type](result)
+    }
+
+}
+
+let p = new Promise();
+
+function fn(){
+    console.log('fn');
+    setTimeout(() => {
+        p.resolve('data1')
+    },1000);
+    return p
+}
+
+function fn1(val){
+    console.log('fn1',val);
+    setTimeout(() => {
+        p.resolve('data2')
+    },1000);
+}
+
+function fn2(val){
+    console.log('fn2',val);
+}
+fn().then(fn1).then(fn2)
+
 /**
  * class语法糖
  */
-class wo {
-    constructor(x,y){   //此方法为class默认方法，给wo这个类提供参数形式
-        this.x = x
-        this.y = y
-    }
+// class wo {
+//     constructor(x,y){   //此方法为class默认方法，给wo这个类提供参数形式
+//         this.x = x
+//         this.y = y
+//     }
 
-    name(val){
-        // console.log(val);
-        return val  //要return val才能被类里的函数获取到值
-    }
+//     name(val){
+//         // console.log(val);
+//         return val  //要return val才能被类里的函数获取到值
+//     }
 
-    fullname(val){
-        console.log('Ms.' + this.name(val))
-    }
+//     fullname(val){
+//         console.log('Ms.' + this.name(val))
+//     }
 
-    add(){
-        return this.x + this.y
-    }
-}
+//     add(){
+//         return this.x + this.y
+//     }
+// }
 
-var w = new wo(10,11)
-console.log(w.add());
-console.log(w.fullname('111'))
+// var w = new wo(10,11)
+// console.log(w.add());
+// console.log(w.fullname('111'))
 
-class SunZi extends wo {    //将SunZi扩展到wo中，类似继承
+// class SunZi extends wo {    //将SunZi扩展到wo中，类似继承
+//     constructor(x,y){
+//         super();
+//         this.x = x;
+//         this.y = y;
+//     }
 
-}
-var w1 = new SunZi(1,2)
-console.log(w1.add())
-console.log(w1.fullname('222'))
+//     add(){
+//         return this.x * this.y
+//     }
+// }
+// var w1 = new SunZi(1,2)
+// console.log(w1.add())
+// console.log(w1.fullname('222'))

@@ -1,0 +1,11 @@
+$size:22px;
+$color: red;
+$font-family: 微软雅黑;
+
+body {
+    div{
+         font-size: $size;
+         color: $color;
+         font-family: $font-family;
+    }   
+}

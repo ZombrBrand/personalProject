@@ -19,5 +19,6 @@ gulp.task("default",function(){
         },
         port:'1222'
     });
-    gulp.watch('./sass/*.scss',['sass'])
+    gulp.watch('./sass/*.scss',['sass']);
+    gulp.watch('./*.html').on('change',reload);
 })

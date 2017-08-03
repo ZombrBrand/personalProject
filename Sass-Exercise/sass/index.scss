@@ -1,11 +1,117 @@
-$size:22px;
-$color: red;
-$font-family: 微软雅黑;
+$border-randius: 5px;
+$bg-color: (success:#DFF0D8,info:#D9EDF7,warning:#FCF8E3,damger:#F2DEDE);
+$border-color: #D6E9C6 #BCE8F1 #FAEBCC #EBCCD1;
 
-body {
-    div{
-         font-size: $size;
-         color: $color;
-         font-family: $font-family;
-    }   
+.alert {
+    padding:15px;
+    margin: 10px 0;
+    border: 1px solid transparent;
+    border-radius: $border-randius;
 }
+
+.alter-success {
+    background-color: map-get($bg-color,success);
+    border-color: nth($border-color,1);
+}
+.alter-info {
+    background-color: map-get($bg-color,info);
+    border-color: nth($border-color,2);
+}
+.alter-warning {
+    background-color: map-get($bg-color,warning);
+    border-color: nth($border-color,3);
+}
+.alter-danger {
+    background-color: map-get($bg-color,damger);
+    border-color: nth($border-color,4);
+}
+
+// 选择器嵌套
+// body {
+//     color:red;
+//     div {
+//         color: blue;
+//     }
+// }
+
+// 属性嵌套
+// div {
+//     background: {
+//         color: red;
+//         size: 100% 50%;
+//     }
+// }
+
+// &--父元素选择器
+// a {
+//     color:red;
+//     &:hover {
+//         color:blue;
+//     }
+//     &.content {
+//         width: 1104px;
+//     }
+// }
+
+// @at-root跳出嵌套
+body {
+    @at-root .container {
+        width: 10px;
+    }
+}
+
+// @at-root跳出@media嵌套必须添加(without: media rule)
+@media screen and (max-width:900px){
+    @at-root {
+        .container{
+            font-size: 20px;
+        }
+    }
+}
+
+// @at-root与&复合应用
+.info {
+    color:blue;
+    @at-root nav & {
+        color:red;
+    }
+}
+
+/*
+    继承
+*/
+
+// 继承与多重继承 && 占位选择器 %
+%alert {
+    background-color: #ffeedd;
+}
+.small {
+    font-size: 12px;
+}
+.alert-info {
+    @extend %alert;
+    @extend .small;
+    color: #000;
+}
+
+// 链式继承
+.one {
+    border:1px solid red;
+}
+.two {
+    @extend .one;
+    color: blue;
+}
+.three {
+    @extend .two;
+    border-radius:4px;
+}
+
+// 交叉继承（避免使用）
+a span {
+    font-weight: blod;
+}
+div .content {
+    @extend span;
+}
+

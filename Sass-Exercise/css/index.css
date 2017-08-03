@@ -1,6 +1,76 @@
 @charset "UTF-8";
-body div {
-  font-size: 22px;
+.alert {
+  padding: 15px;
+  margin: 10px 0;
+  border: 1px solid transparent;
+  border-radius: 5px;
+}
+
+.alter-success {
+  background-color: #DFF0D8;
+  border-color: #D6E9C6;
+}
+
+.alter-info {
+  background-color: #D9EDF7;
+  border-color: #BCE8F1;
+}
+
+.alter-warning {
+  background-color: #FCF8E3;
+  border-color: #FAEBCC;
+}
+
+.alter-danger {
+  background-color: #F2DEDE;
+  border-color: #EBCCD1;
+}
+
+.container {
+  width: 10px;
+}
+
+@media screen and (max-width: 900px) {
+  .container {
+    font-size: 20px;
+  }
+}
+
+.info {
+  color: blue;
+}
+
+nav .info {
   color: red;
-  font-family: 微软雅黑;
+}
+
+/*
+    继承
+*/
+.alert-info {
+  background-color: #ffeedd;
+}
+
+.small, .alert-info {
+  font-size: 12px;
+}
+
+.alert-info {
+  color: #000;
+}
+
+.one, .two, .three {
+  border: 1px solid red;
+}
+
+.two, .three {
+  color: blue;
+}
+
+.three {
+  border-radius: 4px;
+}
+
+a span, a div .content, div a .content {
+  font-weight: blod;
 }

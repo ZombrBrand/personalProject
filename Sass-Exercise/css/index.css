@@ -74,3 +74,90 @@ nav .info {
 a span, a div .content, div a .content {
   font-weight: blod;
 }
+
+/*
+    @mixin
+*/
+.container {
+  color: red;
+  font-size: 18px;
+}
+
+.shadows {
+  box-shadow: 0px 4px 4px #555, 2px 6px 10px #6dd3ee;
+}
+
+@media only screen and (min-device-width: 320px) and (max-device-width: 568px) {
+  font-size: 12px;
+}
+
+/*
+    条件控制
+*/
+body {
+  color: red;
+}
+
+span, div .content {
+  color: green;
+}
+
+.span1 {
+  width: 20%;
+}
+
+.span2 {
+  width: 40%;
+}
+
+.span3 {
+  width: 60%;
+}
+
+.span4 {
+  width: 80%;
+}
+
+.p6 {
+  width: 120%;
+}
+
+.p3 {
+  width: 60%;
+}
+
+.div1 {
+  color: blue;
+}
+
+.div2 {
+  color: red;
+}
+
+.div3 {
+  color: green;
+}
+
+.text-default {
+  color: blue;
+}
+
+.text-info {
+  color: red;
+}
+
+.text-danger {
+  color: green;
+}
+
+.label-default {
+  color: blue;
+}
+
+.label-info {
+  color: green;
+}
+
+.label-danger {
+  color: red;
+}

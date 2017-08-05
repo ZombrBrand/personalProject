@@ -31,7 +31,7 @@ $border-color: #D6E9C6 #BCE8F1 #FAEBCC #EBCCD1;
 //     color:red;
 //     div {
 //         color: blue;
-//     }
+//     } 
 // }
 
 // 属性嵌套
@@ -115,3 +115,99 @@ div .content {
     @extend span;
 }
 
+/*
+    @mixin
+*/
+$div:container;
+
+// 简单实例
+@mixin cont($color:red,$fontsize:14px){
+    color:$color;
+    font-size:$fontsize;
+}
+.#{container}{
+    @include cont($fontsize:18px);
+}
+
+// 多值传参
+@mixin box-shadow($shadow...){
+    box-shadow:$shadow;
+}
+.shadows{
+    @include box-shadow(0px 4px 4px #555,2px 6px 10px #6dd3ee);
+}
+
+// 传递内容
+@mixin style-for-ipone {
+    @media only screen and (min-device-width:320px) and (max-device-width:568px){
+        @content;
+    }
+}
+@include style-for-ipone{
+    font-size: 12px;
+}
+
+/*
+    条件控制
+*/
+// if语句
+$screenwidth: 500;
+body {
+    color: if($screenwidth > 768,blue,red);
+}
+
+@if $screenwidth > 768 {
+    body{
+        color:red;
+    }
+}
+@else if $screenwidth > 400 {
+    span{
+        color: green;
+    }
+}
+@else {
+    p{
+        color: blue;
+    }
+}
+
+// for循环
+@for $i from 1 to 5{
+    .span#{$i}{
+        width: 20% * $i;        
+    }
+}
+
+// while循环
+$j:6;
+@while $j > 0{
+    .p#{$j}{
+        width:20% * $j;
+    }
+    $j: $j - 3;
+}
+
+// each循环
+// 常规遍历
+$k:1;
+@each $c in blue,red,green{
+    .div#{$k}{
+        color: $c;
+    }
+    $k: $k + 1;
+}
+
+// list遍历
+@each $key,$color in (default,blue),(info,red),(danger,green){
+    .text-#{$key}{
+        color:$color;
+    }
+}
+
+// map遍历
+@each $key,$value in (default:blue,info:green,danger:red){
+    .label-#{$key}{
+        color:$value;
+    }
+}

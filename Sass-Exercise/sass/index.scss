@@ -1,3 +1,6 @@
+/*
+  题目1  
+*/
 $border-randius: 5px;
 $bg-color: (success:#DFF0D8,info:#D9EDF7,warning:#FCF8E3,damger:#F2DEDE);
 $border-color: #D6E9C6 #BCE8F1 #FAEBCC #EBCCD1;
@@ -25,6 +28,31 @@ $border-color: #D6E9C6 #BCE8F1 #FAEBCC #EBCCD1;
     background-color: map-get($bg-color,damger);
     border-color: nth($border-color,4);
 }
+
+/*
+    题目2
+*/
+@function buildLayout($num:5){
+    $map:(defaultVal:0);    //sass的map对象必须要有值才不报错
+    $rate:percentage(1 / $num);
+    @for $i from 1 through $num{
+        $temMap:(col#{$i}:$rate * $i);
+        $map:map-merge($map,$temMap);
+    }
+    $map:map-remove($map,defaultVal);
+    @return $map;
+}
+
+@mixin buildLayout($num:5){
+    $map:buildLayout($num);
+    @each $key,$val in $map{
+        .#{$key}{
+            width:$val;
+        }
+    }
+}
+
+@include buildLayout()
 
 // 选择器嵌套
 // body {
@@ -54,160 +82,160 @@ $border-color: #D6E9C6 #BCE8F1 #FAEBCC #EBCCD1;
 // }
 
 // @at-root跳出嵌套
-body {
-    @at-root .container {
-        width: 10px;
-    }
-}
+// body {
+//     @at-root .container {
+//         width: 10px;
+//     }
+// }
 
 // @at-root跳出@media嵌套必须添加(without: media rule)
-@media screen and (max-width:900px){
-    @at-root {
-        .container{
-            font-size: 20px;
-        }
-    }
-}
+// @media screen and (max-width:900px){
+//     @at-root {
+//         .container{
+//             font-size: 20px;
+//         }
+//     }
+// }
 
-// @at-root与&复合应用
-.info {
-    color:blue;
-    @at-root nav & {
-        color:red;
-    }
-}
+// // @at-root与&复合应用
+// .info {
+//     color:blue;
+//     @at-root nav & {
+//         color:red;
+//     }
+// }
 
 /*
     继承
 */
 
 // 继承与多重继承 && 占位选择器 %
-%alert {
-    background-color: #ffeedd;
-}
-.small {
-    font-size: 12px;
-}
-.alert-info {
-    @extend %alert;
-    @extend .small;
-    color: #000;
-}
+// %alert {
+//     background-color: #ffeedd;
+// }
+// .small {
+//     font-size: 12px;
+// }
+// .alert-info {
+//     @extend %alert;
+//     @extend .small;
+//     color: #000;
+// }
 
-// 链式继承
-.one {
-    border:1px solid red;
-}
-.two {
-    @extend .one;
-    color: blue;
-}
-.three {
-    @extend .two;
-    border-radius:4px;
-}
+// // 链式继承
+// .one {
+//     border:1px solid red;
+// }
+// .two {
+//     @extend .one;
+//     color: blue;
+// }
+// .three {
+//     @extend .two;
+//     border-radius:4px;
+// }
 
-// 交叉继承（避免使用）
-a span {
-    font-weight: blod;
-}
-div .content {
-    @extend span;
-}
+// // 交叉继承（避免使用）
+// a span {
+//     font-weight: blod;
+// }
+// div .content {
+//     @extend span;
+// }
 
-/*
-    @mixin
-*/
-$div:container;
+// /*
+//     @mixin
+// */
+// $div:container;
 
-// 简单实例
-@mixin cont($color:red,$fontsize:14px){
-    color:$color;
-    font-size:$fontsize;
-}
-.#{container}{
-    @include cont($fontsize:18px);
-}
+// // 简单实例
+// @mixin cont($color:red,$fontsize:14px){
+//     color:$color;
+//     font-size:$fontsize;
+// }
+// .#{container}{
+//     @include cont($fontsize:18px);
+// }
 
-// 多值传参
-@mixin box-shadow($shadow...){
-    box-shadow:$shadow;
-}
-.shadows{
-    @include box-shadow(0px 4px 4px #555,2px 6px 10px #6dd3ee);
-}
+// // 多值传参
+// @mixin box-shadow($shadow...){
+//     box-shadow:$shadow;
+// }
+// .shadows{
+//     @include box-shadow(0px 4px 4px #555,2px 6px 10px #6dd3ee);
+// }
 
-// 传递内容
-@mixin style-for-ipone {
-    @media only screen and (min-device-width:320px) and (max-device-width:568px){
-        @content;
-    }
-}
-@include style-for-ipone{
-    font-size: 12px;
-}
+// // 传递内容
+// @mixin style-for-ipone {
+//     @media only screen and (min-device-width:320px) and (max-device-width:568px){
+//         @content;
+//     }
+// }
+// @include style-for-ipone{
+//     font-size: 12px;
+// }
 
-/*
-    条件控制
-*/
-// if语句
-$screenwidth: 500;
-body {
-    color: if($screenwidth > 768,blue,red);
-}
+// /*
+//     条件控制
+// */
+// // if语句
+// $screenwidth: 500;
+// body {
+//     color: if($screenwidth > 768,blue,red);
+// }
 
-@if $screenwidth > 768 {
-    body{
-        color:red;
-    }
-}
-@else if $screenwidth > 400 {
-    span{
-        color: green;
-    }
-}
-@else {
-    p{
-        color: blue;
-    }
-}
+// @if $screenwidth > 768 {
+//     body{
+//         color:red;
+//     }
+// }
+// @else if $screenwidth > 400 {
+//     span{
+//         color: green;
+//     }
+// }
+// @else {
+//     p{
+//         color: blue;
+//     }
+// }
 
-// for循环
-@for $i from 1 to 5{
-    .span#{$i}{
-        width: 20% * $i;        
-    }
-}
+// // for循环
+// @for $i from 1 to 5{
+//     .span#{$i}{
+//         width: 20% * $i;        
+//     }
+// }
 
-// while循环
-$j:6;
-@while $j > 0{
-    .p#{$j}{
-        width:20% * $j;
-    }
-    $j: $j - 3;
-}
+// // while循环
+// $j:6;
+// @while $j > 0{
+//     .p#{$j}{
+//         width:20% * $j;
+//     }
+//     $j: $j - 3;
+// }
 
-// each循环
-// 常规遍历
-$k:1;
-@each $c in blue,red,green{
-    .div#{$k}{
-        color: $c;
-    }
-    $k: $k + 1;
-}
+// // each循环
+// // 常规遍历
+// $k:1;
+// @each $c in blue,red,green{
+//     .div#{$k}{
+//         color: $c;
+//     }
+//     $k: $k + 1;
+// }
 
-// list遍历
-@each $key,$color in (default,blue),(info,red),(danger,green){
-    .text-#{$key}{
-        color:$color;
-    }
-}
+// // list遍历
+// @each $key,$color in (default,blue),(info,red),(danger,green){
+//     .text-#{$key}{
+//         color:$color;
+//     }
+// }
 
-// map遍历
-@each $key,$value in (default:blue,info:green,danger:red){
-    .label-#{$key}{
-        color:$value;
-    }
-}
+// // map遍历
+// @each $key,$value in (default:blue,info:green,danger:red){
+//     .label-#{$key}{
+//         color:$value;
+//     }
+// }

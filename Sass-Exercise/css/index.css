@@ -55,3 +55,14 @@
 /*
     继承
 */
+.alert-info {
+  background-color: #ffeedd;
+}
+
+.small, .alert-info {
+  font-size: 12px;
+}
+
+.alert-info {
+  color: #000;
+}

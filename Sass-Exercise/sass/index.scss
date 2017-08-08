@@ -52,7 +52,7 @@ $border-color: #D6E9C6 #BCE8F1 #FAEBCC #EBCCD1;
     }
 }
 
-@include buildLayout()
+@include buildLayout();
 
 // 选择器嵌套
 // body {
@@ -110,17 +110,17 @@ $border-color: #D6E9C6 #BCE8F1 #FAEBCC #EBCCD1;
 */
 
 // 继承与多重继承 && 占位选择器 %
-// %alert {
-//     background-color: #ffeedd;
-// }
-// .small {
-//     font-size: 12px;
-// }
-// .alert-info {
-//     @extend %alert;
-//     @extend .small;
-//     color: #000;
-// }
+%alert {
+    background-color: #ffeedd;
+}
+.small {
+    font-size: 12px;
+}
+.alert-info {
+    @extend %alert;
+    @extend .small;
+    color: #000;
+}
 
 // // 链式继承
 // .one {
@@ -129,7 +129,7 @@ $border-color: #D6E9C6 #BCE8F1 #FAEBCC #EBCCD1;
 // .two {
 //     @extend .one;
 //     color: blue;
-// }
+// } 
 // .three {
 //     @extend .two;
 //     border-radius:4px;

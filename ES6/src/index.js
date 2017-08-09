@@ -367,69 +367,69 @@
 //     return val
 // })
 
-// let p = new Promise((resolve,reject) => {
-//     setTimeout(resolve,1000,2);
-// })
+let p = new Promise((resolve,reject) => {
+    setTimeout(resolve,1000,2);
+})
 
-// let p1 = p.then(val => {
-//     console.log(val)
-//     val += 2;
-//     console.log(val);
-//     return 2
-// }).then((val) => {
-//     console.log(val)
-// })
+let p1 = p.then(val => {
+    console.log(val)
+    val += 2;
+    console.log(val);
+    return 2
+}).then((val) => {
+    console.log(val)
+})
 
-//编写简易promise
-class Promise {
-    constructor(){
-        this.callback = []
-    }
+// //编写简易promise
+// class Promise {
+//     constructor(){
+//         this.callback = []
+//     }
 
-    then(onsuccess,onfail){
-        this.callback.push({
-            resolve:onsuccess, 
-            reject:onfail
-        })
-        return this
-    }
+//     then(onsuccess,onfail){
+//         this.callback.push({
+//             resolve:onsuccess, 
+//             reject:onfail
+//         })
+//         return this
+//     }
 
-    resolve(result){
-        this.complete('resolve',result);
-    }
+//     resolve(result){
+//         this.complete('resolve',result);
+//     }
 
-    reject(result){
-        this.complete('reject',result);
-    }
+//     reject(result){
+//         this.complete('reject',result);
+//     }
 
-    complete(type,result){
-        var callbackObj = this.callback.shift();
-        callbackObj[type](result)
-    }
+//     complete(type,result){
+//         var callbackObj = this.callback.shift();
+//         callbackObj[type](result)
+//     }
 
-}
+// }
 
-let p = new Promise();
+// let p = new Promise();
 
-function fn(){
-    console.log('fn');
-    setTimeout(() => {
-        p.resolve('data1')
-    },1000);
-    return p
-}
+// function fn(){
+//     console.log('fn');
+//     setTimeout(() => {
+//         p.resolve('data1')
+//     },1000);
+//     return p
+// }
 
-function fn1(val){
-    console.log('fn1',val);
-    setTimeout(() => {
-        p.resolve('data2')
-    },1000);
-}
+// function fn1(val){
+//     console.log('fn1',val);
+//     setTimeout(() => {
+//         p.resolve('data2')
+//     },1000);
+// }
 
-function fn2(val){
-    console.log('fn2',val);
-}
-fn().then(fn1).then(fn2)
+// function fn2(val){
+//     console.log('fn2',val);
+// }
+// fn().then(fn1).then(fn2)
 
 /**
  * class语法糖

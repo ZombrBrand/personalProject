@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"
+    />
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>首页</title>
+    <link rel="stylesheet" href="../css/aui.css">
+    <style type="text/css">
+        .aui-list .aui-list-item-media {
+            width: 6rem;
+        }
+
+        .aui-list:before {
+            background: #fff;
+        }
+
+        #aui-slide3 img {
+            min-height: 10rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="aui-content" id="app">
+        <div class="aui-padded-l-15 aui-margin-t-10">
+            <h2>头条新闻</h2>
+        </div>
+        <ul class="aui-list aui-media-list">
+            <template v-for="(val,index) in list">
+                <li class="aui-list-item" @click="deleteCart(index)">
+                    <div class="aui-media-list-item-inner">
+                        <div class="aui-list-item-inner">
+                            <div class="aui-list-item-text">
+                                <div class="aui-list-item-title aui-font-size-18">
+                                    {{ val.title }}
+                                </div>
+                                <div class="aui-list-item-title aui-font-size-18">
+                                    {{ index }}
+                                </div>
+                            </div>
+                            <div class="aui-info aui-padded-b-0">
+                                <div class="aui-info-item aui-font-size-12">
+                                    <img :src="val.url" style="width:1rem" class="aui-img-round" />
+                                    <span class="aui-margin-l-5">{{ val.auther }}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="aui-list-item-media">
+                            <img :src="val.url">
+                        </div>
+                    </div>
+                </li>
+            </template>
+            <!-- <li class="aui-list-item" v-for="val in list">
+            <div class="aui-media-list-item-inner">
+                <div class="aui-list-item-inner">
+                    <div class="aui-list-item-text">
+                        <div class="aui-list-item-title aui-font-size-18">
+                            {{ val.title }}
+                        </div>
+                    </div>
+                    <div class="aui-info aui-padded-b-0">
+                        <div class="aui-info-item aui-font-size-12">
+                            <img :src="val.url" style="width:1rem" class="aui-img-round" />
+                            <span class="aui-margin-l-5">{{ val.auther }}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="aui-list-item-media">
+                    <img :src="val.url">
+                </div>
+            </div>
+            </li> -->
+        </ul>
+    </div>
+</body>
+
+</html>
+<script src="../vue.js"></script>
+<script>
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            list: [{
+                    "id": "5",
+                    "title": "做一个有魅力的女人",
+                    "cover": "11",
+                    "url": "http://o9ru2uk83.bkt.clouddn.com/2017-01-01_58688191e007b.png",
+                    "create_time": "1483243923",
+                    "update_time": "1483243923",
+                    "sort": "0",
+                    "status": "1",
+                    'author': '孟老师'
+                },
+                {
+                    "id": "4",
+                    "title": "做一个有理想的男人",
+                    "cover": "10",
+                    "url": "http://o9ru2uk83.bkt.clouddn.com/2017-01-01_586881724f0ec.jpg",
+                    "create_time": "1482240664",
+                    "update_time": "1483243891",
+                    "sort": "0",
+                    "status": "1",
+                    'author': '孟老师'
+                },
+                {
+                    "id": "3",
+                    "title": "你的支持是我最大的动力",
+                    "cover": "9",
+                    "url": "http://o9ru2uk83.bkt.clouddn.com/2017-01-01_58688167c5903.jpg",
+                    "create_time": "1482240647",
+                    "update_time": "1483243881",
+                    "sort": "0",
+                    "status": "1",
+                    'author': '孟老师'
+                },
+                {
+                    "id": "2",
+                    "title": "孟老师亲自授课，录制不易，请笑纳。",
+                    "cover": "8",
+                    "url": "http://o9ru2uk83.bkt.clouddn.com/2017-01-01_5868815705adb.png",
+                    "create_time": "1482240622",
+                    "update_time": "1483243866",
+                    "sort": "0",
+                    "status": "1",
+                    'author': '孟老师'
+                },
+                {
+                    "id": "1",
+                    "title": "跟着孟老师30天搞定Apicloud",
+                    "cover": "7",
+                    "url": "http://o9ru2uk83.bkt.clouddn.com/2017-01-01_586881494e7c3.jpg",
+                    "create_time": "1482240586",
+                    "update_time": "1483243851",
+                    "sort": "0",
+                    "status": "1",
+                    'author': '孟老师'
+                }
+            ],
+        },
+        methods: {
+            deleteCart:function(index){
+                this.list.splice(index,1)
+            }
+        },
+        watch: {
+            c: {
+                handler: function (val, oldVal) {
+
+                },
+                deep: true
+            }
+        }
+    });
+</script>

@@ -1,0 +1,58 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <link rel="stylesheet" href="../css/aui.css">
+</head>
+    <body>
+    <div id="app">
+        <ul class="aui-list aui-form-list">
+            <li class="aui-list-item">
+                <div class="aui-list-item-inner">
+                    <div class="aui-list-item-label aui-margin-r-15">
+                        排序方式:
+                    </div>
+                    <div class="aui-list-item-input">
+                        <!--
+                            如果 v-model 表达初始的值不匹配任何的选项，
+                            <select> 元素就会以”未选中”的状态渲染。在 iOS 中，
+                            这会使用户无法选择第一个选项，
+                            因为这样的情况下，iOS 不会引发 change 事件。因此，像以上提供 disabled 选项是建议的做法。
+                        -->
+                        <select v-model="time_zhouqi" @change="changeZhouqi()">
+                            <option disabled value="">请选择</option>
+                            <option value="每周">每周</option>
+                            <option value="每年">每年</option>
+                            <option value="每月">每月</option>
+                        </select>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <script src="../vue.js"></script>
+    <script>
+        var vm = new Vue({
+            el:'#app',
+            data:{
+                time_zhouqi:''
+            },
+            methods:{
+                changeZhouqi:function(){
+                    console.log(this.time_zhouqi);
+                }
+            },
+            watch:{
+                time_zhouqi:{
+                    handler:function(val,oldVal){
+                        console.log(`新值：${val},老值：${oldVal}`)
+                    }
+                },
+                deep:true
+            }
+        })
+    </script>
+    </body>
+</html>

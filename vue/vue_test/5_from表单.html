@@ -7,148 +7,156 @@
     <title>Document</title>
     <link rel="stylesheet" href="../css/aui.css">
 </head>
-<body>
-    <div id="app" class="aui-content aui-margin-b-15">
-        <ul class="aui-list aui-form-list">
-            <li class="aui-list-header">带有输入框</li>
-            <li class="aui-list-item">
-                <div class="aui-list-item-inner">
-                    <div class="aui-list-item-label">
-                        Name
+    <body>
+        <div id="app" class="aui-content aui-margin-b-15">
+            <ul class="aui-list aui-form-list">
+                <li class="aui-list-header">带有输入框</li>
+                <li class="aui-list-item">
+                    <div class="aui-list-item-inner">
+                        <div class="aui-list-item-label">
+                            Name
+                        </div>
+                        <div class="aui-list-item-input">
+                            <input type="text" placeholder="Name" v-model.trim="name">
+                        </div>
                     </div>
-                    <div class="aui-list-item-input">
-                        <input type="text" placeholder="Name" v-model.trim="name">
+                </li>
+                <li class="aui-list-item">
+                    <div class="aui-list-item-inner">
+                        <div class="aui-list-item-label">
+                            Password
+                        </div>
+                        <div class="aui-list-item-input">
+                            <input type="password" placeholder="Password" v-model.number="passwd">
+                        </div>
                     </div>
-                </div>
-            </li>
-            <li class="aui-list-item">
-                <div class="aui-list-item-inner">
-                    <div class="aui-list-item-label">
-                        Password
+                </li>
+                <li class="aui-list-item">
+                    <div class="aui-list-item-inner">
+                        <div class="aui-list-item-label">
+                            Age
+                        </div>
+                        <div class="aui-list-item-input">
+                            <input type="number" placeholder="Number" v-model.number="age">
+                        </div>
                     </div>
-                    <div class="aui-list-item-input">
-                        <input type="password" placeholder="Password" v-model.number="passwd">
-                    </div>
-                </div>
-            </li>
-            <li class="aui-list-item">
-                <div class="aui-list-item-inner">
-                    <div class="aui-list-item-label">
-                        Age
-                    </div>
-                    <div class="aui-list-item-input">
-                        <input type="number" placeholder="Number" v-model.number="age">
-                    </div>
-                </div>
-            </li>
-            <li class="aui-list-item">
-                <div class="aui-list-item-inner">
-                    <div class="aui-list-item-label">
-                        多行文本
-                    </div>
-                    <div class="aui-list-item-input">
-                        <textarea name="text" placeholder="add mutiple lines" cols="20" rows="10" v-model="message"></textarea>
-                    </div>
-                </div>            
-            </li>
-            <li class="aui-list-item">
-                <div class="aui-list-item-inner">
-                    <div class="aui-list-item-label">
-                        内容展示
-                    </div>
-                    <div class="aui-list-item-input">
-                        {{ message }}
-                    </div>
-                </div>            
-            </li>
-            <li class="aui-list-item">
-                <div class="aui-list-item-inner">
-                    <div class="aui-list-item-label">
-                        复选框
-                    </div>
-                    <div class="aui-list-item-input">
-                        <input type="checkbox" id="jack" value="jack" v-model="checkedName"><label for="one">jack</label>
-                        <input type="checkbox" id="john" value="john" v-model="checkedName"><label for="one">john</label>
-                        <input type="checkbox" id="mike" value="mike" v-model="checkedName"><label for="one">mike</label>
-                    </div>
-                </div>            
-            </li>
-            <li class="aui-list-item">
-                <div class="aui-list-item-inner">
-                    <div class="aui-list-item-label">
-                        内容展示
-                    </div>
-                    <div class="aui-list-item-input">
-                        {{ checkedName }}
-                    </div>
-                </div>            
-            </li>
-            <li class="aui-list-item">
-                <div class="aui-list-item-inner">
-                    <div class="aui-list-item-label">
-                        单选按钮
-                    </div>
-                    <div class="aui-list-item-input">
-                        <input type="radio" id="one" value="One" v-model="picked"><label for="one">One</label>
-                        <input type="radio" id="two" value="Two" v-model="picked"><label for="two">Two</label>
-                    </div>
-                </div>            
-            </li>
-            <li class="aui-list-item">
-                <div class="aui-list-item-inner">
-                    <div class="aui-list-item-label">
-                        内容展示
-                    </div>
-                    <div class="aui-list-item-input">
-                        {{ picked }}
-                    </div>
-                </div>            
-            </li>
-            <li class="aui-list-item">
-                <div class="aui-list-item-inner">
-                    <div class="aui-list-item-label">
-                        复选-动态value
-                    </div>
-                    <div class="aui-list-item-input">
-                        <input type="checkbox" v-model="toggle" v-bind:true-value="a" v-bind:false-value="b">
-                        <span>{{ toggle }}</span>
-                    </div>
-                </div>               
-            </li>
-            <li class="aui-list-item">
-                <div class="aui-list-item-inner">
-                    <div class="aui-list-item-label">
-                        单选-动态value
-                    </div>
-                    <div class="aui-list-item-input">
-                        <input type="radio" v-model="pick" v-bind:value="a">
-                        <span>{{ pick }}</span>
-                    </div>
-                </div>               
-            </li>
-        </ul>
-    </div>
-    <script src="../vue.js"></script>
-    <script>
-        var vm = new Vue({
-            el:'#app',
-            data:{
-                a:'正确',
-                b:'错误',
-                name:'',
-                passwd:'',
-                age:'',
-                message:'',
-                picked:'',
-                toggle:'',
-                pick:'',
-                checkedName:[]
-            },
-            methods:{
-            },
-            watch:{
-            }
-        })
-    </script>
-</body>
+                </li>
+                <li class="aui-list-item">
+                    <div class="aui-list-item-inner">
+                        <div class="aui-list-item-label">
+                            多行文本
+                        </div>
+                        <div class="aui-list-item-input">
+                            <textarea name="text" placeholder="add mutiple lines" cols="20" rows="10" v-model="message"></textarea>
+                        </div>
+                    </div>            
+                </li>
+                <li class="aui-list-item">
+                    <div class="aui-list-item-inner">
+                        <div class="aui-list-item-label">
+                            内容展示
+                        </div>
+                        <div class="aui-list-item-input">
+                            {{ message }}
+                        </div>
+                    </div>            
+                </li>
+
+                <!--  
+                    对于单选按钮，勾选框及选择列表选项， v-model 绑定的 value 通常是静态字符串（对于勾选框是逻辑值）
+                -->
+                <li class="aui-list-item">
+                    <div class="aui-list-item-inner">
+                        <div class="aui-list-item-label">
+                            复选框
+                        </div>
+                        <div class="aui-list-item-input">
+                            <input type="checkbox" id="jack" value="jack" v-model="checkedName"><label for="one">jack</label>
+                            <input type="checkbox" id="john" value="john" v-model="checkedName"><label for="one">john</label>
+                            <input type="checkbox" id="mike" value="mike" v-model="checkedName"><label for="one">mike</label>
+                        </div>
+                    </div>            
+                </li>
+                <li class="aui-list-item">
+                    <div class="aui-list-item-inner">
+                        <div class="aui-list-item-label">
+                            内容展示
+                        </div>
+                        <div class="aui-list-item-input">
+                            {{ checkedName }}
+                        </div>
+                    </div>            
+                </li>
+                <li class="aui-list-item">
+                    <div class="aui-list-item-inner">
+                        <div class="aui-list-item-label">
+                            单选按钮
+                        </div>
+                        <div class="aui-list-item-input">
+                            <input type="radio" id="one" value="One" v-model="picked"><label for="one">One</label>
+                            <input type="radio" id="two" value="Two" v-model="picked"><label for="two">Two</label>
+                        </div>
+                    </div>            
+                </li>
+                <li class="aui-list-item">
+                    <div class="aui-list-item-inner">
+                        <div class="aui-list-item-label">
+                            内容展示
+                        </div>
+                        <div class="aui-list-item-input">
+                            {{ picked }}
+                        </div>
+                    </div>            
+                </li>
+
+                <!-- 
+                    将value绑定到vue实例的动态属性，用v-bind实现
+                -->
+                <li class="aui-list-item">
+                    <div class="aui-list-item-inner">
+                        <div class="aui-list-item-label">
+                            复选-动态value
+                        </div>
+                        <div class="aui-list-item-input">
+                            <input type="checkbox" v-model="toggle" v-bind:true-value="a" v-bind:false-value="b">
+                            <span>{{ toggle }}</span>
+                        </div>
+                    </div>               
+                </li>
+                <li class="aui-list-item">
+                    <div class="aui-list-item-inner">
+                        <div class="aui-list-item-label">
+                            单选-动态value
+                        </div>
+                        <div class="aui-list-item-input">
+                            <input type="radio" v-model="pick" v-bind:value="a">
+                            <span>{{ pick }}</span>
+                        </div>
+                    </div>               
+                </li>
+            </ul>
+        </div>
+        <script src="../vue.js"></script>
+        <script>
+            var vm = new Vue({
+                el:'#app',
+                data:{
+                    a:'正确',
+                    b:'错误',
+                    name:'',
+                    passwd:'',
+                    age:'',
+                    message:'',
+                    picked:'',
+                    toggle:'',
+                    pick:'',
+                    checkedName:[]
+                },
+                methods:{
+                },
+                watch:{
+                }
+            })
+        </script>
+    </body>
 </html>

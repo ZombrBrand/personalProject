@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+    <body>
+        <script>
+            // 原生或各框架页面加载完成后执行方法
+
+            // 原生写法
+            window.onload = function(){
+                // 执行代码段
+            }
+
+            // jQuery写法
+            $(document).ready(function(){
+                // 执行代码段
+            })
+
+            $(function(){
+                // 执行代码段
+            })
+
+            // Vue
+            let vm = new Vue({
+                data:{},
+                mounted:function(){
+                    this.$nextTick(function(){
+                        // 执行代码段
+                    })
+                }
+            })
+            
+        </script>
+    </body>
+</html>

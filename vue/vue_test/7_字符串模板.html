@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+        <body>
+            <div id="app">
+                {{ message }}
+            </div>
+            <script src="../vue.js"></script>
+             <script type="x-template" id="temp">
+                <div>hello,张三<span>,李四</span></div>
+            </script> 
+            <script>
+                // 数据
+                let data = 'hello,miao';
+
+                // // 第一种写法
+                // let str = `<div>hello,张三<span>,李四</span></div>`              
+                // var vm = new Vue({
+                //     el:'#app',
+                //     data:{
+                //         message:data
+                //     },
+                //     template:str
+                // })
+
+                // 第二种写法
+                var vm = new Vue({
+                    el:'#app',
+                    data:{
+                        message:data
+                    },
+                    template:'#temp'
+                })
+            </script>
+        </body>
+</html>

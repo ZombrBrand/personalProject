@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <div id="app">
+        <p>自定义组件 1</p>
+        <custom-select input-value="搜索"></custom-select>
+
+        <p>自定义组件 2</p>
+        <custom-select input-value="查找"></custom-select>
+    </div>
+    <script src="../vue.js"></script>
+    <script>
+        Vue.component('custom-select',{
+            props:['inputValue'],
+            template:`<section class="warp">
+					<div class="searchIpt clearFix">
+						<div class="clearFix">
+							<input type="text" class="keyWord" value="" />
+							<input type="button" :value="inputValue">
+							<span></span>
+						</div>
+						<ul class="list">
+							<li>html+css</li>
+							<li>html5+css3</li>
+							<li>javascript</li>
+							<li>angular</li>
+							<li>react</li>
+							<li>vue</li>
+							<li>jquery</li>
+							<li>nodejs</li>
+						</ul>
+					</div>
+				</section>`
+        })
+        
+        new Vue({
+            el: '#app',
+            data: {
+
+            }
+        })
+    </script>
+</body>
+</html>

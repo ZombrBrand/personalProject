@@ -11,44 +11,44 @@
         }
     </style>
 </head>
-<body>
-    <div id="app">
-        
-    </div>
-    <script src="../vue.js"></script>
-    <script>
-        let data = true;
+    <body>
+        <div id="app">
+            
+        </div>
+        <script src="../vue.js"></script>
+        <script>
+            let data = true;
 
-        var vm = new Vue({
-            el:'#app',
-            data:{
-                message:data
-            },
-            render(createElement){
-                return createElement(
-                    "ul",
-                    {
-                        class:{
-                            red:data
+            var vm = new Vue({
+                el:'#app',
+                data:{
+                    message:data
+                },
+                render(createElement){
+                    return createElement(
+                        "ul",
+                        {
+                            class:{
+                                red:data
+                            },
+                            style:{
+                                backgroundColor:'yellow'
+                            },
+                            attrs:{
+                                miaowei:"123"
+                            },
+                            domProps:{  //操作DOM属性，使用这个属性就不再使用createElement创建子元素
+                                innerHTML:"<li>我是HTML</li>"
+                            }
                         },
-                        style:{
-                            backgroundColor:'yellow'
-                        },
-                        attrs:{
-                            miaowei:"123"
-                        },
-                        domProps:{  //操作DOM属性，使用这个属性就不再使用createElement创建子元素
-                            innerHTML:"<li>我是HTML</li>"
-                        }
-                    },
-                    [
-                        createElement("li",1),
-                        createElement("li",2),
-                        createElement("li",3),
-                    ]
-                );
-            }
-        })
-    </script>
-</body>
+                        [
+                            createElement("li",1),
+                            createElement("li",2),
+                            createElement("li",3),
+                        ]
+                    );
+                }
+            })
+        </script>
+    </body>
 </html>

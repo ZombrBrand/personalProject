@@ -9,41 +9,77 @@
 </head>
 <body>
     <div id="app">
-        <p>自定义组件 1</p>
-        <custom-select input-value="搜索"></custom-select>
+        <div style="float:left">
+            <p>自定义组件 1</p>
+            <custom-select input-value="搜索" :list="list1"></custom-select>
+        </div>
+        <div style="float:left">
+            <p>自定义组件 2</p>
+            <custom-select input-value="查找" :list="list2"></custom-select>
+        </div>
 
-        <p>自定义组件 2</p>
-        <custom-select input-value="查找"></custom-select>
+        <!-- 受限制的元素，不符合w3c标准的DOM节点浏览器会解析错误：
+            例如：ul只能放li，如果实际情况下使用vue框架下需要放置别的标签，使用特殊属性 'is' 扩展HTML标签
+        -->
+        <!-- <div style="float:left">
+            <p>自定义组件 3</p>
+            <table>
+                <tr is='custom-select'></tr>
+            </table>
+        </div> -->
+        
     </div>
     <script src="../vue.js"></script>
     <script>
         Vue.component('custom-select',{
-            props:['inputValue'],
+            data: function(){
+                return {
+                    showList: false,
+                    val: ''
+                }
+            },
+            props:['inputValue','list'],
             template:`<section class="warp">
 					<div class="searchIpt clearFix">
 						<div class="clearFix">
-							<input type="text" class="keyWord" value="" />
+							<input type="text" class="keyWord" :value="val" @click="showList = !showList"/>
 							<input type="button" :value="inputValue">
 							<span></span>
 						</div>
-						<ul class="list">
-							<li>html+css</li>
-							<li>html5+css3</li>
-							<li>javascript</li>
-							<li>angular</li>
-							<li>react</li>
-							<li>vue</li>
-							<li>jquery</li>
-							<li>nodejs</li>
-						</ul>
+                        <custom-list 
+                            v-show="showList" 
+                            :list="list"
+                            @receive="changeValue"
+                        ></custom-list>
 					</div>
-				</section>`
+                </section>`,
+            methods: {
+                changeValue(item){
+                    this.val = item;
+                }
+            }
         })
         
+        Vue.component('custom-list',{
+            props:['list'],
+            template:`<ul class="list">
+                            <template v-for="item of list">
+                                <li @click="selectValue(item)">{{ item }}</li>
+                            </template>
+                        </ul>`,
+            methods: {
+                selectValue(item){
+                    this.$emit('receive',item);
+                }
+            }
+        })
+
+
         new Vue({
             el: '#app',
             data: {
-
+                list1: ['北京','上海','广州','深圳'],
+                list2: ['2017-8-19','2017-8-20','2017-8-21','2017-8-22']
             }
         })
     </script>

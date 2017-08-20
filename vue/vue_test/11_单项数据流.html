@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../vue.js"></script>
+</head>
+<body>
+    <!--  
+        数据从父组件传递给子组件只能单向绑定，子件内部不能修改父组件传递过来的数据
+    -->
+    <div id="app">
+        <div>父组件使用了count</div>
+        <p>{{ count }}</p>
+        <custom-component :count='count'  @recrement-click='countHandle'></custom-component>
+    </div>
+
+    <script>
+        // 改变父组件传递数据的方法：
+
+        // 1.讲父组件数据赋值给子组件data中局部数据来使用
+        Vue.component('custom-component',{
+            props:['count'],
+            data(){
+                return {
+                    childrenCount:this.count
+                }
+            },
+            methods: {
+                changeCount(){
+                    this.childrenCount++
+                    this.$emit('recrement-click')
+                }
+            },
+            template:`
+                <div>
+                    <input type='button' value='改变count的值' @click='changeCount'>
+                    {{ childrenCount }}
+                </div>
+            `
+        })
+
+        new Vue({
+            el: '#app',
+            data: {
+                count: 0
+            },
+            methods: {
+                countHandle(){
+                    this.count++
+                }
+            }
+        })
+
+        // 2.作为子组件中的computed的计算属性
+        // Vue.component('custom-component',{
+        //     props: ['count'],
+        //     data(){
+        //         return {
+        //             childrenCount:this.count
+        //         }
+        //     },
+        //     computed: {
+        //         childrenCount2(){
+        //             return this.childrenCount
+        //         }
+        //     },
+        //     methods: {
+        //         changeCount(){
+        //             this.childrenCount++
+        //             this.$emit('recrement-click')
+        //         }  
+        //     },
+        //     template: `
+        //             <div>
+        //                 <input type='button' value='改变count的值' @click='changeCount'>
+        //                 {{ childrenCount2 }}
+        //             </div>
+        //         `
+        // })
+
+        // new Vue({
+        //     el: '#app',
+        //     data: {
+        //         count: 0
+        //     },
+        //     methods: {
+        //         countHandle(){
+        //             this.count++
+        //         }
+        //     }
+        // })
+    </script>
+</body>
+</html>

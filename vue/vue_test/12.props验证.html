@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+   <div id="app">
+        <div>父组件使用了count</div>
+        <p>{{ count }}</p>
+        <custom-component :count='count'  @recrement-click='countHandle'></custom-component>
+    </div>
+    <script>
+        Vue.component('custom-component',{
+            props:{
+                count:{
+                    type:[Number,String],   //count所指定的类型
+                    default: 10,    //count变量默认值
+                    // required: true   //必传
+                    validator:function(value){  //自定义验证规则 value 必须大于10才不会报错
+                        // console.log(value)
+                        return value > 10
+                    }
+                }
+            },
+            data(){
+                return {
+                    childrenCount:this.count
+                }
+            },
+            methods: {
+                changeCount(){
+                    this.childrenCount++
+                    this.$emit('recrement-click')
+                }
+            },
+            template:`
+                <div>
+                    <input type='button' value='改变count的值' @click='changeCount'>
+                    {{ childrenCount }}
+                </div>
+            `
+        })
+
+        new Vue({
+            el: '#app',
+            data: {
+                count: 0
+            },
+            methods: {
+                countHandle(){
+                    this.count++
+                }
+            }
+        })
+    </script> 
+</body>
+</html>

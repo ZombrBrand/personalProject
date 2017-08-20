@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <p>这是展示slot分发内容</p>
+        <custom>
+            <!-- 当写在自定义标签之间的内容 要混合子组件中的模板 -->
+            
+            <!-- 父组件作用域 -->
+            {{ message }}  
+
+            <div slot="one">我是第1个div</div>
+            <div slot="three">我是第3个div</div>
+            <template slot="two">
+                <div>我是批量div</div>
+                <div>我是批量div</div>
+                <div>我是批量div</div>
+                <div>我是批量div</div>
+                <div>我是批量div</div>
+            </template> 
+        </custom>
+    </div>
+
+    <script>
+        //定制模板 div
+        // <slot>元素所包裹的部分作为内容的插槽，如果父组件内没有对应的内容则显示定制模板的内容，反之显示父组件的内容
+        // 父组件模板的内容在父组件作用域内编译，子组件模板内容在子组件作用域内编译
+        Vue.component('custom',{
+            data(){
+                return {
+                    message: '我是子组件的message'  //子组件作用域
+                }
+            },
+            template: `
+                <div>
+                    <slot></slot>
+                    <slot name="one">
+                        <p>我是第1个P</p>
+                    </slot>
+                    <slot name="two">
+                        <p>我是第2个P</p>
+                    </slot> 
+                    <slot name="three">
+                        <p>我是第3个P</p>
+                    </slot> 
+
+                    <!-- 子组件作用域 -->
+                    {{ message }}
+                </div>
+            `
+        })
+
+        new Vue({
+            el: '#app',
+            data: {
+                message: '我是父组件的message'    //父组件作用域
+            }
+        })
+    </script>
+</body>
+</html>

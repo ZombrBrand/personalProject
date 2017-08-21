@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../vue.js"></script>
+    <style>
+        #modal {
+            width: 502px;
+            height: 173px;
+            border: 1px solid rgba(0,0,0,.2);
+            border-radius: 5px;
+            box-shadow: 0 3px 9px rgba(0,0,0,.5)
+        }
+        #modal .modal-header {
+            padding: 10px;
+            border-bottom: 1px solid rgba(0,0,0,.2);
+        }
+        #modal h4 {
+            margin: 0;
+        }
+        #modal .modal-content {
+            padding: 10px;
+            border-bottom:  1px solid rgba(0,0,0,.2);
+        }
+        #modal .modal-foot {
+            padding: 16px 15px;
+        }
+        #modal .modal-foot:after {
+            content: '';
+            display: block;
+            clear: both;
+        }
+        #modal .modal-button {
+            float: right;
+        }
+        #modal span {
+            display: inline-block;
+            padding: 3px 15px;
+            background-color: rgba(125,125,125,0.4);
+            font-size: 14px;
+        }
+        #modal .confirm {
+            margin-right: 5px;
+            background-color: #39f;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div id="modal">
+        <div class="modal-header">
+            <h4>提醒</h4>
+        </div>
+        <div class="modal-content">
+            <p>在这里添加内容</p>
+        </div>
+        <div class="modal-foot">
+            <div class="modal-button">
+                <span class="confirm">确认</span>
+                <span class="cancel">取消</span>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

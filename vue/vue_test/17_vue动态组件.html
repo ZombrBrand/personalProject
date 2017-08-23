@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <input type="button" value="第1个div" @click="changeDiv(1)">
+        <input type="button" value="第2个div" @click="changeDiv(2)">
+        <input type="button" value="第3个div" @click="changeDiv(3)">
+
+        <!-- 包裹动态组件时，会缓存组件的状态在内存中，而不是销毁它们，避免重新渲染 -->
+        <keep-alive>
+            <!-- 使用<component>元素和is特性将多个组件挂载到一起 -->
+            <component :is="switchDiv"></component>
+        </keep-alive>
+    </div>
+
+    <script>
+        let button1 = Vue.component('button1',{
+            template: `
+                <div @click="changeBg">第1个div</div>
+            `,
+            methods: {
+                changeBg(e){
+                    e.target.style.backgroundColor = 'red';
+                }
+            }
+        })
+        let button2 = Vue.component('button2',{
+            template: `
+                <div>第2个div</div>
+            `
+        })
+        let button3 = Vue.component('button3',{
+            template: `
+                <div>第3个div</div>
+            `
+        })
+
+        new Vue({
+            el: '#app',
+            data: {
+               switchDiv: button1
+            },
+            methods: {
+                changeDiv(index){
+                    switch(index){
+                        case 1:
+                            this.switchDiv = button1;
+                            break;
+                        case 2:
+                            this.switchDiv = button2;
+                            break;
+                        case 3:
+                            this.switchDiv = button3;
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+</html>

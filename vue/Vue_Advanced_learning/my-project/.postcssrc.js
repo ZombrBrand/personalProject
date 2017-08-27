@@ -1,5 +1,4 @@
 // https://github.com/michael-ciniawsky/postcss-load-config
-// http://hao.jobbole.com/postcss/  中文介绍postcss是基本使用
 
 module.exports = {
   "plugins": {

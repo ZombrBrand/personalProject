@@ -22,6 +22,21 @@ module.exports = {
     // allow async-await
     'generator-star-spacing': 0,
     // allow debugger during development
-    'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0
+    'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0,
+    'no-unused-vars': 0,  //关闭禁止未使用的变量
+    'no-multiple-empty-lines': 0,  //关闭连续多空行报错
+    'space-before-function-paren': 0,
+    'space-before-blocks': 0,
+    'spaced-comment': 0,
+    'keyword-spacing': 0,
+    'no-trailing-spaces': 0,
+    'comma-spacing': 0,
+    'key-spacing': 0,
+    'indent': 0,
+    'quotes': 0,
+    'eqeqeq': 0,
+    'padded-blocks': 0,
+    'eol-last': 0,
+    'semi': 0
   }
 }

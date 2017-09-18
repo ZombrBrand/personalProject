@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Document</title>
+	<style>
+		#traffic>li {
+			display: block;
+		}
+		#traffic span {
+			display: inline-block;
+			width: 50px;
+			height: 50px;
+			background-color: gray;
+			margin: 5px;
+			border-radius: 50%;
+		}
+		#traffic.stop li:nth-child(3) span {
+			background-color: #a00;
+		}
+		#traffic.wait li:nth-child(2) span {
+			background-color: #aa0;
+		}
+		#traffic.pass li:nth-child(1) span {
+			background-color: #0a0;
+		}
+	</style>
+</head>
+<body>
+	<ul id="traffic" class="pass">
+		<li><span></span></li>
+		<li><span></span></li>
+		<li><span></span></li>
+	</ul>
+	<script src="./index02.js"></script>
+</body>
+</html>

@@ -1,0 +1,8 @@
+.calculator {
+	width: 200px;
+	margin: 100px auto;
+	text-align: center;
+}
+.calculator input,.calculator span {
+	font-size: 22px;
+}

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		// 将2个已排序的数组在m+n次操作下，完成去重，得到一个完整的非重数组
+
+		let arr1 = [1,2,3,4,5]
+		let arr2 = [4,5,6,7,8,9]
+
+		console.log(distinctBySortArray(arr1,arr2))
+
+		function distinctBySortArray(arr1,arr2){
+			// 获取数组长度
+			let n = arr1.length
+			let m = arr2.length
+			let arr = []
+			
+			// 遍历数组
+			for(var i=0,j=0; i<n && j<m;){
+				let temp1 = arr1[i]
+				let temp2 = arr2[j]
+
+				if(temp1 < temp2){
+					arr.push(arr1[i])
+					i++
+				}else if(temp1 > temp2){
+					arr.push(arr2[j])
+					j++
+				}else{
+					j++
+				}
+			}
+
+			if(i < n){
+				return arr.concat(arr1.slice(i,n))
+			}
+			if(j < m){
+				return arr.concat(arr2.slice(j,n))
+			}
+		}
+	</script>	
+</body>
+</html>

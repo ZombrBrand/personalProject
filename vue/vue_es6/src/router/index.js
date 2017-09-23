@@ -7,6 +7,10 @@ import Es6_3 from '@/components/es6_3'
 import Es6_4 from '@/components/es6_4'
 import Es6_5 from '@/components/es6_5'
 import Es6_6 from '@/components/es6_6'
+import Es6_7 from '@/components/es6_7'
+import Es6_8 from '@/components/es6_8'
+import Es6_9 from '@/components/es6_9'
+import Es6_10 from '@/components/es6_10'
 
 Vue.use(Router)
 
@@ -21,7 +25,7 @@ export default new Router({
 		{
       path: '/es6',
       name: 'Es6',
-      component: Es6_6
+      component: Es6_10
     }
   ]
 })

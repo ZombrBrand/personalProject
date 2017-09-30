@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Document</title>
+</head>
+<body style="background-color:black;font-size:64px;color:aliceblue;padding:50px">
+	<span id="time" style="margin-right:15px"></span>
+	<span id="hours"></span>
+	:
+	<span id="minutes"></span>
+	:
+	<span id="seconds"></span>
+
+	<script>
+		let $hours = document.querySelector('#hours'),
+				$minutes = document.querySelector('#minutes'),
+				$seconds = document.querySelector('#seconds'),
+				$time = document.querySelector('#time')
+
+		function fn(){
+			let date = new Date()
+
+			if(date.getHours() > 12){
+				$time.innerText = '下午'
+			}else {
+				$time.innerText = '上午'
+			}
+
+			$hours.innerText = format(date.getHours()) % 12
+			$minutes.innerText = format(date.getMinutes())
+			$seconds.innerText = format(date.getSeconds())
+
+		}
+
+		function format(str){
+			if(str < 10){
+				return '0' + str
+			}else{
+				return str
+			}
+		}
+
+		setInterval(function(){
+			fn()
+		},1000)
+
+
+		fn()
+	</script>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Document</title>
+	<script src="./index.js"></script>
+</head>
+
+<body>
+	<label for="user">用户名：</label><input id="user" type="text" name="id">
+	<hr>
+	<label for="user">密码：</label><input id="passwd" type="password" name="pwd">
+	<hr>
+	<label for="user">验证码：</label><input id="yzm" type="text" name="yzm">
+	<span id="sj" style="margin-left:5px"></span>
+	<hr>
+	<input id="btn" type="button" value="登录">
+	<script>
+		const $user = document.querySelector('#user')
+		const $passwd = document.querySelector('#passwd')
+		const $yzm = document.querySelector('#yzm')
+		const $sj = document.querySelector('#sj')
+		const $btn = document.querySelector('#btn')
+
+		let str1 = str(26, 10)
+		let str2 = ''
+		for (let i = 0; i < 4; i++) {
+			str2 += str1[Math.floor(Math.random() * str1.length)]
+		}
+
+		$sj.innerText = str2
+
+		$btn.addEventListener('click', function () {
+
+			if ($user.value != 'admin') {
+				alert('用户名错误')
+			} else {
+				if ($passwd.value != 'admin') {
+					alert('密码错误')
+				} else {
+					if ($yzm.value != $sj.innerText) {
+						alert('验证码错误')
+					} else {
+						location.href = 'http://www.baidu.com'
+					}
+				}
+			}
+		})
+	</script>
+</body>
+
+</html>

@@ -102,17 +102,32 @@
 				this.count = count
 				this.num = num
 				this.flag = true
+				this.touchend
 				this.redTime
 				this.blueTime
 				this._self = this
-				this.bind()
+				this.init()
 			}
 
 			RandomNum.prototype = {
+				init: function () {
+					this.device()
+					this.bind()
+				},
+				device: function () {
+					// navigator.userAgent获取用户代理值（PC还是移动端）
+					var isMobile = /Mobile/i.test(navigator.userAgent);
+
+					if (!isMobile) {
+						this.touchend = 'click';
+					}else{
+						this.touchend = 'touchend'
+					}
+				},
 				bind: function () {
 					var _this = this
 
-					this.obtainEl.addEventListener("click", function () {
+					this.obtainEl.addEventListener(this.touchend, function () {
 						if (_this.flag) {
 							// console.log(_this.showRedEl)
 							_this.showRedEl.classList.remove('red-width')
@@ -141,8 +156,6 @@
 
 						_this.flag = _this.flag ? false : true
 					})
-
-
 				},
 				shuangSeQiu: function (count, num) {
 					let setArr = new Set()

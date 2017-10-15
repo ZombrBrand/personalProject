@@ -43,7 +43,7 @@ function es6_11() {
 	class Point {
 		constructor() {
 			this.id = '1',
-				this.name = '张三'
+			this.name = '张三'
 		}
 	}
 	let point = new Point()

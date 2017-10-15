@@ -37,6 +37,7 @@ module.exports = {
     'eqeqeq': 0,
     'padded-blocks': 0,
     'eol-last': 0,
-    'semi': 0
+		'semi': 0,
+		'no-tabs': 0
   }
 }

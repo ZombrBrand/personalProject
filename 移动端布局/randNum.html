@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+	<title>Document</title>
+	<script>
+		let ratio = 1 / window.devicePixelRatio
+		document.write('<meta name="viewport" content="width=device-width, initial-scale=' + ratio + ',maximum-scale=' +
+			ratio + ',minimum-scale=' + ratio + '">')
+
+		function fn() {
+			let $html = document.querySelector('html')
+			let pageWidth = $html.getBoundingClientRect().width
+			$html.style.fontSize = pageWidth / 14 + 'px'
+		}
+
+		fn()
+		window.onresize = function () {
+			fn()
+		}
+	</script>
+	<style>
+		body,
+		html {
+			height: 100%;
+		}
+
+		.wrap {
+			position: absolute;
+			top: 10%;
+			left: 10%;
+		}
+
+		#numBut {
+			background-color: #fff;
+			height: 0.925rem;
+			padding: 0.2rem;
+			margin-right: 0.25rem;
+			border: 1px solid #ccc;
+			border-radius: 0.125rem;
+			box-shadow: 1px 2px 8px rgba(0, 0, 0, .2), 4px 4px 12px rgba(0, 0, 0, .1);
+			outline: none;
+			font-size: 16px;
+			vertical-align: middle;
+		}
+
+		#redShow,
+		#blueShow {
+			display: inline-block;
+			height: 0.925rem;
+			padding: 0.2rem;
+			margin-right: 0.125rem;
+			border-radius: 0.125rem;
+			color: red;
+			box-shadow: 1px 2px 8px rgba(0, 0, 0, .2), 4px 4px 12px rgba(0, 0, 0, .1);
+			vertical-align: middle;
+			/* box-sizing: border-box; */
+			font-size: .5em;
+			line-height: 0.925rem
+		}
+
+		#blueShow {
+			color: blue;
+		}
+
+		.red-width {
+			width: 3.3rem;
+		}
+
+		.blue-width {
+			width: 0.625rem;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="wrap">
+		<button id="numBut">"双色球"获取号码</button>
+		<span id="redShow" class="red-width"></span>
+		<span id="blueShow" class="blue-width"></span>
+
+		<div>----------------------------</div>
+
+		<button id="numBut">"超级大乐透"获取号码</button>
+		<span id="redShow" class="red-width"></span>
+		<span id="blueShow" class="blue-width"></span>
+	</div>
+
+
+	<script>
+		const $numBut = document.querySelectorAll('#numBut')
+		const $redShow = document.querySelectorAll('#redShow')
+		const $blueShow = document.querySelectorAll('#blueShow')
+
+		var randomNum = (function () {
+			function RandomNum(obtainEl, showRedEl, showBlueEl, count, num) {
+				this.obtainEl = obtainEl
+				this.showRedEl = showRedEl
+				this.showBlueEl = showBlueEl
+				this.count = count
+				this.num = num
+				this.flag = true
+				this.redTime
+				this.blueTime
+				this._self = this
+				this.bind()
+			}
+
+			RandomNum.prototype = {
+				bind: function () {
+					var _this = this
+
+					this.obtainEl.addEventListener("click", function () {
+						if (_this.flag) {
+							// console.log(_this.showRedEl)
+							_this.showRedEl.classList.remove('red-width')
+							_this.showBlueEl.classList.remove('blue-width')
+
+							// redTime = redTime || clearInterval(redTime)
+							// blueTime = blueTime || clearInterval(blueTime)
+							console.log(_this.count[0])
+							// 展示红球区
+							_this.redTime = setInterval(() => {
+								_this.showRedEl.innerText = _this.shuangSeQiu(_this.count[0], _this.num[0]).sort((a, b) => {
+									return a - b
+								})
+							}, 50)
+
+							// 展示篮球区
+							_this.blueTime = setInterval(() => {
+								_this.showBlueEl.innerText = _this.shuangSeQiu(_this.count[1], _this.num[1]).sort((a, b) => {
+									return a - b
+								})
+							}, 50)
+						} else {
+							clearInterval(_this.redTime)
+							clearInterval(_this.blueTime)
+						}
+
+						_this.flag = _this.flag ? false : true
+					})
+
+
+				},
+				shuangSeQiu: function (count, num) {
+					let setArr = new Set()
+					for (;;) {
+						let rand = Math.floor(Math.random() * count) + 1
+
+						if (setArr.size >= num) {
+							break;
+						}
+
+						setArr.add(rand)
+					}
+					return [...setArr]
+				}
+				// ,
+				// redBox: function (count, num) {
+				// 	console.log(this)
+				// 	this.showRedEl.innerText = this.shuangSeQiu(count, num).sort((a, b) => {
+				// 		return a - b
+				// 	})
+				// },
+				// blueBox: function (count, num) {
+				// 	this.showBlueEl.innerText = this.shuangSeQiu(count, num).sort((a, b) => {
+				// 		return a - b
+				// 	})
+				// }
+			}
+
+			return {
+				init: function (el, redEl, blueEl, counts = [], nums = []) {
+					// el.forEach((node, el) => {
+					new RandomNum(el, redEl, blueEl, counts, nums)
+					// })
+				}
+			}
+		})()
+
+
+		randomNum.init($numBut[0], $redShow[0], $blueShow[0], [33, 16], [7, 1])
+		randomNum.init($numBut[1], $redShow[1], $blueShow[1], [35, 12], [6, 2])
+	</script>
+</body>
+
+</html>

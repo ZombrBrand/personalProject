@@ -58,6 +58,7 @@
         },
         methods: {
             getData(){
+								console.log(this.$route)
                 let id = this.$route.params.userId
             
                 if(id){

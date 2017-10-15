@@ -78,7 +78,7 @@ let router = new Router({
       path: '/document',
       name: 'document',
       beforeEnter(to,from,next){
-        // console.log(to.meta.title)
+        console.log(to)
         next()
       },
       components: {

@@ -56,7 +56,7 @@
 			color: red;
 			box-shadow: 1px 2px 8px rgba(0, 0, 0, .2), 4px 4px 12px rgba(0, 0, 0, .1);
 			vertical-align: middle;
-			/* box-sizing: border-box; */
+			 /* box-sizing: border-box;  */
 			font-size: .5em;
 			line-height: 0.925rem
 		}
@@ -119,8 +119,10 @@
 					var isMobile = /Mobile/i.test(navigator.userAgent);
 
 					if (!isMobile) {
+						// console.log('click')
 						this.touchend = 'click';
 					}else{
+						// console.log('touchend')
 						this.touchend = 'touchend'
 					}
 				},
@@ -128,6 +130,7 @@
 					var _this = this
 
 					this.obtainEl.addEventListener(this.touchend, function () {
+						// console.log(_this.touchend)
 						if (_this.flag) {
 							// console.log(_this.showRedEl)
 							_this.showRedEl.classList.remove('red-width')

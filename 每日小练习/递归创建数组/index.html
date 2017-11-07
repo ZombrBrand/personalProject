@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		// 写一个函数，参数为m,n，生成一个长度为m，每一项都是n的数组，不能用循环。
+		function createArr(m,n){
+			let arr = []
+			function arrayPush(m,n){
+				if(arr.length === m){
+					return arr
+				}
+
+				arr.push(n)
+				return arrayPush(m,n)
+			}
+
+			return arrayPush(m,n)
+		}
+	</script>
+</body>
+</html>

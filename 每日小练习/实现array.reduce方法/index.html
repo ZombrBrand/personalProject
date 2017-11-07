@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Document</title>
+</head>
+
+<body>
+	<script>
+		Array.prototype.myReduce(fn, initalValue) {
+			if (this.length === 0) { //this为当前数组对象，如[1,2,3].myReduce
+				if (initialValue === undefined) {
+					console.err("reduce of empty array with no initalValue");
+				} else {
+					return initalValue;
+				}
+			} else {
+				//判断initalValue是否存在，如果不存在就使用数组第一个值为初始值，下标从第二个值开始
+				let prev = initalValue !== undefined ? initalValue : this[0];
+				let startIndex = initalValue !== undefined ? 0 : 1;
+
+				for (let i = startIndex; i < this.length; i++) {
+					prev = fn(prev, this[i]);
+				}
+
+				return prev;
+			}
+		}
+	</script>
+</body>
+
+</html>

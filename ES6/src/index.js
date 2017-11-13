@@ -326,59 +326,59 @@
 /**
  * promise
  */
-var check = 200;
+// var check = 200;
 
-function step1(resolve,reject){
-    console.log('第一步已完成');
-    if(check === 200){
-        resolve('step.1 success');
-    }else{
-        reject('step.1 error');
-    }
-}
+// function step1(resolve,reject){
+//     console.log('第一步已完成');
+//     if(check === 200){
+//         resolve('step.1 success');
+//     }else{
+//         reject('step.1 error');
+//     }
+// }
 
-function step2(resolve,reject){
-    console.log('第二步已完成');
-    if(check === 200){
-        resolve('step.2 success');
-    }else{
-        reject('step.2 error');
-    }
-}
+// function step2(resolve,reject){
+//     console.log('第二步已完成');
+//     if(check === 200){
+//         resolve('step.2 success');
+//     }else{
+//         reject('step.2 error');
+//     }
+// }
 
-function step3(resolve,reject){
-    check = 200;
-    console.log('第三步已完成');
-    if(check === 200){
-        resolve('step.3 success');
-    }else{
-        reject('step.3 error');
-    }
-}
+// function step3(resolve,reject){
+//     check = 200;
+//     console.log('第三步已完成');
+//     if(check === 200){
+//         resolve('step.3 success');
+//     }else{
+//         reject('step.3 error');
+//     }
+// }
 
-new Promise(step1).then(function(val){
-    console.log(val);
-    return new Promise(step2);
-}).then(function(val){
-    console.log(val);
-    return new Promise(step3);
-}).then(function(val){
-    console.log(val);
-    return val
+// new Promise(step1).then(function(val){
+//     console.log(val);
+//     return new Promise(step2);
+// }).then(function(val){
+//     console.log(val);
+//     return new Promise(step3);
+// }).then(function(val){
+//     console.log(val);
+//     return val
+// })
+
+let p = new Promise((resolve,reject) => {
+    setTimeout(resolve,1000,2);
 })
 
-// let p = new Promise((resolve,reject) => {
-//     setTimeout(resolve,1000,2);
-// })
-
-// let p1 = p.then(val => {
-//     console.log(val)
-//     val += 2;
-//     console.log(val);
-//     return 2
-// }).then((val) => {
-//     console.log(val)
-// })
+let p1 = p.then(val => {
+    console.log(val)
+    val += 2;
+    console.log(val);
+    return 2
+}).then((val) => {
+    console.log(val)
+})
 
 // //编写简易promise
 // class Promise {

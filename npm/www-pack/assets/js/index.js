@@ -1,1 +1,0 @@
-webpackJsonp([0],[,function(n,t){},function(n,t){n.exports={name:"zhaona"}},,function(n,t,e){"use strict";(function(n){var t=e(2),o=function(n){return n&&n.__esModule?n:{default:n}}(t);e(1),n("#ct").html("hello word my name is "+o.default.name)}).call(t,e(0))}],[4]);

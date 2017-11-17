@@ -1,7 +1,0 @@
-@import url('./font.css');
-@import url('./fontcolor.less');
-
-body {
-	background-color: #fff666;
-	background-image: url(../img/baidu.png);
-}

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Document</title>
+</head>
+
+<body>
+	<script>
+		let arr = [1, 1, 2, '2', 3, 4, 5, 6, 6, 7, 8, 9, 0, "a", "a", "b"];
+
+
+		Array.prototype.unique = function () {
+			let newArr = [],
+				len = this.length,
+				flag = true
+
+			for (let i = len - 1; i >= 0; i--) {
+				for (let j = 0; j < newArr.length; j++) {
+					if (this[i] === newArr[j]) {
+						flag = false
+						break
+					} else {
+						flag = true
+					}
+				}
+
+				if (flag) {
+					newArr.push(this[i])
+				}
+			}
+			return newArr.reverse()
+		}
+
+		// 使用with改进
+		Array.prototype.unique1 = function () {
+			let newArr = [],
+				flag = true,
+				i = this.length,
+				j = 0
+
+			while (--i >= 0) {
+				j = newArr.length
+				while (--j >= 0) {
+					flag = this[i] !== newArr[j]
+					if (!flag) {
+						break
+					}
+				}
+				flag && newArr.push(this[i])
+			}
+			return newArr.reverse()
+		}
+
+		//对象去除法
+		Array.prototype.unique2 = function () {
+			let newArr = [],
+				obj = {},
+				len = this.length
+
+			for (let i = len - 1; i > 0; i--) {
+				obj[this[i]] = ""
+			}
+			for (let key in obj) {
+				newArr.push(key)
+			}
+			return newArr
+		}
+
+		//优化对象去除法
+		Array.prototype.unique3 = function () { //这种情况下无法判断数组中元素的类型，如果不能去除不同类型的重复则需要改进
+			let newArr = [],
+				obj = {},
+				len = this.length
+
+			for (let i = len - 1; i > 0; i--) {
+				if (obj[this[i]] == undefined) {
+					obj[this[i]] = ""
+					newArr.push(this[i])
+				}
+			}
+			return newArr.reverse()
+		}
+
+		//改进可判数据类型
+		Array.prototype.unique4 = function () { //这种情况下无法判断数组中元素的类型，如果不能去除不同类型的重复则需要改进
+			let newArr = [],
+				obj = {},
+				len = this.length
+
+			for (let i = len - 1; i > 0; i--) {
+				if (obj[this[i]] == undefined || obj[this[i]] !== this[i]) {
+					obj[this[i]] = this[i]
+					newArr.push(this[i])
+				}
+			}
+			return newArr.reverse()
+		}
+
+		Array.prototype.unique5 = function () {
+			let newArr = [],
+				obj = {},
+				i = this.length
+
+			while (--i) {
+				(obj[this[i] == undefined] || obj[this[i]] !== this[i]) && (obj[this[i]] = this[i], newArr.push(this[i]))
+			}
+
+			return newArr.reverse()
+		}
+
+		//通过正则实现去重
+		Array.prototype.unique6 = function () {
+			let newArr = [],
+				arr1 = []
+
+			arr1 = arr.join(',').match(/([^\,]+)(?!.*\1)/ig)
+			arr1.forEach(item => {
+				/[a-zA-z]/.test(item) ? newArr.push(item) : newArr.push(parseInt(item))
+			})
+
+			return newArr
+		}
+
+		console.log(arr.unique6())
+	</script>
+
+</body>
+
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Document</title>
+</head>
+
+<body>
+	<script>
+		function clone(obj) {
+			var o
+
+			if (obj instanceof Array) {
+				let len = obj.length
+				o = []
+
+				while (len--) {
+					o[len] = clone(obj[len])
+				}
+				return o
+
+			} else if (obj instanceof Object) {
+				o = {}
+
+				for (let key in obj) {
+					o[key] = clone(obj[key])
+				}
+				return o
+
+			} else {
+				return obj
+			}
+		}
+
+		function clone2(obj) {
+			let o = obj instanceof Array ? [] : {}
+
+			for (let key in obj) {
+				if (obj[key] instanceof Object) {
+					o[key] = clone2(obj[key])
+				} else {
+					o[key] = obj[key]
+				}
+			}
+			return o
+		}
+
+		function clone3(obj) {
+			let o = obj instanceof Array ? [] : {}
+			for (let key in obj) {
+				o[key] = obj[key] instanceof Object ? clone3(obj[key]) : obj[key]
+			}
+			return o
+		}
+
+		console.log(clone3({
+			x: 1,
+			y: [1, 2, 3]
+		}))
+		console.log(clone3([1, 2, {
+			x: 5,
+			y: [1, 2, 3]
+		}, 3]))
+	</script>
+</body>
+
+</html>

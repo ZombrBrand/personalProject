@@ -1,0 +1,1 @@
+{"version":3,"sources":["webpack:///./src/console.js"],"names":["print","consle","log"],"mappings":";;;;;;;;;;;;kBAAwBA,K;AAAT,SAASA,KAAT,GAAgB;AAC3BC,WAAOC,GAAP,CAAW,GAAX;AACH,C","file":"js/print.js","sourcesContent":["export default function print(){\r\n    consle.log(111)\r\n}\n\n\n// WEBPACK FOOTER //\n// ./src/console.js"],"sourceRoot":""}

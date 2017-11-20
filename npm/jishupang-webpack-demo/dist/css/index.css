@@ -1,13 +1,27 @@
+/*! lzijian编写的组件代码 */
 body {
-	background-color: red;
-	color: white;
+  background-color: red;
+  color: white;
 }
+
 #tupian {
-	width: 200px;
-	height: 300px;
-	background-image: url(http://192.168.2.153:1111/images/d2e0a1b119e7a79ef9b6c1ebb29a0de9.jpg)
-}#less {
+  width: 200px;
+  height: 300px;
+  margin-bottom: 50px;
+  background-image: url(http://192.168.2.153:1117/images/d2e0a1b119e7a79ef9b6c1ebb29a0de9.jpg);
+  -webkit-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+#less {
   width: 100px;
   height: 100px;
   background-color: #000;
 }
+
+#sass {
+  width: 100%;
+  height: 30px;
+  background-color: yellow;
+}
+/*# sourceMappingURL=index.css.map*/

@@ -1,0 +1,9 @@
+body {
+  width: 100%;
+  height: 100%;
+  background-color: #d82f2f; }
+  body #app ul {
+    list-style: none;
+    width: 200px;
+    height: 200px;
+    background-color: #2623c0; }

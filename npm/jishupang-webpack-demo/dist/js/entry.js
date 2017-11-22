@@ -35,7 +35,7 @@ document.getElementById("title").innerHTML = str;
 $('#title').html('Hello,wellow to JSpang.com');
 
 var json = __webpack_require__(7);
-document.getElementById("json").innerHTML = json.name + "address:" + json.address;
+document.getElementById("json").innerHTML = json.name + "，address:" + json.address;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),

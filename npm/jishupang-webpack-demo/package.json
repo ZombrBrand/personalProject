@@ -6,8 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "server": "webpack-dev-server --open",
-    "dev": "set type=dev&webpack --watch",
-    "build": "set type=build&webpack"
+    "dev": "set type=dev&webpack",
+    "build": "set type=build&webpack --watch"
   },
   "author": "",
   "license": "ISC",

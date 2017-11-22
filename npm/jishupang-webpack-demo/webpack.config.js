@@ -14,7 +14,7 @@ let address = {}
 if (process.env.type == "build") {
   address["publicPath"] = "http://cdn.jspang.com"
 } else {
-  address["publicPath"] = "http://192.168.2.153:1117/"
+  address["publicPath"] = "http://192.168.2.153:1400/"
 }
 
 
@@ -115,7 +115,7 @@ module.exports = {
     contentBase: path.resolve(__dirname, 'dist'),
     compress: true,
     host: '192.168.2.153',
-    port: 1117
+    port: 1400
   },
   watchOptions: {
     poll: 1000,

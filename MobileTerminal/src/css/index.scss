@@ -1,14 +1,360 @@
+/*reset*/
+
 body {
-    width: 100%;
-    height: 100%;
-    background-color: rgb(216, 47, 47);
-    #app ul {
-        list-style: none;
-        width: 200px;
-        height: 200px;
-        background-color: rgb(38, 35, 192);
-        li {
-            color: #fff;
-        }
-    }
+	margin: 0;
+	padding: 0;
+}
+
+input {
+	margin: 0;
+	padding: 0;
+	border: none; //解决IOS下表单元素圆角问题
+	-webkit-appearance: none;
+}
+
+img {
+	border: none;
+	vertical-align: top;
+}
+
+ul {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+a {
+	//取消a标签手指按下时出现的黑色遮罩层
+	-webkit-tap-highlight-color: transparent;
+	text-decoration: none;
+	color: #818788;
+}
+
+
+/*工具样式*/
+
+$rem: 40px;
+@function con($px) {
+	@return $px / $rem * 1rem;
+}
+
+.clearfix::after {
+	content: "";
+	display: block;
+	clear: both;
+}
+
+
+/*框架搭建*/
+
+html,
+body {
+	width: 100%;
+	height: 100%;
+}
+
+html {
+	overflow: hidder;
+}
+
+body {
+	overflow: auto;
+	font-size: con(20px);
+	font-family: Arial, Helvetica, STHeiTi, sans-serif;
+}
+
+
+/*主体部分*/
+
+// #app {
+// 	height: 4000px;
+// }
+
+
+/*头部*/
+
+.headbox {
+	width: 100%;
+	height: con(74px);
+	background-color: #fabc09;
+	position: fixed;
+	.btn_type {
+		float: left;
+		width: con(78px);
+		height: con(74px);
+		background: url('../image/ico-type.jpg') no-repeat con(22px) con(10px);
+		background-size: con(33px) con(55px);
+	}
+	.search_box {
+		float: left;
+		width: con(480px);
+		height: con(74px);
+		.search_form {
+			height: con(50px);
+			padding-top: con(12px);
+			position: relative;
+			&::before {
+				content: '';
+				position: absolute;
+				top: con(25px);
+				left: con(16px);
+				width: con(23px);
+				height: con(23px);
+				background: url('../image/ico-search.jpg');
+			}
+			.search_input {
+				width: con(480px);
+				height: con(50px);
+				background-color: #d5dba9;
+				border-radius: con(6px);
+				padding-left: con(51px);
+				font-size: con(20px);
+				box-sizing: border-box;
+			}
+		}
+	}
+	.shop_car {
+		float: left;
+		width: con(82px);
+		height: con(74px);
+		background: url('../image/ico-shopCar.jpg') no-repeat con(17px) con(8px);
+		background-size: con(50px) con(56px);
+	}
+}
+
+.wrap {
+	width: 100%;
+	padding-top: con(74px);
+	/*广告轮播*/
+	.banner {
+		width: 100%;
+		height: con(272px);
+		img {
+			width: 100%;
+		}
+	}
+	/*优惠list*/
+	.nav {
+		width: 100%;
+		padding: con(18px) 0 con(2px) 0;
+		box-sizing: border-box;
+		background-color: #cce3d1;
+		border-top: 1px solid #acd3b3;
+		.nav_item {
+			float: left;
+			width: 20%;
+			height: con(114px);
+			text-align: center;
+			margin-bottom: con(8px);
+			img {
+				width: con(68px);
+				height: con(70px);
+			}
+			.nav_title {
+				display: block;
+				line-height: con(44px);
+			}
+		}
+	}
+	.suning_tt {
+		width: 100%;
+		height: con(87px);
+		background-color: #cce3d1;
+		border: 2px solid #cce3d1;
+		box-sizing: border-box;
+		.tt_title {
+			float: left;
+			width: con(139px);
+			height: con(87px);
+			background: url('../image/ico-tt.jpg') no-repeat 0 con(22px);
+			background-size: con(124px) con(41px);
+		}
+		.tt_line {
+			float: left;
+			width: 1px;
+			height: con(33px);
+			background-color: #97c1a0;
+			margin-top: con(27px);
+		}
+		.tt_list {
+			float: left;
+			width: con(430px);
+			height: con(87px);
+			padding-top: con(14px);
+			margin-left: con(32px);
+			box-sizing: border-box;
+			.item {
+				display: block;
+				line-height: con(35px);
+				background: url('../image/ico-list.jpg') no-repeat 0 con(10px);
+				background-size: con(6px) con(6px);
+				text-indent: con(17px);
+			}
+		}
+	}
+	.shop_type {
+		border-top: con(19px) solid #cce3d1;
+		.type_top {
+			overflow: hidden;
+			a {
+				float: left;
+			}
+			.big_img {
+				width: con(319px);
+				height: con(248px);
+				margin-right: 1px;
+				img {
+					width: con(319px);
+					height: con(248px);
+				}
+			}
+			.sub_img {
+				width: con(319px);
+				height: con(123px);
+				margin-bottom: 1px;
+				img {
+					width: con(319px);
+					height: con(123px);
+				}
+			}
+		}
+		.bottom_item {
+			float: left;
+			margin: 0 1px 1px 0;
+			img {
+				width: con(159px);
+				height: con(257px);
+			}
+		}
+	}
+	.suning_qg {
+		width: 100%;
+		// height: con(257px);
+		background-color: #cce3d1;
+		border-top: con(33px) solid #cce3d1;
+		padding-left: con(16px);
+		box-sizing: border-box;
+		.head {
+			width: 100%;
+			height: con(54px);
+			.head_left {
+				float: left;
+				.title {
+					float: left;
+					width: con(116px);
+					height: con(40px);
+					margin-right: con(16px);
+					background: url('../image/title-qg.jpg') no-repeat;
+					background-size: con(116px) con(40px);
+				}
+				.time_box {
+					float: left;
+					padding-top: con(14px);
+					.time_name {
+						float: left;
+						font-size: con(18px);
+						color: #f94f4e;
+					}
+					.updeta_time {
+						float: left;
+						margin-left: con(8px);
+						.time_item {
+							display: inline-block;
+							width: con(22px);
+							height: con(22px);
+							border: 1px solid #809474;
+							border-radius: con(4px);
+							text-align: center;
+							line-height: con(20px);
+							color: #383938;
+						}
+						.tips {
+							border-color: #ff3739;
+							color: #ff3739;
+						}
+					}
+				}
+			}
+			.head_right {
+				float: right;
+				padding: con(11px) con(20px) 0 0;
+				.more {
+					float: left;
+					width: con(104px);
+					height: con(29px);
+					line-height: con(29px);
+					font-size: con(18px);
+					text-align: center;
+					background-color: #ffc001;
+					border-radius: con(12px);
+					color: #456c24;
+					margin-right: con(2px);
+				}
+				.ico_more {
+					float: left;
+					width: con(15px);
+					height: con(25px);
+					background: url('../image/ico-sj.jpg') no-repeat;
+					background-size: 100%;	
+				}
+			}
+		}
+		.shoping_box {
+			width: 100%;
+			overflow: hidden;
+			.shoping_list {
+				width: 200%;
+				.list_item {
+					width: con(190px);
+					float: left;
+					margin-right: con(8px);
+					.item_img {
+						display: block;
+						width: con(188px);
+						border: 1px solid #b2cdb1;
+						img {
+							width: 100%;
+						}
+					}
+					.item_bottom {
+						width: 100%;
+						height: con(57px);
+						padding-left: con(16px);
+						background-color: #ddd;
+						box-sizing: border-box;
+						position: relative;
+						.jiage {
+							display: block;
+							color: #dc0000;
+							line-height: con(28px);
+						}
+						.yuanjia {
+							display: block;
+							font-size: con(16px);
+							line-height: con(24px);
+							color: #999;
+						}
+						.zhekou {
+							position: absolute;
+							top: con(-6px);
+							right: con(6px);
+							width: con(61px);
+							height: con(61px);
+							padding-top: con(10px);
+							background: url('../image/ico-zhekou.jpg') no-repeat;
+							background-size: 100%;
+							text-align: center;
+							.big_font {
+								font-size: con(22px);
+								span {
+									font-size: con(18px);
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		
+	}
 }

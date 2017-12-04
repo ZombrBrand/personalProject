@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    //插入排序：
+      //实现原理：先获取一个元素到新数组中，然后每次从旧数组中抽取元素与新数组的元素从后向前进行比较，当大于比较的元素时，插入到该元素后面
+
+    function insertSort(arr) {
+      let newArr = []
+      newArr.push(arr[0])
+
+      for (let i = 1; i < arr.length; i++) { //由于获取了oldarr第一个元素到newarr中，所以从第一个开始
+        let cur = arr[i]
+        for (let j = newArr.length - 1; j >= 0;) { //从newarr中最大的一项开始对比
+          if (arr[i] < newArr[j]) { //如果oldarr的元素比newarr小的话，就j--继续往前面的元素进行对比
+            j--
+            if (j === -1) { //oldarr的元素比newarr第一个元素还小，就插入到newarr第一位
+              newArr.unshift(arr[i])
+            }
+          } else { //将oldarr的元素插入到大于比较元素的后面，结束当前循环
+            newArr.splice(j + 1, 0, arr[i])
+            break
+          }
+        }
+      }
+      return newArr
+    }
+
+    let arr = [12, 13, 23, 14, 20, 26, 34, 13, 16]
+    console.log(insertSort(arr))
+  </script>
+</body>
+
+</html>

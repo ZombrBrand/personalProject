@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    let arr = [1, 1, 2, '2', 3, 4, 5, 6, 6, 7, 8, 9, 0, "a", "a", "b"];
+    let obj = {}
+    for(let i=0; i<arr.length; i++){
+      let cur = arr[i]
+      if(obj[cur] == undefined || obj[cur] !== arr[i]){
+        obj[cur] = cur
+        continue
+      }
+
+      //将最后一项插入重复项，然后将数组最后一项删除，
+      //i--是抵消下一次i++，为了继续遍历之前插入的最后一项
+      arr[i] = arr[arr.length - 1]
+      arr.length--
+      i--
+    }
+
+    console.log(arr)
+  </script>
+</body>
+
+</html>

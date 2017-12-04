@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Document</title>
+</head>
+
+<body>
+	<script>
+		//交换的方法有两种：
+		//1.创建一个空变量，继承其中一个变量值，然后三方赋值替换
+		let a = 12,
+			b = 13,
+			temp
+
+		temp = a
+		a = b
+		b = temp
+		console.log(a, b) // a=13,b=12
+
+		//2.将值合并后，变量相减
+		let x = 12,
+			y = 13
+		x = x + y
+		y = x - y
+		x = x - y
+		console.log(x, y) // x=13,y=12
+
+		//冒泡排序的核心算法：
+			//前一项和后一项比，如果大于后一项就交换
+			//排序次数为arr.length-1,因为第一项不用和自身做比较
+
+		let arr = [4, 3, 5, 2, 1]
+		//第一轮
+		//4>3 [3,4,5,2,1]
+		//4<5 不交换
+		//5>2	[3,4,2,5,1]
+		//5>1 [3,4,2,1,5]
+
+		//第二轮
+		//3<4 不交换
+		//4>2 [3,2,4,1,5]
+		//4>1 [3,2,1,4,5]
+
+		//第三轮
+		//3>2 [2,3,1,4,5]
+		//3>1 [2,1,3,4,5]
+
+		//第四轮
+		//2>1 [1,2,3,4,5]
+
+		//一直到排arr.length-1次
+		//每一轮比较次数：
+			//i=0时	j=4	arr.length-1 因为不用和自己比所以-1
+			//i=1时	j=3	arr.length-1-1
+			//i=2时	j=2	arr.length-1-2
+			//i=3时	j=1	arr.length-1-3
+
+		//所以每轮次数是arr.length-1-i
+
+		function bubbleSort(arr) {
+			let flag = false //设定标记，因为在排序的过程中有可能就会出现一轮就排序完成，那样后面就不需要遍历了，提升性能
+			
+			for (let i = 0; i < arr.length - 1; i++) {
+				for (let j = 0; j < arr.length - 1 - i; j++) {
+					if (arr[j] > arr[j + 1]) {
+						arr[j] = arr[j] + arr[j + 1]
+						arr[j + 1] = arr[j] - arr[j + 1]
+						arr[j] = arr[j] - arr[j + 1]
+						flag = true
+					}
+				}
+				if (flag) {
+					flag = false
+				} else {
+					break
+				}
+			}
+			return arr
+		}
+
+		console.log(bubbleSort(arr))
+	</script>
+</body>
+
+</html>

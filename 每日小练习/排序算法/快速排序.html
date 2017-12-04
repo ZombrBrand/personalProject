@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    //快速排序思想：
+      //找寻数组中的基准点（一般是指数组中间项）,然后剥离出数组
+      //按照基准点，小于基准的放在左边，大于基准放右边
+      //如：[12,13,23,14,20,26,34,13,16]，基准点为20
+        //左边：[12,13,14,13,16]
+        //右边：[23,26,34]
+      //分好后继续寻找左右两边数组的基准点，继续按照上一次操作，直到数组中只剩下一个元素，最后拼接
+
+    function quickSort(arr){
+      if (arr.length === 1) {
+        return arr
+      }
+
+      let pointIndex = Math.floor(arr.length/2)
+      let pointValue = arr.splice(pointIndex,1)[0] //因为使用splice返回的是一个数组
+      let left = []
+      let right = []
+ 
+      for(let i=0; i < arr.length; i++){
+        arr[i] < pointValue ? left.push(arr[i]):right.push(arr[i])
+      }
+
+      return quickSort(left).concat([pointValue],quickSort(right))
+      
+    }
+
+    let arr = [12,13,23,14,20,26,34,13,16]
+    console.log(quickSort(arr))
+
+
+  </script>
+</body>
+</html>

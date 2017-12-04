@@ -4,12 +4,13 @@ const htmlWebpackPlugin = require('html-webpack-plugin')
 const extractTextPlugin = require('extract-text-webpack-plugin')
 
 let websit = {
-	publicPath: "http://192.168.2.153:1269/"
+	publicPath: "http://192.168.2.153:1270/"
 }
 
 module.exports = {
 	entry: {
 		mobileReset: './src/js/mobileReset.js'
+		// flex: './src/js/flex.js'
 	},
 	output: {
 		path: path.resolve(__dirname, 'dist'),
@@ -69,7 +70,7 @@ module.exports = {
 		contentBase: path.resolve(__dirname, "dist"),
 		compress: true,
 		host: '192.168.2.153',
-		port: 1269
+		port: 1270
 	},
 	watchOptions: {
 		poll: 1000,

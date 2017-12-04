@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    //1.递归实现1-100，但被3整除以外的数相加
+    function sum(n) {
+      if (n === 0) {
+        return 0
+      }
+      if (n % 3 === 0) {
+        return sum(n - 1)
+      }
+      return n + sum(n - 1)
+    }
+    let total_1 = sum(100)
+    console.log(total_1)
+
+    //2.递归实现1-10，能被2整除的数相加
+    function fn(n) {
+      if (n === 1) {
+        return 1
+      }
+      if (n % 2 === 0) {
+        return n * fn(n - 1)
+      }
+      return fn(n - 1)
+    }
+    let total_2 = fn(10)
+    console.log(total_2)
+
+    //3.递归实现使用setTimeout实现setInterval功能，使结果累加
+    let count_1 = 0,
+      timer
+
+    //例子
+    // timer = window.setInterval(function(){
+    //   count_1++
+    //   console.log(count_1)
+
+    //   if(count_1 === 10){
+    //     window.clearInterval(timer)
+    //   }
+    // },1000)
+
+    //setTimeout实现
+    function move() {
+      window.clearTimeout(timer)
+
+      count_1++
+      console.log(count_1)
+
+      if (count_1 === 10) {
+        return
+      }
+
+      timer = window.setTimeout(move, 1000)
+      // timer = window.setTimeout(arguments.callee, 1000)  //arguments.callee代表move这个函数
+    }
+
+    move()
+  </script>
+</body>
+
+</html>

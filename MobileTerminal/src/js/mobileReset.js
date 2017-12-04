@@ -3,6 +3,7 @@ import sass from '../css/index.scss'
 
 // 设置1:1像素比
 let ratio = 1 / window.devicePixelRatio
+console.log(ratio)
 document.write('<meta name="viewport" content="width=device-width, initial-scale=' + ratio + ',maximum-scale=' +
     ratio + ',minimum-scale=' + ratio + '">')
 
@@ -16,6 +17,4 @@ function fn() {
 }
 
 fn()
-window.onresize = function () {
-    fn()
-}
+window.addEventListener("resize",fn,false)

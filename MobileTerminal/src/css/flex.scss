@@ -1,0 +1,25 @@
+    .fix_box {
+      width: 800px;
+      height: 500px;
+      border: 5px solid pink;
+      display: flex;
+      .item {
+        width: 80px;
+        height: 80px;
+        background-color: yellow;
+        border: 1px solid black;
+        text-align: center;
+        line-height: 80px;
+        margin: auto; //居中显示
+      }
+    }
+
+
+
+
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}

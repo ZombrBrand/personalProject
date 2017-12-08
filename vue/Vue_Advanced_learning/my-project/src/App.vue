@@ -21,6 +21,7 @@
         </ul>
       </div>
 
+      //同一页面并行组件展示的设置，name为路由components下的组件名字
       <!-- <router-view name="hobby"></router-view>
       <router-view name="abc"></router-view>    -->
       

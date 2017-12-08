@@ -18,16 +18,21 @@ Vue.use(Router)
 let router = new Router({
   mode: 'history',
   linkActiveClass: 'is-active',
-  scrollBehavior(to,from,savePosition){ //触发条件：点击前进后退或切换导航时触发
+  scrollBehavior(to, from, savePosition) { //触发条件：点击前进后退或切换导航时触发
     // to 进入的目标路由对象、from 离开的路由对象、savePosition记录滚动条坐标，只有在点击前进后退才记录值
-    if(to.hash){
-      return {
-        selector: to.hash
-      }
+    // if(to.hash){ //这个to.hash是只有在<router-link :to="{path='/document#abc'}"的时候使用
+    //   return {
+    //     selector: to.hash //点击前进后退就会selector定位到有hash的元素
+    //   }
+    // }
+
+    if (savePosition) { //当在前进后退的时候就会检测之前滚动条所在位置
+      return savePosition
+    } else {
+      return {x:0,y:0}
     }
   },
-  routes: [
-    {
+  routes: [{
       path: '/',
       component: home,
       meta: {
@@ -50,10 +55,9 @@ let router = new Router({
       alias: '/index'
     },
     {
-      path: '/about',     
+      path: '/about',
       component: about,
-      children: [
-        {
+      children: [{
           path: '', //默认子路由
           name: 'about',
           component: study,
@@ -68,7 +72,7 @@ let router = new Router({
           component: silder
         },
         {
-          path: 'work',
+          path: 'work', //嵌套路由地址展示为："http://127.0.0.1/about/work",如果不想展示about的话就改成path:"/work"
           name: 'work',
           component: work
         }
@@ -77,11 +81,11 @@ let router = new Router({
     {
       path: '/document',
       name: 'document',
-      beforeEnter(to,from,next){
+      beforeEnter(to, from, next) {
         console.log(to)
         next()
       },
-      components: {
+      components: { //并行组件设置，当前路由下展示多个同级组件，具体情况查看妙味《命名视图》
         default: document,
         hobby: hobby,
         abc: abc
@@ -101,10 +105,12 @@ let router = new Router({
       redirect: (to) => { //动态设置重定向的目标
         // 目标路由对象
         // console.log(to)
-        if(to.path === '/123'){
+        if (to.path === '/123') {
           return '/home'
-        }else if(to.path === '/456'){
-          return {path: '/about'}
+        } else if (to.path === '/456') {
+          return {
+            path: '/about'
+          }
         }
       }
     }
@@ -118,7 +124,7 @@ let router = new Router({
 //   next()
 // })
 
-router.afterEach((to,from) => {
+router.afterEach((to, from) => {
   window.document.title = to.meta.title
 })
 

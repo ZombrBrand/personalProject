@@ -41,7 +41,7 @@ let router = new Router({
       }
     },
     {
-      path: '/user/:tip?/:userId?',
+      path: '/user/:tip?/:userId?', //?是正则匹配的符号，表示零个或1个，可以在组件中通过this.$route.params查询到相关动态参数
       component: user,
       meta: {
         index: 4,
@@ -61,7 +61,7 @@ let router = new Router({
           path: '', //默认子路由
           name: 'about',
           component: study,
-          meta: {
+          meta: { //因为about组件下有嵌套路由，而子路由的第一个为默认子路由，所以meta信息需要放置在默认子路由中
             index: 3,
             title: 'about'
           }

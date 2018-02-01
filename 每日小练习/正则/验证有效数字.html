@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 验证有效数字（正数、负数、零、小数）
+      // "."可能出现，也可能不出现，但是一旦出现，后面必须跟着一位或多位数字
+      // 最开始可以有“+|-”,也可能没有
+      // 整数部分，一位数可以是0-9，多位数不能以0开头
+
+      // [+-]? 为 `+|-` 可以出现也可以不出现
+      // (\d|([1-9]\d+)) 为 `单位数\d` 或者 `是不以0开头的多位数([1-9]\d+)`
+      // (\.\d+)? 为 可以有 `.`,也可以没有,但是一旦有`.`就必须后面有一位或者多位数字
+      var reg = /^[+-]?(\d|([1-9]\d+))(\.\d+)?$/
+      console.log(reg.test(133.6))
+  </script>
+</body>
+</html>

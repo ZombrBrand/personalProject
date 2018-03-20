@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+
+	<body>
+		<div id="app">
+			<h3>路由</h3>
+			<router-link v-text="'首页'" to="/home"></router-link>
+			<router-link v-text="'列表页'" to="/list" tag="span"></router-link>
+			<router-view></router-view>
+		</div>
+
+		<!-- 父路由 -->
+		<template id="home">
+			<section>
+				<p>home</p>
+				<router-view></router-view>
+			</section>
+
+		</template>
+
+		<template id="list">
+			<p>list</p>
+		</template>
+
+		<!-- 子路有 -->
+		<template id="home-c1">
+			<p>home-c1</p>
+		</template>
+		<template id="home-c2">
+			<p>home-c2</p>
+		</template>
+		<script type="text/javascript" src="lib/vue2.0.js"></script>
+		<script type="text/javascript" src="lib/vue-router.js"></script>
+		<script type="text/javascript">
+			var Home = {
+				template: '#home'
+			}
+
+			var List = {
+				template: '#list'
+			}
+
+			var Page = {
+				template: '#home-c1'
+			}
+
+			var Search = {
+				template: '#home-c2'
+			}
+
+			var routes = [{
+					path: '/home',
+					name: 'home',
+					component: Home,
+					children: [{
+							path: '/page',
+							component: Page
+						},
+						{
+							path: 'search',
+							component: Search
+						}
+					]
+				},
+				{
+					path: '/list',
+					name: 'list',
+					component: List
+				}
+			]
+
+			var router = new VueRouter({
+				routes: routes
+			})
+
+			var app = new Vue({
+				el: '#app',
+				router: router,
+				data: {},
+				created: function() {
+					console.log('app：', this)
+				}
+			})
+		</script>
+	</body>
+
+</html>

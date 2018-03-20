@@ -1,0 +1,41 @@
+/*产品列表页*/
+
+.product {
+	background-color: #fff;
+	padding: 0 10px;
+}
+
+.product h3 {
+	font-size: 18px;
+	font-weight: normal;
+	padding: 10px 0;
+}
+
+.product li {
+	padding: 10px 0;
+	border-top: 1px solid #ccc;
+}
+
+.product a {
+	display: block;
+}
+
+.product img {
+	width: 100px;
+}
+
+.product .right {
+	padding-left: 110px;
+	font-size: 12px;
+}
+
+.product p {
+	height: 45px;
+	font-size: 14px;
+	font-weight: 700;
+}
+
+.product .price {
+	color: #06C1AE;
+	margin-right: 5px;
+}

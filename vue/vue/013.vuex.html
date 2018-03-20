@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+
+	<body>
+		<div id="app">
+			<h3>路由</h3>
+			<router-link v-text="'首页'" to="/home"></router-link>
+			<router-link v-text="'列表页'" to="/list" tag="span"></router-link>
+			<router-view></router-view>
+		</div>
+
+		<!-- 父路由 -->
+		<template id="home">
+			<section>
+				<p>home</p>
+				<router-view></router-view>
+			</section>
+
+		</template>
+
+		<template id="list">
+			<section>
+				<p @click="add">add：{{$store.state.num}}</p>
+				<p @click='red'>reduce：{{$store.state.num}}</p>
+				<button @click="reset">重置</button>
+				<h2>double num：{{$store.getters.double}}</h2>
+			</section>
+
+		</template>
+
+		<!-- 子路有 -->
+		<template id="home-c1">
+			<p>home-c1</p>
+		</template>
+		<template id="home-c2">
+			<p>home-c2</p>
+		</template>
+		<script type="text/javascript" src="lib/vue2.0.js"></script>
+		<script type="text/javascript" src="lib/vue-router.js"></script>
+		<script type="text/javascript" src="lib/vue-resource.js"></script>
+		<script type="text/javascript" src="lib/vuex.js"></script>
+		<script type="text/javascript">
+			var Home = {
+				template: '#home'
+			}
+
+			var List = {
+				template: '#list',
+				data: function() {
+					return {
+						data: {}
+					}
+				},
+				created: function() {
+					this.$http
+						.get('data.json', {
+							params: {
+								hello: 'kitty'
+							}
+						})
+						//						.post('data.json', {
+						//							title: '异步请求'
+						//						}, {
+						//							params: {
+						//								msg: '专业前端'
+						//							}
+						//						})
+						.then(function(res) {
+							this.data = res.data.data
+						})
+
+				},
+				methods: {
+					add: function(){
+						this.$store.commit('addNum',10)
+					},
+					red: function(){
+						this.$store.commit('reduceNum',10)
+					},
+					reset: function(){
+						this.$store.dispatch('resetNum')
+					}
+				}
+			}
+
+			var Page = {
+				template: '#home-c1'
+			}
+
+			var Search = {
+				template: '#home-c2'
+			}
+
+			//创建路由
+			var routes = [{
+					path: '/home',
+					name: 'home',
+					component: Home,
+					children: [{
+							path: '/page',
+							component: Page
+						},
+						{
+							path: 'search',
+							component: Search
+						}
+					]
+				},
+				{
+					path: '/list',
+					name: 'list',
+					component: List
+				}
+			]
+
+			var router = new VueRouter({
+				routes: routes
+			})
+
+			//创建vuex
+			var store = new Vuex.Store({
+				state: {
+					num: 0
+				},
+				getters: {
+					double: function(state){
+						return state.num * 2
+					}
+				},
+				mutations: {
+					addNum: function(state,num) {
+						state.num += num
+					},
+					reduceNum: function(state,num) {
+						state.num -= num
+					},
+					reset: function(state) {
+						state.num = 0
+					}
+				},
+				actions: {
+					resetNum: function(state) {
+						window.setTimeout(function(){
+							state.commit('reset')
+						},2000)
+					}
+				}
+			})
+
+			var app = new Vue({
+				el: '#app',
+				router: router,
+				store: store,
+				data: {},
+				created: function() {
+					//					console.log('app：', this)
+				}
+			})
+		</script>
+	</body>
+
+</html>

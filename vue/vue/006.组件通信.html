@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+
+	<body>
+		<div id="app">
+			<input type="text" v-model="vmMsg"/>
+			<h1>{{vmMsg}}</h1>
+			<h1>-----------------------------</h1>
+			<my-input hello="world" :parent-msg="vmMsg"></my-input>
+		</div>
+
+		<template id="ickt2">
+			<div>
+				<input type="text" v-model="msg" />
+				<button @click="onClickBtn">触发子传父按钮</button>
+				<h1>{{msg}}</h1>
+				<div>
+					<h3>父组件传下的信息：</h3>
+					<span>{{hello}}</span>
+					<span>{{parentMsg}}</span>
+				</div>
+			</div>
+		</template>
+		<script type="text/javascript" src="./lib/vue2.0.js"></script>
+		<script type="text/javascript">
+
+			var myInput = Vue.extend({
+				template: '#ickt2',
+				props: ["hello","parentMsg"],
+				data: function() {
+					return {
+						msg: ''
+					}
+				},
+				methods: {
+					onClickBtn: function() {
+						console.log(111,this.$parent)
+						this.$parent.$emit('myickt',100,true,this.msg)
+					}
+				}
+			})
+
+			Vue.component('myInput', myInput)
+			var vm = new Vue({
+				el: '#app',
+				data: {
+					vmMsg: ''
+				},
+				created: function() {
+					this.$on('myickt',function(arg1,arg2,msg) {
+						console.log('myickt',this,arguments)
+						this.vmMsg = msg
+					})
+				}
+			})
+		</script>
+	</body>
+
+</html>

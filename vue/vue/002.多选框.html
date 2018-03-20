@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+
+	<body>
+		<div id="app">
+			<label>篮球<input type="checkbox" v-model="instrest.basketball" ></label>
+			<label>足球<input type="checkbox" v-bind:true-value="trueValue" v-bind:false-value="'未选中足球'" v-model="instrest.football" ></label>
+			<label>排球<input type="checkbox" v-model="instrest.netball" ></label>
+			<h1>选中的运动：{{instrest}}</h1>
+		</div>
+		<script type="text/javascript" src="./lib/vue2.0.js"></script>
+		<script type="text/javascript">
+			var vm = new Vue({
+				el: '#app',
+				data: {
+					instrest: {
+						basketball: true,
+						football: '选中足球',
+						netball: ''
+					},
+					trueValue: '选中足球'
+				}
+			})
+		</script>
+	</body>
+
+</html>

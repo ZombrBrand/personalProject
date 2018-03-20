@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+
+	<body>
+		<div id="app">
+			<h3>货币过滤器：{{number | currency("",4)}}</h1>
+			
+			<input type="text" v-model="msg"/>
+			<h3>驼峰命名过滤器：{{msg | toCamel}}</h3>
+		</div>
+
+		<script type="text/javascript" src="./lib/vue2.0.js"></script>
+		<script type="text/javascript">
+			
+			//货币
+			Vue.filter('currency', function(value, sign, len) {
+				value = parseFloat(value)
+				sign = sign || '$'
+				len = len || 2
+				var integer = Math.floor(value)
+				var Decimal = (value - integer).toFixed(len)
+				var arr = String(integer).split("")
+				
+				for(var i = arr.length - 3; i >= 0; i -= 3){
+					arr.splice(i,0,",")
+				}
+				
+				return sign + arr.join('') + Decimal.slice(1)
+
+			})
+			
+			//驼峰命名
+			Vue.filter('toCamel',function(value) {
+				var reg = /[\-_]([a-z])?/g
+				return value.replace(reg,function(match,$1) {
+					return ($1 || '').toUpperCase()
+				})
+			})
+			
+			var vm = new Vue({
+				el: '#app',
+				data: {
+					number: 12345,
+					msg: ''
+				}
+			})
+
+			
+		</script>
+	</body>
+
+</html>

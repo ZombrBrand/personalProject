@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="initial-scale=1,minimum-scale=1,maxmum-scale=1,user-scalable=no,width=device-width" />
+		<title>团购网</title>
+	</head>
+
+	<body>
+		<div id="app">
+			<header class="header">
+				<div class="goback f-l" @click="goBack">
+					<span class="arrow"></span><span class="arrow green"></span>
+				</div>
+				<div class="login f-r">登录</div>
+				<h1>团购网站</h1>
+			</header>
+			<div class="search" v-show="view !== 'detail'">
+				<input type="text" placeholder="请输入搜索关键字" v-model="search" @keyup.enter="seachResult" />
+			</div>
+			<component :is="view" :query="query" :search="searchValue"></component>
+		</div>
+
+		<!-- 自定义组建 -->
+		<!-- 首页 -->
+		<template id="home">
+			<section class="home">
+				<ul class="types clearfix">
+					<li v-for="(item,index) in types" :key="index">
+						<a :href="'#/list/type/' + item.id">
+							<img :src="item.url" />
+						</a>
+						<span>{{item.text}}</span>
+					</li>
+				</ul>
+				<ul class="activity">
+					<li v-for="(item,index) in ad" :key="index">
+						<a :href="'#/detail/' + item.id">
+							<h3 :class="'color-' + index">{{item.title}}</h3>
+							<p>{{item.description}}</p>
+							<img :src="'img/ad/' + item.url" />
+						</a>
+					</li>
+				</ul>
+				<ul class="product clearfix">
+					<h3>猜你喜欢</h3>
+					<li v-for="(item,index) in list" :key="index">
+						<a :href="'#/detail/' + item.id">
+							<img class="f-l" :src="'./img/list/' + item.img" />
+							<div class="right">
+								<p>{{item.title}}</p>
+								<span class="price">{{item.price + '元'}}</span>
+								<span class="origin-price">{{'门市价:' + item.originPrice}}</span>
+								<span class="sales f-r">{{'销量 ' + item.sales}}</span>
+							</div>
+
+						</a>
+					</li>
+				</ul>
+			</section>
+		</template>
+
+		<!-- 列表页 -->
+		<template id="list">
+			<section class="list">
+				<ul class="order-list">
+					<li v-for="(item,index) in order" :key="index" @click="orderList(item.id)">
+						<span>{{item.text}}</span>
+						<span class="arrow"></span>
+					</li>
+				</ul>
+				<ul class="product clearfix">
+					<li v-for="(item,index) in listFilter" :key="index">
+						<a :href="'#/detail/' + item.id">
+							<img class="f-l" :src="'./img/list/' + item.img" />
+							<div class="right">
+								<p>{{item.title}}</p>
+								<span class="price">{{item.price + '元'}}</span>
+								<span class="origin-price">{{'门市价:' + item.originPrice}}</span>
+								<span class="sales f-r">{{'销量 ' + item.sales}}</span>
+							</div>
+						</a>
+					</li>
+				</ul>
+				<div class="load-more" @click="showList" v-show="other.length">
+					<div class="center">
+						<span>查看其它{{other.length}}条团购</span>
+						<span class="arrow">
+							<span class="arrow white"></span>
+						</span>
+					</div>
+				</div>
+			</section>
+		</template>
+
+		<!-- 详情页 -->
+		<template id="detail">
+			<section class="detail">
+				<div class="banner">
+					<img v-if="data.src" :src="'img/item/' + data.src" />
+					<div class="caption">
+						<h2>{{data.title}}</h2>
+						<p>{{data.description}}</p>
+					</div>
+				</div>
+				<div class="price-col">
+					<span class="price">{{data.price}}</span><span>元</span>
+					<span class="originPrice">门市价 {{data.originPrice}}元</span>
+					<span class="btn f-r">立即购买</span>
+				</div>
+				<ul class="return-purchase clearfix">
+					<li>支持立即退货</li>
+					<li>支持随时退货</li>
+					<li>销量 {{data.sales}}</li>
+				</ul>
+				<div class="store-information">
+					<h2>店家信息</h2>
+					<div class="address">
+						<p>{{data.storeName}}</p>
+						<p>{{data.storeAddress}}</p>
+					</div>
+					<div class="branch">
+						<a href="javascript:;">查看6家分店</a>
+					</div>
+				</div>
+				<div class="announcement">
+					<h2>购买须知</h2>
+					<ul class="clearfix">
+						<li>
+							<h3>有效日期</h3>
+							<p>{{data.validateTime}}</p>
+						</li>
+						<li>
+							<h3>使用日期</h3>
+							<p>{{data.useTime}}</p>
+						</li>
+						<li>
+							<h3>有效规则</h3>
+							<p v-for="(item,index) in data.rules">{{item}}</p>
+						</li>
+					</ul>
+				</div>
+			</section>
+		</template>
+
+		<script type="text/javascript" src="./static/lib/sea.js"></script>
+		<script type="text/javascript" src="./static/lib/seajs-css.js"></script>
+		<script type="text/javascript" src="./static/lib/seajs-preload.js"></script>
+		<script type="text/javascript">
+			seajs.config({
+				//根目录
+				base: './static',
+				//预加载
+				preload: ['lib/vue.js']
+			})
+
+			seajs.use(['reset.css', 'router/router'])
+		</script>
+	</body>
+
+</html>

@@ -1,0 +1,110 @@
+/*详情页*/
+
+.detail .banner {
+	position: relative;
+}
+
+.detail .banner img {
+	display: block;
+	width: 100%;
+}
+
+.detail .banner .caption {
+	position: absolute;
+	left: 20px;
+	bottom: 20px;
+	color: #fff
+}
+
+.detail .banner .caption h2 {
+	margin: 5px;
+}
+
+.detail .price-col {
+	height: 60px;
+	padding: 5px 10px;
+	background-color: #fff;
+	border-bottom: 1px solid #ccc;
+}
+
+.detail .price-col .price {
+	font-size: 38px;
+	color: #06C1AE;
+}
+
+.detail .price-col .btn {
+	padding: 10px 15px;
+	background-color: #f60;
+	color: #fff;
+	font-size: 14px;
+	margin-top: 13px;
+}
+
+.detail .return-purchase {
+	display: flex;
+	flex-wrap: wrap;
+	background-color: #fff;
+	padding: 15px 10px 0;
+	margin-bottom: 10px;
+}
+
+.detail .return-purchase li {
+	width: 50%;
+	margin-bottom: 10px;
+	color: yellowgreen;
+	font-size: 14px;
+}
+
+.detail .return-purchase li:last-child {
+	color: #000;
+}
+
+.detail .store-information {
+	background-color: #fff;
+	padding: 10px;
+	line-height: 30px;
+	margin-bottom: 5px;
+}
+
+.detail .store-information h2 {
+	padding-bottom: 10px;
+	border-bottom: 1px solid #ccc;
+	font-weight: 500;
+}
+
+.detail .store-information .address {
+	padding: 15px 0;
+	border-bottom: 1px solid #ccc;
+}
+
+.detail .branch a {
+	display: block;
+	padding-top: 5px;
+	color: skyblue;
+	font-size: 16px;
+}
+
+.detail .announcement {
+	background-color: #fff;
+	padding: 10px;
+}
+
+.detail .announcement h2 {
+	padding-bottom: 10px;
+	border-bottom: 1px solid #ccc;
+	font-weight: 500;
+}
+
+.detail .announcement ul {
+	padding: 10px 0;
+}
+
+.detail .announcement li h3 {
+	color: #f90;
+	line-height: 50px;
+	font-weight: normal;
+}
+
+.detail .announcement li p {
+	line-height: 30px;
+}

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+
+	<body>
+		<div id="app">
+			<h3>路由</h3>
+			<router-view></router-view>
+		</div>
+
+		<template id="home">
+			<p>home</p>
+		</template>
+
+		<template id="list">
+			<p>list</p>
+		</template>
+
+		<template id="detail">
+			<section>
+				<!--URL:http://127.0.0.1:8020/code/vue/008.%E5%8A%A8%E6%80%81%E8%B7%AF%E7%94%B1.html?__hbt=1520580850041#/detail/10?name=123#abc-->
+				<p>detail</p>
+				<p>{{$route.params.id}}</p>
+				<p>{{$route.path}}</p>
+				<p>{{$route.hash}}</p>
+				<p>{{$route.query.name}}</p>
+			</section>
+		</template>
+
+		<script type="text/javascript" src="lib/vue2.0.js"></script>
+		<script type="text/javascript" src="lib/vue-router.js"></script>
+		<script type="text/javascript">
+			var Home = {
+				template: '#home'
+			}
+
+			var List = {
+				template: '#list'
+			}
+
+			var Detail = {
+				template: '#detail',
+				created: function() {
+					console.log('组件：', this)
+				}
+			}
+
+			var routes = [{
+					path: '/home',
+					name: 'home',
+					component: Home
+				},
+				{
+					path: '/list',
+					name: 'list',
+					component: List
+				},
+				{
+					path: '/detail/:id',
+					name: 'detail',
+					component: Detail
+				},
+				{
+					path: '/ickt',
+					redirect: 'detail/11'
+				},
+				{
+					path: '*',
+					redirect: '/home'
+				}
+			]
+
+			var router = new VueRouter({
+				routes: routes
+			})
+
+			var app = new Vue({
+				el: '#app',
+				router: router,
+				data: {},
+				created: function() {
+					console.log('app：', this)
+				}
+			})
+		</script>
+	</body>
+
+</html>

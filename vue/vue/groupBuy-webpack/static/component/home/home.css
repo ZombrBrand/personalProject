@@ -1,0 +1,65 @@
+/*首页icon样式*/
+
+.home .types {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	background-color: #fff;
+	padding: 10px 0;
+	margin-bottom: 10px;
+	text-align: center;
+}
+
+.home .types li {
+	width: 20%;
+}
+
+.home .types a {
+	display: block;
+}
+
+.home .types li img {
+	width: 60%;
+}
+
+.home .types li span {
+	display: block;
+	margin: 0 10px 5px 10px;
+	font-size: 12px;
+}
+
+
+/*广告栏样式*/
+
+.home .activity {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: flex-start;
+	background-color: #fff;
+	margin-bottom: 10px;
+}
+
+.home .activity li {
+	width: 33.33333333%;
+	border-right: 1px solid #ccc;
+	padding: 15px 0;
+	text-align: center;
+	box-sizing: border-box;
+}
+
+.home .activity li:last-child {
+	border-right: none;
+}
+
+.home .activity li img {
+	width: 60%;
+}
+
+.home .activity h3 {
+	font-size: 18px;
+}
+
+.home .activity p {
+	font-size: 14px;
+	margin: 10px 0;
+}

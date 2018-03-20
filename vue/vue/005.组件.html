@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="app">
+			<my-input></my-input>
+		</div>
+		
+		
+		<template id="ickt2">
+			<div>
+				<input type="text" v-model="msg"/>
+				<h1>{{msg}}</h1>
+			</div>
+		</template>
+		
+		<!--<script type="text/template" id="ickt1">
+			<div>
+				<h1>自定义组件1</h1>
+			</div>
+		</script>-->
+		<script type="text/javascript" src="./lib/vue2.0.js"></script>
+		<script type="text/javascript">
+			
+			//1.直接通过模版字符串定义
+//			var myInput = Vue.extend({
+//				template: '<div><h1>自定义组件</h1></div>'
+//			})
+
+			//2.通过css选择器定义-1
+//			var myInput = Vue.extend({
+//				template: '#ickt1'
+//			})
+
+			//2.通过css选择器定义-2
+			var myInput = Vue.extend({
+				template: '#ickt2',
+				data: function() {
+					return {
+						msg: ''
+					}
+				}
+			})
+			
+			
+			
+			Vue.component('myInput',myInput)
+			var vm = new Vue({
+				el: '#app',
+				data: {}
+			})
+		</script>
+	</body>
+</html>

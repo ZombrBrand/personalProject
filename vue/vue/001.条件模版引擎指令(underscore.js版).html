@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			.type {
+				color: orange;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="ickt"></div>
+		<script type="text/template" id="tpl">
+			<% if (type) { %>
+				<span class="type"><%=type%> | </span>
+			<% } %>
+			<span><%=title%></span>
+		</script>
+		<script type="text/javascript" src="./lib/underscore.js"></script>
+		<script type="text/javascript">
+			//1.获取数据
+			var data = {
+				type: '财经',
+				title: '房地产投资略有放缓 货币政策重在稳定预期'
+			}
+			
+			//2.获取容器元素
+			var ickt = document.getElementById('ickt')
+			
+			//3.获取模板
+			var fn = _.template(tpl.innerHTML)
+			
+			//4.格式化模板
+			var html = fn(data)
+			
+			//5.渲染
+			ickt.innerHTML = html
+		</script>
+	</body>
+</html>

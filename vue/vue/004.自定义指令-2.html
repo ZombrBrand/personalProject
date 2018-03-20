@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="app">
+			<input type="text" v-model="msg"/>
+			<span v-check="msg" test="^\w{4,6}$" error-text="不合法，请输入4-6位字母数字下划线"></span>
+		</div>
+		<script type="text/javascript" src="./lib/vue2.0.js"></script>
+		<script type="text/javascript">
+			Vue.directive('check',function(el,obj){
+				var test = el.getAttribute("test")
+				var reg = new RegExp(test)
+				
+				if(reg.test(obj.value)) {
+					el.innerHTML = ''
+				}else{
+					el.innerHTML = el.getAttribute("error-text")
+				}
+			})
+			
+			
+			var vm = new Vue({
+				el: '#app',
+				data: {
+					msg: '自定义指令'
+				}
+			})
+		</script>
+	</body>
+</html>

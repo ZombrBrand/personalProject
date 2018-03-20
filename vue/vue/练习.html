@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+
+	<body>
+		<div id="app">
+			<h1 v-html="link"></h1>
+		</div>
+		<script type="text/javascript" src="vue2.0.js"></script>
+		<script type="text/javascript">
+			var arr = function(){}
+
+			function Fn() {
+				this.name = 123
+				this.fn1 = function() {
+					console.log(123)
+				}
+				
+			}
+			Fn.prototype = {
+				constructor: Fn,
+				fn2: function(){
+					console.log(456)
+				}
+			}
+			
+			
+			arr = new Fn
+		</script>
+	</body>
+
+</html>

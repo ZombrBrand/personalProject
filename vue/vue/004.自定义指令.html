@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			h3 {
+				height: 20px;
+				background-color: pink;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="app">
+			<input type="text" v-model="msg"/>
+			<h3 v-hello="msg">{{msg}}</h3>
+		</div>
+		<script type="text/javascript" src="./lib/vue2.0.js"></script>
+		<script type="text/javascript">
+			Vue.directive('hello',
+			
+			//指令对象
+//			{
+//				bind: function(){
+//					console.log(1,this,arguments)
+//				},
+//				update: function(){
+//					console.log(2,this,arguments)
+//				},
+//				unbind: function(){
+//					console.log(3,this,arguments)
+//				},
+//				inseret: function(){
+//					console.log(4,this,arguments)
+//				},
+//				componentUpdate: function(){
+//					console.log(5,this,arguments)
+//				}
+//			}
+			
+			//指令方法
+			function(el){
+				el.onclick = function(e){
+					console.log(e)
+				}
+			}
+			
+			)
+			
+			var vm = new Vue({
+				el:'#app',
+				data: {
+					msg: '自定义指令'
+				}
+			})
+		</script>
+	</body>
+</html>

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			* {
+				margin: 0;
+				padding: 0;
+				outline: none;
+				list-style: none;
+			}
+			
+			#app {
+				position: relative;
+				width: 500px;
+				margin: 100px auto;
+			}
+			
+			#app input {
+				width: 300px;
+				margin-left: 10px;
+				padding: 10px 5px;
+				box-sizing: border-box;
+			}
+			
+			#app ul {
+				position: absolute;
+				top: 39px;
+				left: 62px;
+				width: 300px;
+				border: 1px solid #EEEEEE;
+				border-top: none;
+				padding: 5px;
+				box-sizing: border-box;
+				font-size: 12px;
+				color: #666;
+			}
+			
+			#app ul li {
+				padding: 5px 0;
+				cursor: pointer;
+			}
+			
+			#app ul li:hover,#app ul li.choose {
+				background-color: #eee;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div id="app">
+			<label for="email_input">账户名</label>
+			<input 
+				id="email_input" 
+				type="text" placeholder="请输入电子邮箱" 
+				v-model="msg"
+				@keydown.up="choosePrevLi"
+				@keydown.down="chooseNextLi"
+				@keydown.enter="chooseEnterLi"
+			>
+			<ul v-show="msg	&& dealEmail.length > 0">
+				<li 
+					v-for="(item,index) in dealEmail"
+					@click="clickChooseLi"
+				>{{dealmsg}}@{{item}}<template v-if="item == 189">.cn</template><template v-else>.com</template>
+				</li>
+			</ul>
+		</div>
+		<script type="text/javascript" src="./lib/vue2.0.js"></script>
+		<script type="text/javascript">
+			var vm = new Vue({
+				el: "#app",
+				data: {
+					msg: '',
+					email: ['qq', '163', '126', '189', 'sina', 'hotmail', 'gmail', 'sohu', '21cn'],
+					num: 0,
+					isChange: true
+				},
+				methods: {
+					clickChooseLi: function(e) {
+						this.msg = e.target.innerHTML
+					},
+					choosePrevLi: function(e) {
+						e.preventDefault()	//表单使用向上键盘时会有个默认行为就是会把光标放在文字前面，体验不好
+						this.num--
+						this.changeLisStyle()
+						this.isChange = false
+					},
+					chooseNextLi: function() {
+						if(this.isChange) {
+							this.isChange = false
+						}else {
+							this.num++
+						}
+						
+						this.changeLisStyle()
+					},
+					chooseEnterLi: function() {
+						var lis = document.getElementsByTagName("li")
+						this.msg = lis[this.num].innerHTML
+					},
+					getCurrentNum: function(len) {
+						//1.num从0开始，向上(num--)向下(num++)，所以除余之后索引值在-8到8这个区间
+						//	var num = this.num % len = -8 ~ 8
+						//2.因为不能是负数，要从0开始，所以再加上len，那么区间范围就是0~16
+						//	num += len
+						//3.为了保证num在0~8之间，然后再次除余len
+						//	num % len
+						return (this.num % len + len) % len
+					},
+					changeLisStyle: function() {
+						var lis = document.getElementsByTagName("li"),
+							lisLen = lis.length,
+							num = this.getCurrentNum(lisLen)
+						for(var i = 0; i < lisLen; i++) {
+							lis[i].className = ""
+						}
+						lis[num].className = "choose"
+					}
+				},
+				computed: {
+					dealEmail: function() {
+						if(this.msg.indexOf('@') >= 0) {
+							var str = this.msg.slice(this.msg.indexOf('@') + 1),
+								result = []
+							this.email.forEach(function(item) {
+								var test = item + (item == 189 ? '.c' : '.co')
+								if(test.indexOf(str) === 0) {
+									result.push(item)
+								}
+							})
+							return result
+						}
+						return this.email
+					},
+					dealmsg: function() {
+						if(this.msg.indexOf('@') >= 0) {
+							return this.msg.slice(0, this.msg.indexOf('@'))
+						}
+						return this.msg
+					}
+				}
+			})
+		</script>
+	</body>
+
+</html>

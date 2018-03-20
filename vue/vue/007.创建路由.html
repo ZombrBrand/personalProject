@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+
+	<body>
+		<div id="app">
+			<h3>路由</h3>
+			<router-view></router-view>
+		</div>
+
+		<template id="home">
+			<p>home</p>
+		</template>
+
+		<template id="list">
+			<p>list</p>
+		</template>
+
+		<template id="detail">
+			<p>detail</p>
+		</template>
+
+		<script type="text/javascript" src="lib/vue2.0.js"></script>
+		<script type="text/javascript" src="lib/vue-router.js"></script>
+		<script type="text/javascript">
+			var Home = {
+				template: '#home'
+			}
+
+			var List = {
+				template: '#list'
+			}
+
+			var Detail = {
+				template: '#detail'
+			}
+
+			var routes = [{
+					path: '/home',
+					name: 'home',
+					component: Home
+				},
+				{
+					path: '/list',
+					name: 'list',
+					component: List
+				},
+				{
+					path: '/detail',
+					name: 'detail',
+					component: Detail
+				}
+			]
+			
+			var router = new VueRouter({
+				routes: routes
+			})
+			
+			var app = new Vue({
+				el: '#app',
+				router: router,
+				data: {}
+			})
+		</script>
+	</body>
+
+</html>

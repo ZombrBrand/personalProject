@@ -1,0 +1,379 @@
+* {
+	padding: 0;
+	margin: 0;
+	list-style: none;
+}
+
+body {
+	background-color: #efefef;
+}
+
+input {
+	border: none;
+	outline: none;
+}
+
+a,a:hover, a:visited, a:link, a:active {
+	color: #333;
+	text-decoration: none;
+	-webkit-tap-highlight-color:rgba(255,0,0,0);
+}
+
+p {
+	font-size: 16px;
+	font-weight: normal;
+}
+
+.clearfix:after {
+	content: '';
+	display: block;
+	clear: both;
+}
+
+.f-l {
+	float: left;
+}
+
+.f-r {
+	float: right;
+}
+
+.color-0 {
+	color: red;
+}
+
+.color-1 {
+	color: green;
+}
+
+.color-2 {
+	color:purple;
+}
+
+.header {
+	background-color: #06C1AE;
+	height: 60px;
+	line-height: 60px;
+	color: #fff;
+	padding: 0 15px;
+}
+
+.header h1 {
+	padding-left: 30px;
+	text-align: center;
+	font-size: 26px;
+}
+
+.header .login {
+	height: 60px;
+	padding-top: 5px;
+	box-sizing: border-box;
+}
+
+.header .goback {
+	position: relative;
+}
+
+.header .goback .arrow {
+	position: absolute;
+	left: 0;
+	top: 23px;
+	border: 10px solid transparent;
+	border-right-color: #fff;
+}
+
+.header .goback .arrow.green {
+	border-right-color: #06c1ae;
+	left: 3px;
+}
+
+.search {
+	padding: 10px 20px;
+	background-color: #fff;
+}
+
+.search input {
+	width: 100%;
+	padding: 10px 20px;
+	background-color: #efefef;
+	box-sizing: border-box;
+	border-radius: 19px;
+}
+
+
+/*首页icon样式*/
+.home .types {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	background-color: #fff;
+	padding: 10px 0;
+	margin-bottom: 10px;
+	text-align: center;
+}
+
+.home .types li {
+	width: 20%;
+}
+.home .types a {
+	display: block;
+}
+
+.home .types li img {
+	width: 60%;
+}
+.home .types li span {
+	display: block;
+	margin: 0 10px 5px 10px;
+	font-size: 12px;
+}
+
+/*广告栏样式*/
+.home .activity {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: flex-start;
+	background-color: #fff;
+	margin-bottom: 10px;
+}
+
+.home .activity li {
+	width: 33.33333333%;
+	border-right: 1px solid #ccc;
+	padding: 15px 0;
+	text-align: center;
+	box-sizing: border-box;
+}
+
+.home .activity li:last-child {
+	border-right: none;
+}
+
+.home .activity li img {
+	width: 60%;
+}
+
+.home .activity h3 {
+	font-size: 18px;
+}
+
+.home .activity p {
+	font-size: 14px;
+	margin: 10px 0;
+}
+
+/*产品列表页*/
+.product {
+	background-color: #fff;
+	padding: 0 10px;
+}
+
+.product h3 {
+	font-size: 18px;
+	font-weight: normal;
+	padding: 10px 0;
+}
+
+.product li {
+	padding: 10px 0;
+	border-top: 1px solid #ccc;
+}
+
+.product a {
+	display: block;
+}
+
+.product img {
+	width: 100px;
+}
+
+.product .right {
+	padding-left: 110px;
+	font-size: 12px;
+}
+
+.product p {
+	height: 45px;
+	font-size: 14px;
+	font-weight: 700;
+}
+
+.product .price {
+	color: #06C1AE;
+	margin-right: 5px;
+}
+
+.list .order-list {
+	display: flex;
+	justify-content: space-around;
+	background-color: #fff;
+	text-align: center;
+}
+
+.list .order-list li {
+	position: relative;
+	width: 25%;
+	padding: 5px 0;
+	font-size: 12px;
+}
+
+.list .order-list li + li {
+	border-left: 1px solid #ccc;
+}
+
+.list .order-list span.arrow,.list .order-list span.arrow::after {
+	position: absolute;
+	top: 50%;
+	right: 12px;
+	margin-top: -2px;
+	border: 5px solid transparent;
+	border-top-color: #000;
+}
+
+/*.list .order-list span.arrow::after {
+	content: '';
+	top: -5px;
+	left: -5px;
+	border-top-color: #fff;
+}*/
+
+.list .load-more {
+	height: 40px;
+	border-top: 1px solid #ccc;
+	border-bottom: 1px solid #ccc;
+	background-color: #fff;
+	line-height: 40px;
+	text-align: center;
+	color: #06C1AE;
+}
+
+.list .center {
+	position: relative;
+	width: 180px;
+	margin: 0 auto;
+}
+
+.list .center .arrow {
+	position: absolute;
+	top: 50%;
+	right: 6px;
+	margin-top: -3px;
+	border: 10px solid transparent;
+	border-top-color: #06C1AE;
+}
+
+.list .center .white {
+	top: -9px;
+	right: -10px;
+	border-top-color: #fff;
+}
+
+/*详情页*/
+.detail .banner {
+	position: relative;
+}
+
+.detail .banner img {
+	display: block;
+	width: 100%;
+}
+
+.detail .banner .caption {
+	position: absolute;
+	left: 20px;
+	bottom: 20px;
+	color: #fff
+}
+
+.detail .banner .caption h2 {
+	margin: 5px;
+}
+
+.detail .price-col {
+	height: 60px;
+	padding: 5px 10px;
+	background-color: #fff;
+	border-bottom: 1px solid #ccc;
+}
+
+.detail .price-col .price {
+	font-size: 38px;
+	color: #06C1AE;
+}
+
+.detail .price-col .btn {
+	padding: 10px 15px;
+	background-color: #f60;
+	color: #fff;
+	font-size: 14px;
+	margin-top: 13px;
+}
+
+.detail .return-purchase {
+	display: flex;
+	flex-wrap: wrap;
+	background-color: #fff;
+	padding: 15px 10px 0;
+	margin-bottom: 10px;
+}
+
+.detail .return-purchase li {
+	width: 50%;
+	margin-bottom: 10px;
+	color: yellowgreen;
+	font-size: 14px;
+}
+
+.detail .return-purchase li:last-child {
+	color: #000;
+}
+
+.detail .store-information {
+	background-color: #fff;
+	padding: 10px;
+	line-height: 30px;
+	margin-bottom: 5px;
+}
+
+.detail .store-information h2 {
+	padding-bottom: 10px;
+	border-bottom: 1px solid #ccc;
+	font-weight: 500;
+}
+
+.detail .store-information .address {
+	padding: 15px 0;
+	border-bottom: 1px solid #ccc;
+}
+
+.detail .branch a {
+	display: block;
+	padding-top: 5px;
+	color: skyblue;
+	font-size: 16px;
+}
+
+.detail .announcement {
+	background-color: #fff;
+	padding: 10px;
+}
+
+.detail .announcement h2 {
+	padding-bottom: 10px;
+	border-bottom: 1px solid #ccc;
+	font-weight: 500;
+}
+
+.detail .announcement ul {
+	padding: 10px 0;
+}
+
+.detail .announcement li h3 {
+	color: #f90;
+	line-height: 50px;
+	font-weight: normal;
+}
+
+.detail .announcement li p {
+	line-height: 30px;
+}
